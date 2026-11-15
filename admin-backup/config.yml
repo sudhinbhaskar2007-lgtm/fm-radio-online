@@ -1,0 +1,73 @@
+# Backup admin (Sveltia CMS, free and open source).
+# Edits the same files as the main admin (.pages.yml / Pages CMS).
+# Sign in with "Sign In Using Access Token" (a GitHub fine-grained token
+# with Contents: Read and write on this repository).
+backend:
+  name: github
+  repo: sudhinbhaskar2007-lgtm/fm-radio-online
+  branch: main
+
+media_folder: assets/uploads
+public_folder: assets/uploads
+
+site_url: https://sudhinbhaskar2007-lgtm.github.io/fm-radio-online/
+display_url: https://sudhinbhaskar2007-lgtm.github.io/fm-radio-online/#news
+
+collections:
+  - name: content
+    label: "Mizhi News"
+    files:
+      - name: news
+        label: "News / വാർത്ത"
+        file: data/news.json
+        format: json
+        fields:
+          - name: stories
+            label: "Stories"
+            widget: list
+            root: true
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { name: id, label: "Web link name (optional)", widget: string, required: false }
+              - { name: title, label: "Headline (English)", widget: string }
+              - { name: titleMl, label: "Headline (Malayalam)", widget: string, required: false }
+              - { name: date, label: "Date", widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+              - name: category
+                label: "Category"
+                widget: select
+                options:
+                  - { value: uk, label: "UK / യുകെ" }
+                  - { value: kerala, label: "Kerala / കേരളം" }
+                  - { value: immigration, label: "Immigration / കുടിയേറ്റം" }
+                  - { value: community, label: "Community / സമൂഹം" }
+                  - { value: cinema, label: "Cinema / സിനിമ" }
+                  - { value: sports, label: "Sports / കായികം" }
+                  - { value: jobs, label: "Jobs / ജോലി" }
+                  - { value: mizhi, label: "Mizhi FM / മിഴി എഫ്എം" }
+              - { name: image, label: "Photo", widget: image, required: false }
+              - { name: summary, label: "Short summary (English)", widget: text, required: false }
+              - { name: summaryMl, label: "Short summary (Malayalam)", widget: text, required: false }
+              - { name: body, label: "Full story (English). Empty line between paragraphs.", widget: text, required: false }
+              - { name: bodyMl, label: "Full story (Malayalam). Empty line between paragraphs.", widget: text, required: false }
+              - { name: featured, label: "Top story", widget: boolean, default: false, required: false }
+              - { name: breaking, label: "Breaking news", widget: boolean, default: false, required: false }
+              - { name: link, label: "Read more link (optional)", widget: string, required: false }
+
+      - name: gallery
+        label: "Photo gallery / ചിത്രങ്ങൾ"
+        file: data/gallery.json
+        format: json
+        fields:
+          - name: albums
+            label: "Albums"
+            widget: list
+            root: true
+            summary: "{{fields.date}} · {{fields.title}}"
+            fields:
+              - { name: id, label: "Web link name (optional)", widget: string, required: false }
+              - { name: title, label: "Album name (English)", widget: string }
+              - { name: titleMl, label: "Album name (Malayalam)", widget: string, required: false }
+              - { name: date, label: "Date", widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+              - { name: description, label: "About this album (English)", widget: text, required: false }
+              - { name: descriptionMl, label: "About this album (Malayalam)", widget: text, required: false }
+              - { name: photos, label: "Photos (first one is the cover)", widget: image, multiple: true, required: false }

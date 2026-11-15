@@ -1,5 +1,20 @@
 [
   {
+    "id": "photo-gallery-launch",
+    "date": "2026-11-15",
+    "category": "mizhi",
+    "title": "New on Mizhi News: photo gallery",
+    "titleMl": "മിഴി ന്യൂസിൽ പുതിയ ഫോട്ടോ ഗാലറി",
+    "summary": "Share photos from your association's Onam, Christmas and community events. We'll put them in the Mizhi photo gallery.",
+    "summaryMl": "നിങ്ങളുടെ അസോസിയേഷന്റെ ഓണം, ക്രിസ്മസ്, മറ്റു പരിപാടികൾ എന്നിവയുടെ ചിത്രങ്ങൾ അയക്കൂ. മിഴി ഫോട്ടോ ഗാലറിയിൽ ഞങ്ങൾ അവ പ്രസിദ്ധീകരിക്കാം.",
+    "body": "Mizhi UK Malayalam News now has a photo gallery. Open the \"Photo gallery\" tab in the news menu to see albums, and tap any photo to view it full screen.\n\nHas your Malayali association held an Onam celebration, Christmas carol night, sports day or cultural programme? Send us your photos with the event name, place and date. Please only send photos you took yourself or have permission to share.",
+    "bodyMl": "മിഴി യുകെ മലയാളം വാർത്തയിൽ ഇനി ഫോട്ടോ ഗാലറിയും. വാർത്താ മെനുവിലെ \"ചിത്രങ്ങൾ\" എന്ന ടാബ് തുറന്നാൽ ആൽബങ്ങൾ കാണാം. ഏതു ചിത്രത്തിലും തൊട്ടാൽ അത് വലുതായി കാണാം.\n\nനിങ്ങളുടെ മലയാളി അസോസിയേഷൻ ഓണാഘോഷമോ ക്രിസ്മസ് കരോളോ കായികമേളയോ കലാപരിപാടികളോ നടത്തിയോ? പരിപാടിയുടെ പേര്, സ്ഥലം, തീയതി എന്നിവയോടൊപ്പം ചിത്രങ്ങൾ ഞങ്ങൾക്ക് അയക്കൂ. നിങ്ങൾ സ്വയം എടുത്തതോ പങ്കുവെക്കാൻ അനുവാദമുള്ളതോ ആയ ചിത്രങ്ങൾ മാത്രം അയക്കുക.",
+    "image": "",
+    "featured": false,
+    "breaking": true,
+    "link": ""
+  },
+  {
     "id": "mizhi-fm-launch",
     "date": "2026-11-15",
     "category": "mizhi",
