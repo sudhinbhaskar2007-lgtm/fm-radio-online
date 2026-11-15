@@ -3,60 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mizhi UK Malayalam News | മിഴി യുകെ മലയാളം വാർത്ത</title>
-  <meta name="description" content="News and updates for the Malayali community in the UK, from Mizhi FM.">
-  <meta name="theme-color" content="#07060f">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=4">
-  <script src="config.js?v=4"></script>
-  <script src="news-data.js?v=4"></script>
+  <title>Mizhi UK Malayalam News</title>
+  <meta http-equiv="refresh" content="0; url=index.html#news">
+  <script>location.replace("index.html" + (/^#(cat|story)=/.test(location.hash) ? location.hash : "#news"));</script>
+  <style>body{background:#07060f;color:#f7f3ff;font-family:system-ui,sans-serif;margin:0;padding:16px}</style>
 </head>
 <body>
-  <div class="bg-video" aria-hidden="true">
-    <video id="bgVideo" autoplay muted loop playsinline preload="auto"></video>
-    <div class="bg-shade"></div>
-  </div>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo" id="logo"></span>
-      <nav class="site-tabs" aria-label="Mizhi">
-        <a href="news.html" class="site-tab tab-news active" aria-current="page"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
-        <a href="index.html" class="site-tab"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
-      </nav>
-    </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <a href="index.html#home">Listen</a>
-      <a href="index.html#schedule">Schedule</a>
-      <a href="index.html#shows">Shows</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="news-hero">
-      <h1 id="newsTitle">Mizhi UK Malayalam News</h1>
-      <p class="title-ml ml" id="newsTitleMl">മിഴി യുകെ മലയാളം വാർത്ത</p>
-      <p class="muted" id="newsIntro"></p>
-      <p class="muted ml" id="newsIntroMl"></p>
-      <a class="btn primary" href="index.html#home">▶ Listen to Mizhi FM live</a>
-    </section>
-    <section class="news-list" id="newsList" aria-live="polite"></section>
-  </main>
-
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> <span data-bind="stationName"></span>. All rights reserved.</p>
-    <p class="credit">Background artwork: miya photograph</p>
-    <div class="credit music-credits" id="musicCredits"></div>
-  </footer>
-
-  <script src="assets/news.js?v=4"></script>
+  <p>Opening <a href="index.html#news" style="color:#ff9a1f">Mizhi UK Malayalam News</a>…</p>
 </body>
 </html>

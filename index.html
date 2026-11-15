@@ -11,8 +11,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=4">
-  <script src="config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <script src="config.js?v=6"></script>
+  <script src="news-data.js?v=6"></script>
 </head>
 <body>
   <!-- Full-page looping background (set in config.js) -->
@@ -24,8 +25,8 @@
     <div class="brand">
       <span class="logo" id="logo"></span>
       <nav class="site-tabs" aria-label="Mizhi">
-        <a href="news.html" class="site-tab tab-news"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
-        <a href="#home" class="site-tab active" aria-current="page"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
+        <a href="#news" class="site-tab tab-news" id="tabNews"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
+        <a href="#home" class="site-tab active" id="tabFm" aria-current="page"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
       </nav>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
@@ -40,7 +41,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="radioView">
     <!-- HERO / PLAYER -->
     <section id="home" class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -118,10 +119,136 @@
     </section>
   </main>
 
+  <!-- NEWS (Mizhi UK Malayalam News) -->
+  <main id="newsView" class="nw" hidden>
+    <!-- Info bar: date, London time & weather, £ to ₹ -->
+    <div class="np-info">
+      <div class="np-wrap np-info-row">
+        <span id="npDate"></span>
+        <span><span id="npTime"></span> UK</span>
+        <span id="npWeather" hidden></span>
+        <span id="npFx" hidden></span>
+      </div>
+    </div>
+
+    <!-- Masthead -->
+    <section class="np-wrap np-mast">
+      <div>
+        <h1 class="nw-title"><span id="newsTitle">Mizhi UK Malayalam News</span></h1>
+        <p class="np-title-ml ml" id="newsTitleMl">മിഴി യുകെ മലയാളം വാർത്ത</p>
+        <p class="np-tag"><span id="newsTagline"></span> <span class="ml" id="newsTaglineMl"></span></p>
+      </div>
+      <a class="np-mast-ad" id="mastAd" href="#">
+        <strong>Advertise here</strong>
+        <span class="ml">ഇവിടെ പരസ്യം ചെയ്യൂ</span>
+      </a>
+    </section>
+
+    <!-- Category bar -->
+    <nav class="np-cats" aria-label="News categories">
+      <div class="np-wrap np-cats-row" id="npCats"></div>
+    </nav>
+
+    <!-- Breaking ticker -->
+    <div class="np-breaking" id="npBreaking" hidden>
+      <div class="np-wrap np-breaking-row">
+        <span class="np-breaking-label">● BREAKING <span class="ml">പ്രധാന വാർത്ത</span></span>
+        <div class="np-ticker"><div class="np-ticker-track" id="npTicker"></div></div>
+      </div>
+    </div>
+
+    <div class="np-wrap np-body">
+      <div class="np-main">
+        <h2 class="np-section-title" id="npHeading">Top stories <span class="ml">പ്രധാന വാർത്തകൾ</span></h2>
+        <section class="np-lead" id="npLead"></section>
+        <h2 class="np-section-title">Latest news <span class="ml">പുതിയ വാർത്തകൾ</span></h2>
+        <section class="np-grid" id="npGrid" aria-live="polite"></section>
+      </div>
+
+      <aside class="np-side">
+        <div class="np-box np-radio">
+          <div class="np-radio-head"><span class="dot"></span> LIVE <span class="ml">തത്സമയം</span></div>
+          <div class="np-radio-row">
+            <button class="np-radio-btn" id="npPlay" aria-label="Play Mizhi FM">
+              <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            </button>
+            <div>
+              <strong>Mizhi FM <span class="ml">മിഴി എഫ്എം</span></strong>
+              <span class="np-radio-np" id="npNow">Press play to listen live</span>
+            </div>
+          </div>
+          <a class="np-radio-link" href="#home">Open the full radio page →</a>
+        </div>
+
+        <div class="np-box">
+          <h3>Send us news <span class="ml">വാർത്തകൾ അയക്കൂ</span></h3>
+          <p class="muted">Events, achievements, announcements from your town.</p>
+          <div class="np-send" id="npSend"></div>
+        </div>
+
+        <div class="np-box np-ad">
+          <span class="np-ad-label">Advertisement</span>
+          <strong>Your business here</strong>
+          <span class="ml">നിങ്ങളുടെ ബിസിനസ് ഇവിടെ</span>
+          <p>Reach Malayalis across the UK on Mizhi News and Mizhi FM.</p>
+          <a class="btn primary" id="adBtn" href="#">Advertise with us</a>
+        </div>
+
+        <div class="np-box">
+          <h3>Categories <span class="ml">വിഭാഗങ്ങൾ</span></h3>
+          <div class="np-side-cats" id="npSideCats"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Consent pop-up (shown once per visitor) -->
+  <div class="np-consent" id="npConsent" hidden>
+    <div class="np-consent-card" role="dialog" aria-modal="true" aria-labelledby="csTitle">
+      <p class="np-consent-hi">Welcome to Mizhi UK Malayalam News</p>
+      <h2 id="csTitle">Your privacy <span class="ml">നിങ്ങളുടെ സ്വകാര്യത</span></h2>
+      <p>We don't use advertising cookies or track you. To make this site work we:</p>
+      <ul>
+        <li><strong>Remember your choices</strong> on this device (this consent and your radio volume).</li>
+        <li><strong>Load fonts</strong> from Google Fonts.</li>
+        <li><strong>Show London weather and the £ to ₹ rate</strong> by asking Open-Meteo and ExchangeRate-API. Their servers see your IP address, like any website.</li>
+      </ul>
+      <p class="ml np-consent-ml">ഞങ്ങൾ പരസ്യ കുക്കികൾ ഉപയോഗിക്കുന്നില്ല, നിങ്ങളെ ട്രാക്ക് ചെയ്യുന്നില്ല. കാലാവസ്ഥയും വിനിമയ നിരക്കും കാണിക്കാൻ പുറത്തുള്ള സേവനങ്ങൾ ഉപയോഗിക്കുന്നു.</p>
+      <div class="np-consent-btns">
+        <button class="btn" id="csEssential">Essential only</button>
+        <button class="btn primary" id="csAccept">Accept &amp; continue <span class="ml">സമ്മതം</span></button>
+      </div>
+      <p class="small muted">You can change this any time with "Privacy settings" at the bottom of the page.</p>
+    </div>
+  </div>
+
+  <!-- Story reader -->
+  <div class="np-reader" id="npReader" hidden>
+    <div class="np-reader-backdrop" data-close></div>
+    <article class="np-reader-card" role="dialog" aria-modal="true" aria-labelledby="rdTitle">
+      <button class="np-reader-close" data-close aria-label="Close">×</button>
+      <div class="np-reader-img" id="rdImg"></div>
+      <div class="np-reader-body">
+        <div class="np-meta" id="rdMeta"></div>
+        <h2 id="rdTitle"></h2>
+        <p class="np-reader-ml ml" id="rdTitleMl"></p>
+        <div class="np-lang" id="rdLang" hidden>
+          <button data-lang="en" aria-pressed="true">English</button>
+          <button data-lang="ml" class="ml" aria-pressed="false">മലയാളം</button>
+        </div>
+        <div class="np-reader-text" id="rdText"></div>
+        <div class="np-share" id="rdShare"></div>
+      </div>
+    </article>
+  </div>
+
+
   <footer class="footer">
     <p>&copy; <span id="year"></span> <span data-bind="stationName"></span>. All rights reserved.</p>
     <p class="credit">Background artwork: miya photograph</p>
     <div class="credit music-credits" id="musicCredits"></div>
+    <p class="credit"><button class="linkish" id="csOpen">Privacy settings</button></p>
   </footer>
 
   <!-- Mini player shown when the hero scrolls out of view -->
@@ -138,6 +265,7 @@
   </div>
 
   <audio id="audio" preload="none"></audio>
-  <script src="assets/app.js?v=4"></script>
+  <script src="assets/app.js?v=6"></script>
+  <script src="assets/news.js?v=6"></script>
 </body>
 </html>
