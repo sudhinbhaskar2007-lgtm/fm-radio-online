@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin-backup/
+
+Sitemap: https://mizhinews.co.uk/sitemap.xml
