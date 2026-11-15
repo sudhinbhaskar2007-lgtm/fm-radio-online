@@ -10,8 +10,8 @@ backend:
 media_folder: assets/uploads
 public_folder: assets/uploads
 
-site_url: https://sudhinbhaskar2007-lgtm.github.io/fm-radio-online/
-display_url: https://sudhinbhaskar2007-lgtm.github.io/fm-radio-online/#news
+site_url: https://mizhinews.co.uk/
+display_url: https://mizhinews.co.uk/
 
 collections:
   - name: content
