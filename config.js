@@ -51,7 +51,7 @@ window.RADIO_CONFIG = {
   nowPlayingInterval: 15,        // seconds between checks
 
   // ---- Contact & social -----------------------------------------
-  email: "hello@example.com",
+  email: "mizhinews@gmail.com",
   phone: ["07438 407865", "07868 466691"],   // one number, or several in [ ] separated by commas
   whatsapp: "",                  // digits only, with country code, e.g. "447700900000"
   social: {
