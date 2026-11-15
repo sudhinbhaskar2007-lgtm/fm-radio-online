@@ -8,6 +8,7 @@
 window.RADIO_CONFIG = {
   // ---- Branding -------------------------------------------------
   stationName: "Mizhi FM",
+  stationNameMl: "മിഴി എഫ്എം",    // Malayalam name shown under the English one ("" to hide)
   tagline: "Your music. Your community. Live, 24/7.",
   frequency: "",                 // e.g. "101.4" shown as a badge; leave "" for online-only
   logoText: "MIZHI",              // big letters in the logo (used if logoImage is "")

@@ -34,6 +34,13 @@ explaining it. You don't need to touch any other file.
 To use your own logo, add the image to `assets/` and set
 `logoImage: "assets/your-logo.png"`.
 
+### Add news
+
+The **News (വാർത്ത)** page lists items from [`news-data.js`](news-data.js).
+To add a story, copy one `{ ... }` block to the top of `window.MIZHI_NEWS`
+and change the date, headline (English and Malayalam) and summary. Write
+news in your own words; link to other sites with `link` rather than copying.
+
 ## 2. Plug in your stream
 
 The site plays whatever audio stream URL you put in `streamUrl`. The demo URL
@@ -112,6 +119,9 @@ then open http://localhost:8080.
 ```
 index.html               page structure
 config.js                ← all station settings
+news.html                Mizhi UK Malayalam News page
+news-data.js             ← news items (edit this to add news)
+assets/news.js           news page logic
 assets/style.css         look and feel
 assets/app.js            player, now playing, schedule logic
 assets/eye-bg.mp4        background animation (desktop, 1080p)
