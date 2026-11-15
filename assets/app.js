@@ -33,6 +33,14 @@
   if (C.frequency) $("freq").textContent = C.frequency + " FM";
   $("year").textContent = new Date().getFullYear();
 
+  // Music credits (footer)
+  var mc = document.getElementById("musicCredits");
+  if (mc) (C.musicCredits || []).forEach(function (line) {
+    var p = document.createElement("p");
+    p.textContent = line;
+    mc.appendChild(p);
+  });
+
   // ---------------------------------------------------------------
   // Background video
   // ---------------------------------------------------------------

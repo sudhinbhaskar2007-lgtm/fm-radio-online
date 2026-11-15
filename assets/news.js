@@ -25,6 +25,14 @@
   }
   $("year").textContent = new Date().getFullYear();
 
+  // Music credits (footer)
+  var mc = document.getElementById("musicCredits");
+  if (mc) (C.musicCredits || []).forEach(function (line) {
+    var p = document.createElement("p");
+    p.textContent = line;
+    mc.appendChild(p);
+  });
+
   // Page title
   if (P.title) $("newsTitle").textContent = P.title;
   if (P.titleMl) $("newsTitleMl").textContent = P.titleMl;

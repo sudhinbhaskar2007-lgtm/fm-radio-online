@@ -256,6 +256,7 @@ input[type=range] { flex: 1; accent-color: var(--accent); }
 .mini-text span { color: var(--muted); font-size: .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .footer .credit { font-size: .8rem; opacity: .7; }
+.music-credits p { margin: 4px auto; max-width: 640px; }
 
 @media (prefers-reduced-motion: reduce) {
   .bg-video video { display: none; }

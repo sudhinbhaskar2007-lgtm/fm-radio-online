@@ -16,6 +16,13 @@ window.RADIO_CONFIG = {
   accentColor: "#e0359f",        // main brand colour (magenta from the eye)
   accentColor2: "#ff9a1f",       // second gradient colour (orange glow)
 
+  // ---- Music credits ---------------------------------------------
+  // Shown in the footer of every page. Creative Commons (CC BY) music
+  // must credit the artist: add one line per artist you use.
+  musicCredits: [
+    "Music by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0 (creativecommons.org/licenses/by/4.0/)"
+  ],
+
   // ---- Background video ------------------------------------------
   // The looping blinking-eye animation behind the page. Set both to ""
   // to use a plain gradient instead.
