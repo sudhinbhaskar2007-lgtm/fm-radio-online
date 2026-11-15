@@ -29,7 +29,7 @@ window.RADIO_CONFIG = {
   //   Shoutcast:  https://your.server:8000/;  (note the ";")
   //   Zeno.fm:    https://stream.zeno.fm/xxxxxxxx
   //   AzuraCast:  https://your.azuracast/listen/station/radio.mp3
-  streamUrl: "https://ice1.somafm.com/groovesalad-128-mp3",
+  streamUrl: "https://mizhifm.duckdns.org/listen/mizhi_fm/radio.mp3",
 
   // ---- Now playing (optional) ------------------------------------
   // How the site finds the current song title. Pick one:
@@ -38,8 +38,8 @@ window.RADIO_CONFIG = {
   //   "azuracast"  - reads AzuraCast's /api/nowplaying/<station>
   //   "shoutcast"  - reads Shoutcast v2 /stats?json=1
   //   "json"       - any URL returning {"title": "...", "artist": "..."}
-  nowPlayingType: "none",
-  nowPlayingUrl: "",             // e.g. "https://your.server:8000/status-json.xsl"
+  nowPlayingType: "azuracast",
+  nowPlayingUrl: "https://mizhifm.duckdns.org/api/nowplaying/mizhi_fm", // e.g. "https://your.server:8000/status-json.xsl"
   nowPlayingInterval: 15,        // seconds between checks
 
   // ---- Contact & social -----------------------------------------
