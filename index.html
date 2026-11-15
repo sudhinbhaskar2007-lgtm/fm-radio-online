@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Radio</title>
+  <meta name="description" content="Listen live online, 24/7.">
+  <meta name="theme-color" content="#07060f">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <!-- Full-page looping background (set in config.js) -->
+  <div class="bg-video" aria-hidden="true">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto"></video>
+    <div class="bg-shade"></div>
+  </div>
+  <header class="topbar">
+    <a href="#home" class="brand" aria-label="Home">
+      <span class="logo" id="logo"></span>
+      <span class="brand-name" data-bind="stationName"></span>
+      <span class="freq" id="freq"></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#home">Listen</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#shows">Shows</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO / PLAYER -->
+    <section id="home" class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="live-pill"><span class="dot"></span> LIVE</div>
+        <h1 data-bind="stationName"></h1>
+        <p class="tagline" data-bind="tagline"></p>
+
+        <div class="player-card">
+          <button class="play-btn" id="playBtn" aria-label="Play">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            <span class="spinner"></span>
+          </button>
+          <div class="np">
+            <div class="np-label" id="npLabel">Now playing</div>
+            <div class="np-title" id="npTitle">Press play to listen live</div>
+            <div class="np-show" id="npShow"></div>
+          </div>
+          <div class="eq" id="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="volume">
+            <button id="muteBtn" class="icon-btn" aria-label="Mute">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+            </button>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+          </div>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </section>
+
+    <!-- ON AIR NOW / UP NEXT -->
+    <section class="strip">
+      <div class="strip-item">
+        <span class="strip-label">On air now</span>
+        <strong id="onAirNow">—</strong>
+      </div>
+      <div class="strip-item">
+        <span class="strip-label">Up next</span>
+        <strong id="upNext">—</strong>
+      </div>
+      <div class="strip-item">
+        <span class="strip-label">Station time</span>
+        <strong id="clock">—</strong>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="section">
+      <h2>Weekly schedule</h2>
+      <div class="tabs" id="dayTabs" role="tablist"></div>
+      <ul class="schedule-list" id="scheduleList"></ul>
+      <p class="muted small" id="tzNote"></p>
+    </section>
+
+    <!-- SHOWS -->
+    <section id="shows" class="section">
+      <h2>Shows &amp; presenters</h2>
+      <div class="grid" id="showGrid"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <h2>About us</h2>
+      <p data-bind="about"></p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Get in touch</h2>
+      <p class="muted">Song requests, shout-outs, advertising or just say hi.</p>
+      <div class="contact-row" id="contactRow"></div>
+      <div class="social" id="social"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> <span data-bind="stationName"></span>. All rights reserved.</p>
+    <p class="credit">Background artwork: miya photograph</p>
+  </footer>
+
+  <!-- Mini player shown when the hero scrolls out of view -->
+  <div class="mini" id="mini" hidden>
+    <button class="play-btn small" id="miniPlay" aria-label="Play">
+      <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+      <span class="spinner"></span>
+    </button>
+    <div class="mini-text">
+      <strong data-bind="stationName"></strong>
+      <span id="miniTitle">Live</span>
+    </div>
+  </div>
+
+  <audio id="audio" preload="none"></audio>
+  <script src="assets/app.js"></script>
+</body>
+</html>
