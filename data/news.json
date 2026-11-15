@@ -1,62 +1,60 @@
 [
   {
     "id": "photo-gallery-launch",
-    "date": "2026-11-15",
-    "category": "mizhi",
     "title": "New on Mizhi News: photo gallery",
     "titleMl": "മിഴി ന്യൂസിൽ പുതിയ ഫോട്ടോ ഗാലറി",
+    "date": "2026-11-15",
+    "category": "mizhi",
     "summary": "Share photos from your association's Onam, Christmas and community events. We'll put them in the Mizhi photo gallery.",
     "summaryMl": "നിങ്ങളുടെ അസോസിയേഷന്റെ ഓണം, ക്രിസ്മസ്, മറ്റു പരിപാടികൾ എന്നിവയുടെ ചിത്രങ്ങൾ അയക്കൂ. മിഴി ഫോട്ടോ ഗാലറിയിൽ ഞങ്ങൾ അവ പ്രസിദ്ധീകരിക്കാം.",
     "body": "Mizhi UK Malayalam News now has a photo gallery. Open the \"Photo gallery\" tab in the news menu to see albums, and tap any photo to view it full screen.\n\nHas your Malayali association held an Onam celebration, Christmas carol night, sports day or cultural programme? Send us your photos with the event name, place and date. Please only send photos you took yourself or have permission to share.",
     "bodyMl": "മിഴി യുകെ മലയാളം വാർത്തയിൽ ഇനി ഫോട്ടോ ഗാലറിയും. വാർത്താ മെനുവിലെ \"ചിത്രങ്ങൾ\" എന്ന ടാബ് തുറന്നാൽ ആൽബങ്ങൾ കാണാം. ഏതു ചിത്രത്തിലും തൊട്ടാൽ അത് വലുതായി കാണാം.\n\nനിങ്ങളുടെ മലയാളി അസോസിയേഷൻ ഓണാഘോഷമോ ക്രിസ്മസ് കരോളോ കായികമേളയോ കലാപരിപാടികളോ നടത്തിയോ? പരിപാടിയുടെ പേര്, സ്ഥലം, തീയതി എന്നിവയോടൊപ്പം ചിത്രങ്ങൾ ഞങ്ങൾക്ക് അയക്കൂ. നിങ്ങൾ സ്വയം എടുത്തതോ പങ്കുവെക്കാൻ അനുവാദമുള്ളതോ ആയ ചിത്രങ്ങൾ മാത്രം അയക്കുക.",
-    "image": "",
     "featured": false,
-    "breaking": true,
-    "link": ""
+    "breaking": true
   },
   {
     "id": "mizhi-fm-launch",
-    "date": "2026-11-15",
-    "category": "mizhi",
     "title": "Mizhi FM is now live, 24/7",
     "titleMl": "മിഴി എഫ്എം ഇപ്പോൾ 24 മണിക്കൂറും തത്സമയം",
+    "date": "2026-11-15",
+    "category": "mizhi",
     "summary": "Our new online radio station for Malayalis in the UK is on air. Press play and share the link with friends and family.",
     "summaryMl": "യുകെയിലെ മലയാളികൾക്കായുള്ള ഞങ്ങളുടെ പുതിയ ഓൺലൈൻ റേഡിയോ ഇപ്പോൾ പ്രക്ഷേപണം തുടങ്ങി. പ്ലേ അമർത്തൂ, ലിങ്ക് കൂട്ടുകാർക്കും കുടുംബത്തിനും ഷെയർ ചെയ്യൂ.",
     "body": "Mizhi FM, a new online radio station for the Malayali community in the UK, is now broadcasting 24 hours a day.\n\nYou can listen on any phone, tablet or computer: open the Mizhi FM page and press play. On a phone you can also add it to your home screen so it opens like an app.\n\nShows, community news and more are on the way. Tell your friends and family!",
     "bodyMl": "യുകെയിലെ മലയാളി സമൂഹത്തിനായുള്ള പുതിയ ഓൺലൈൻ റേഡിയോ ആയ മിഴി എഫ്എം ഇപ്പോൾ 24 മണിക്കൂറും പ്രക്ഷേപണം ചെയ്യുന്നു.\n\nഏതു ഫോണിലും ടാബ്‌ലെറ്റിലും കമ്പ്യൂട്ടറിലും കേൾക്കാം: മിഴി എഫ്എം പേജ് തുറന്ന് പ്ലേ അമർത്തുക. ഫോണിൽ ഹോം സ്ക്രീനിലേക്ക് ചേർത്താൽ ഒരു ആപ്പ് പോലെ തുറക്കാം.\n\nപരിപാടികളും പ്രാദേശിക വാർത്തകളും ഉടൻ വരുന്നു. കൂട്ടുകാരെയും കുടുംബത്തെയും അറിയിക്കൂ!",
-    "image": "",
     "featured": true,
-    "breaking": true,
-    "link": ""
+    "breaking": true
   },
   {
     "id": "send-us-your-news",
-    "date": "2026-11-15",
-    "category": "community",
     "title": "Send us your community news",
     "titleMl": "നിങ്ങളുടെ പ്രദേശത്തെ വാർത്തകൾ ഞങ്ങൾക്ക് അയക്കൂ",
+    "date": "2026-11-15",
+    "category": "community",
     "summary": "Association events, church and temple programmes, achievements and announcements: tell us and we'll share them here and on air.",
     "summaryMl": "അസോസിയേഷൻ പരിപാടികൾ, പള്ളി / അമ്പല പരിപാടികൾ, നേട്ടങ്ങൾ, അറിയിപ്പുകൾ: ഞങ്ങളെ അറിയിക്കൂ, ഇവിടെയും റേഡിയോയിലും പങ്കുവെക്കാം.",
     "body": "Is your Malayali association planning an Onam or Christmas celebration? Has someone in your town achieved something special? Send us the details, a photo you took, and a contact name, and we'll publish it on Mizhi UK Malayalam News and mention it on Mizhi FM.",
-    "bodyMl": "",
-    "image": "",
     "featured": false,
-    "breaking": false,
-    "link": ""
+    "breaking": false
   },
   {
     "id": "advertise-with-mizhi",
-    "date": "2026-11-15",
-    "category": "mizhi",
     "title": "Advertise with Mizhi FM and Mizhi News",
     "titleMl": "മിഴി എഫ്എമ്മിലും മിഴി ന്യൂസിലും പരസ്യം ചെയ്യൂ",
+    "date": "2026-11-15",
+    "category": "mizhi",
     "summary": "Reach Malayalis across the UK. Affordable radio and website ads for shops, restaurants, travel agents and events.",
     "summaryMl": "യുകെയിലെമ്പാടുമുള്ള മലയാളികളിലേക്ക് എത്തൂ. കടകൾക്കും റെസ്റ്റോറന്റുകൾക്കും ട്രാവൽ ഏജന്റുമാർക്കും പരിപാടികൾക്കും കുറഞ്ഞ നിരക്കിൽ പരസ്യം.",
-    "body": "",
-    "bodyMl": "",
-    "image": "",
     "featured": false,
-    "breaking": false,
-    "link": ""
+    "breaking": false
+  },
+  {
+    "title": "ATM thief arrested in UK",
+    "titleMl": "എടിഎം മോഷ്ടാവ് യുകെയിൽ അറസ്റ്റിൽ ",
+    "date": "2026-11-15",
+    "category": "uk",
+    "bodyMl": "ആറ് മാസത്തിനിടെ 180 ഓളം ക്യാഷ് മെഷീനില്‍ നിന്ന് പണം കവര്‍ന്നയളെ പോലീസ് പിടികൂടി. ഡെഗനാമിലെ ഇയാളുടെ വീട്ടിലെ ലോഫ്റ്റില്‍ ഒളിച്ചിരിക്കവെ സാഹസികമായാണ് ബോഗ്ഡന്‍ ഗാസ് പറോവ് എന്ന 40 കാരനെ പോലീസ് കീഴടക്കിയത്. വീട്ടില്‍ തന്നെ നിര്‍മ്മിച്ച ക്യഷ് ട്രാപ്പിംഗ് മെഷിനുപയോഗിച്ചാണ് ഇയാള്‍ പണം കവരുന്നത്. എടിഎം മെഷിനില്‍ ഈ യന്ത്രം  സ്ഥാപിച്ചശേഷം ഇയാള്‍ തിരികെ പോകും. മറ്റാരെങ്കിലും പണം എടുക്കുമ്പോള്‍ നോട്ടുകള്‍ ഇതില് തടഞ്ഞുനില്‍ക്കും . പിന്നീട് ഇയാള്‍ ചെന്ന് ആ പണം കൈക്കലാക്കുകയായിരുന്നു രീതി. നിരവധി സിസിടിവി പരിശോധനകളില്‍ ഗാസ് പറോവിനെ പലയിടത്തും കണ്ടതോടെയാണ് പോലീസിന് സംശയമുണ്ടായത്. തുടര്‍ന്ന് നടത്തിയ അന്വേഷണത്തിലാണ് ഇയാള്‍ വലയിലാകുന്നത്. ഇതുവരെ 16000 ത്തോളം പൗണ്ട് ഇയാള്‍ കവര്‍ന്നതായി പോലീസ് കണ്ടെത്തി.",
+    "featured": false,
+    "breaking": false
   }
 ]
