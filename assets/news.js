@@ -378,6 +378,16 @@
   // Story reader
   // ---------------------------------------------------------------
   var reader = $("npReader"), lastFocus = null, readerLang = "en", current = null;
+  // Stories open as a full article page inside the news column (own link: #story=id).
+  document.querySelector(".np-main").appendChild(reader);
+  reader.classList.add("np-article");
+  reader.querySelector(".np-reader-card").removeAttribute("aria-modal");
+  reader.querySelector(".np-reader-card").removeAttribute("role");
+  var backBtn = reader.querySelector(".np-reader-close");
+  backBtn.textContent = "← Back to news";
+  backBtn.setAttribute("aria-label", "Back to news");
+  var moreBox = el("section", "np-article-more");
+  reader.appendChild(moreBox);
   function paragraphs(text, ml) {
     var box = $("rdText"); box.textContent = "";
     String(text || "").split(/\n\s*\n/).forEach(function (p) {
@@ -421,15 +431,33 @@
       cp.addEventListener("click", function () { navigator.clipboard.writeText(url).then(function () { cp.textContent = "Copied ✓"; }); });
       share.appendChild(cp);
     }
+    // More stories under the article
+    moreBox.textContent = "";
+    var others = NEWS.filter(function (x) { return x !== n; });
+    var same = others.filter(function (x) { return x.category === n.category; });
+    var pick = same.concat(others.filter(function (x) { return same.indexOf(x) < 0; })).slice(0, 4);
+    if (pick.length) {
+      var hh = el("h2", "np-section-title", "More news ");
+      hh.appendChild(el("span", "ml", "കൂടുതൽ വാർത്തകൾ"));
+      moreBox.appendChild(hh);
+      var g = el("div", "np-grid");
+      pick.forEach(function (x) { g.appendChild(card(x, "grid")); });
+      moreBox.appendChild(g);
+    }
+    $("npNewsMain").hidden = true;
+    $("npGalleryView").hidden = true;
     reader.hidden = false;
-    document.body.classList.add("reader-open");
     document.title = n.title + " | " + (P.title || "Mizhi News");
-    reader.querySelector(".np-reader-close").focus();
+    var bars = (document.querySelector(".topbar") || {}).offsetHeight || 64;
+    bars += (document.querySelector(".np-cats") || {}).offsetHeight || 0;
+    window.scrollTo(0, Math.max(0, reader.getBoundingClientRect().top + window.scrollY - bars - 12));
+    $("rdTitle").setAttribute("tabindex", "-1");
+    $("rdTitle").focus({ preventScroll: true });
   }
   function closeStory() {
     if (reader.hidden) return;
     reader.hidden = true;
-    document.body.classList.remove("reader-open");
+    $("npNewsMain").hidden = false;
     if (/^#story=/.test(location.hash)) {
       document.title = (P.title || "Mizhi News") + (P.titleMl ? " | " + P.titleMl : "");
       history.replaceState(null, "", location.pathname + location.search + (lastCat ? "#cat=" + lastCat : "#news"));
