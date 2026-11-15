@@ -34,16 +34,21 @@ explaining it. You don't need to touch any other file.
 To use your own logo, add the image to `assets/` and set
 `logoImage: "assets/your-logo.png"`.
 
-### Add news
+### Add news and photos (team admin)
 
-The **Mizhi UK Malayalam News** tab shows stories from
-[`news-data.js`](news-data.js). To add a story, copy one `{ ... }` block to the
-top of `window.MIZHI_NEWS` and change the date, category, headlines (English and
-Malayalam), summary and full text. Set `featured: true` for the big top story
-and `breaking: true` to put it in the red ticker. Photos go in `assets/news/`.
-The news view lives inside the main page, so the radio keeps playing while
-people read. Write
-news in your own words; link to other sites with `link` rather than copying.
+News stories live in [`data/news.json`](data/news.json) and photo albums in
+[`data/gallery.json`](data/gallery.json). The team edits them in
+[Pages CMS](https://app.pagescms.org) (free, open source): the fields are set up
+in [`.pages.yml`](.pages.yml), and [`admin.html`](admin.html) on the site has the
+button and step-by-step help. Each save commits to `main`, and the site
+redeploys by itself. Uploaded photos go in `assets/uploads/`.
+
+One-time setup by the repository owner: open https://app.pagescms.org, sign in
+with GitHub, install the Pages CMS GitHub App on this repository only, then
+invite team members (Collaborators) by email.
+
+Write news in your own words, and use your own photos or ones you have permission
+to use. Link to other sites with `link` rather than copying.
 
 ## 2. Plug in your stream
 
@@ -124,7 +129,11 @@ then open http://localhost:8080.
 index.html               page structure
 config.js                ← all station settings
 news.html                old link; forwards to index.html#news
-news-data.js             ← news stories and categories (edit this to add news)
+news-data.js             news page title and category menu
+data/news.json           ← news stories (edited on the admin page)
+data/gallery.json        ← photo albums (edited on the admin page)
+.pages.yml               admin page (Pages CMS) setup
+admin.html               team admin help page
 assets/news.js           news view (inside index.html, so the radio keeps playing)
 assets/style.css         look and feel
 assets/app.js            player, now playing, schedule logic

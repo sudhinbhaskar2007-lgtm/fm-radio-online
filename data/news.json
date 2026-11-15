@@ -1,0 +1,47 @@
+[
+  {
+    "id": "mizhi-fm-launch",
+    "date": "2026-11-15",
+    "category": "mizhi",
+    "title": "Mizhi FM is now live, 24/7",
+    "titleMl": "മിഴി എഫ്എം ഇപ്പോൾ 24 മണിക്കൂറും തത്സമയം",
+    "summary": "Our new online radio station for Malayalis in the UK is on air. Press play and share the link with friends and family.",
+    "summaryMl": "യുകെയിലെ മലയാളികൾക്കായുള്ള ഞങ്ങളുടെ പുതിയ ഓൺലൈൻ റേഡിയോ ഇപ്പോൾ പ്രക്ഷേപണം തുടങ്ങി. പ്ലേ അമർത്തൂ, ലിങ്ക് കൂട്ടുകാർക്കും കുടുംബത്തിനും ഷെയർ ചെയ്യൂ.",
+    "body": "Mizhi FM, a new online radio station for the Malayali community in the UK, is now broadcasting 24 hours a day.\n\nYou can listen on any phone, tablet or computer: open the Mizhi FM page and press play. On a phone you can also add it to your home screen so it opens like an app.\n\nShows, community news and more are on the way. Tell your friends and family!",
+    "bodyMl": "യുകെയിലെ മലയാളി സമൂഹത്തിനായുള്ള പുതിയ ഓൺലൈൻ റേഡിയോ ആയ മിഴി എഫ്എം ഇപ്പോൾ 24 മണിക്കൂറും പ്രക്ഷേപണം ചെയ്യുന്നു.\n\nഏതു ഫോണിലും ടാബ്‌ലെറ്റിലും കമ്പ്യൂട്ടറിലും കേൾക്കാം: മിഴി എഫ്എം പേജ് തുറന്ന് പ്ലേ അമർത്തുക. ഫോണിൽ ഹോം സ്ക്രീനിലേക്ക് ചേർത്താൽ ഒരു ആപ്പ് പോലെ തുറക്കാം.\n\nപരിപാടികളും പ്രാദേശിക വാർത്തകളും ഉടൻ വരുന്നു. കൂട്ടുകാരെയും കുടുംബത്തെയും അറിയിക്കൂ!",
+    "image": "",
+    "featured": true,
+    "breaking": true,
+    "link": ""
+  },
+  {
+    "id": "send-us-your-news",
+    "date": "2026-11-15",
+    "category": "community",
+    "title": "Send us your community news",
+    "titleMl": "നിങ്ങളുടെ പ്രദേശത്തെ വാർത്തകൾ ഞങ്ങൾക്ക് അയക്കൂ",
+    "summary": "Association events, church and temple programmes, achievements and announcements: tell us and we'll share them here and on air.",
+    "summaryMl": "അസോസിയേഷൻ പരിപാടികൾ, പള്ളി / അമ്പല പരിപാടികൾ, നേട്ടങ്ങൾ, അറിയിപ്പുകൾ: ഞങ്ങളെ അറിയിക്കൂ, ഇവിടെയും റേഡിയോയിലും പങ്കുവെക്കാം.",
+    "body": "Is your Malayali association planning an Onam or Christmas celebration? Has someone in your town achieved something special? Send us the details, a photo you took, and a contact name, and we'll publish it on Mizhi UK Malayalam News and mention it on Mizhi FM.",
+    "bodyMl": "",
+    "image": "",
+    "featured": false,
+    "breaking": false,
+    "link": ""
+  },
+  {
+    "id": "advertise-with-mizhi",
+    "date": "2026-11-15",
+    "category": "mizhi",
+    "title": "Advertise with Mizhi FM and Mizhi News",
+    "titleMl": "മിഴി എഫ്എമ്മിലും മിഴി ന്യൂസിലും പരസ്യം ചെയ്യൂ",
+    "summary": "Reach Malayalis across the UK. Affordable radio and website ads for shops, restaurants, travel agents and events.",
+    "summaryMl": "യുകെയിലെമ്പാടുമുള്ള മലയാളികളിലേക്ക് എത്തൂ. കടകൾക്കും റെസ്റ്റോറന്റുകൾക്കും ട്രാവൽ ഏജന്റുമാർക്കും പരിപാടികൾക്കും കുറഞ്ഞ നിരക്കിൽ പരസ്യം.",
+    "body": "",
+    "bodyMl": "",
+    "image": "",
+    "featured": false,
+    "breaking": false,
+    "link": ""
+  }
+]

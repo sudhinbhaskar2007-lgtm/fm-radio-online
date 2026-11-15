@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Mizhi Team Admin</title>
+  <link rel="icon" href="assets/icon.svg">
+  <style>
+    :root { --bg:#07060f; --card:#120d22; --text:#f7f3ff; --muted:#b9add6; --mag:#e0359f; --org:#ff9a1f; --grn:#3ddc84; --border:rgba(255,255,255,.12); }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; padding:24px 16px 60px; }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    h1 { margin:0 0 4px; font-size:clamp(1.6rem,5vw,2.2rem); background:linear-gradient(90deg,var(--mag),var(--org)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .ml { font-family:"Noto Sans Malayalam",system-ui,sans-serif; }
+    .sub { color:var(--muted); margin:0 0 24px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; margin:0 0 16px; }
+    .card h2 { margin:0 0 8px; font-size:1.15rem; }
+    .btn { display:inline-block; padding:14px 22px; border-radius:999px; background:linear-gradient(90deg,var(--mag),var(--org)); color:#fff; font-weight:700; text-decoration:none; font-size:1.05rem; }
+    .btn.ghost { background:transparent; border:1px solid var(--border); font-weight:600; font-size:.95rem; padding:10px 18px; }
+    ol { padding-left: 22px; margin: 8px 0 0; } li { margin: 0 0 8px; }
+    code { background:rgba(255,255,255,.08); padding:1px 6px; border-radius:6px; }
+    .tip { border-left:4px solid var(--grn); }
+    a { color: var(--org); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Mizhi Team Admin</h1>
+    <p class="sub">Update the news and photo galleries. <span class="ml">വാർത്തകളും ചിത്രങ്ങളും ഇവിടെ നിന്ന് ചേർക്കാം.</span></p>
+
+    <div class="card">
+      <h2>Open the admin page</h2>
+      <p>Sign in, then choose <strong>News</strong> or <strong>Photo gallery</strong> on the left.</p>
+      <p><a class="btn" href="https://app.pagescms.org/sudhinbhaskar2007-lgtm/fm-radio-online/main" target="_blank" rel="noopener">Open admin →</a></p>
+      <p><a class="btn ghost" href="index.html#news">← Back to Mizhi News</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Add a news story <span class="ml">വാർത്ത ചേർക്കാൻ</span></h2>
+      <ol>
+        <li>Click <strong>News / വാർത്ത</strong>, then <strong>Add an entry</strong> (you can drag it to the top).</li>
+        <li>Fill in the headline, date and category. Malayalam boxes are optional.</li>
+        <li>Upload a photo if you have one.</li>
+        <li>Tick <strong>Top story</strong> to show it big, or <strong>Breaking</strong> for the red ticker.</li>
+        <li>Click <strong>Save</strong>. The website updates by itself in about 1 to 2 minutes.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Add a photo album <span class="ml">ചിത്രങ്ങൾ ചേർക്കാൻ</span></h2>
+      <ol>
+        <li>Click <strong>Photo gallery / ചിത്രങ്ങൾ</strong>, then <strong>Add an entry</strong>.</li>
+        <li>Type the album name and date, e.g. "Onam 2026, Manchester".</li>
+        <li>Upload the photos (you can pick several at once). The first photo is the cover.</li>
+        <li>Click <strong>Save</strong>.</li>
+      </ol>
+    </div>
+
+    <div class="card tip">
+      <h2>Good to know</h2>
+      <ol>
+        <li>Only people the owner has invited can sign in.</li>
+        <li>Use your own photos, or photos you have permission to use. Please don't copy articles or pictures from other news websites.</li>
+        <li>Smaller photos load faster: about 1600 pixels wide is plenty.</li>
+        <li>Made a mistake? Every save is kept, so the owner can always undo it.</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

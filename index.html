@@ -11,9 +11,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=6">
-  <script src="config.js?v=6"></script>
-  <script src="news-data.js?v=6"></script>
+  <link rel="stylesheet" href="assets/style.css?v=7">
+  <script src="config.js?v=7"></script>
+  <script src="news-data.js?v=7"></script>
 </head>
 <body>
   <!-- Full-page looping background (set in config.js) -->
@@ -159,10 +159,18 @@
 
     <div class="np-wrap np-body">
       <div class="np-main">
-        <h2 class="np-section-title" id="npHeading">Top stories <span class="ml">പ്രധാന വാർത്തകൾ</span></h2>
-        <section class="np-lead" id="npLead"></section>
-        <h2 class="np-section-title">Latest news <span class="ml">പുതിയ വാർത്തകൾ</span></h2>
-        <section class="np-grid" id="npGrid" aria-live="polite"></section>
+        <div id="npNewsMain">
+          <h2 class="np-section-title" id="npHeading">Top stories <span class="ml">പ്രധാന വാർത്തകൾ</span></h2>
+          <section class="np-lead" id="npLead"></section>
+          <h2 class="np-section-title">Latest news <span class="ml">പുതിയ വാർത്തകൾ</span></h2>
+          <section class="np-grid" id="npGrid" aria-live="polite"></section>
+        </div>
+        <section id="npGalleryView" hidden>
+          <a class="np-gl-back" id="glBack" href="#gallery" hidden>← All albums <span class="ml">എല്ലാ ആൽബങ്ങളും</span></a>
+          <h2 class="np-section-title" id="glHeading">Photo gallery <span class="ml">ചിത്രങ്ങൾ</span></h2>
+          <div class="np-gl-desc" id="glDesc" hidden></div>
+          <div class="np-gl-albums" id="glGrid" aria-live="polite"></div>
+        </section>
       </div>
 
       <aside class="np-side">
@@ -195,6 +203,12 @@
           <a class="btn primary" id="adBtn" href="#">Advertise with us</a>
         </div>
 
+        <div class="np-box" id="npSideGallery" hidden>
+          <h3>Photo gallery <span class="ml">ചിത്രങ്ങൾ</span></h3>
+          <div class="np-side-gallery" id="npSideGalleryGrid"></div>
+          <a class="np-radio-link" href="#gallery">See all photos →</a>
+        </div>
+
         <div class="np-box">
           <h3>Categories <span class="ml">വിഭാഗങ്ങൾ</span></h3>
           <div class="np-side-cats" id="npSideCats"></div>
@@ -223,6 +237,14 @@
     </div>
   </div>
 
+  <!-- Photo lightbox -->
+  <div class="np-lightbox" id="npLightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lb-btn lb-close" data-lb="close" aria-label="Close">×</button>
+    <button class="lb-btn lb-prev" data-lb="prev" aria-label="Previous photo">‹</button>
+    <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+    <button class="lb-btn lb-next" data-lb="next" aria-label="Next photo">›</button>
+  </div>
+
   <!-- Story reader -->
   <div class="np-reader" id="npReader" hidden>
     <div class="np-reader-backdrop" data-close></div>
@@ -248,7 +270,7 @@
     <p>&copy; <span id="year"></span> <span data-bind="stationName"></span>. All rights reserved.</p>
     <p class="credit">Background artwork: miya photograph</p>
     <div class="credit music-credits" id="musicCredits"></div>
-    <p class="credit"><button class="linkish" id="csOpen">Privacy settings</button></p>
+    <p class="credit"><button class="linkish" id="csOpen">Privacy settings</button> · <a href="admin.html">Team login</a></p>
   </footer>
 
   <!-- Mini player shown when the hero scrolls out of view -->
@@ -265,7 +287,7 @@
   </div>
 
   <audio id="audio" preload="none"></audio>
-  <script src="assets/app.js?v=6"></script>
-  <script src="assets/news.js?v=6"></script>
+  <script src="assets/app.js?v=7"></script>
+  <script src="assets/news.js?v=7"></script>
 </body>
 </html>

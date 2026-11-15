@@ -1,0 +1,104 @@
+# Admin settings for Pages CMS (https://app.pagescms.org).
+# This file tells the admin page which files the team can edit.
+# Every save in the admin page commits to GitHub and the website
+# updates by itself about a minute later.
+
+media:
+  input: assets/uploads
+  output: assets/uploads
+  categories: [image]
+  rename: safe
+
+content:
+  - name: news
+    label: "News / വാർത്ത"
+    type: file
+    path: data/news.json
+    format: json
+    list: true
+    fields:
+      - name: id
+        label: "Web link name (optional, e.g. onam-2026. Leave empty and one is made from the headline)"
+        type: string
+      - name: title
+        label: "Headline (English)"
+        type: string
+        required: true
+      - name: titleMl
+        label: "Headline (Malayalam / മലയാളം)"
+        type: string
+      - name: date
+        label: "Date"
+        type: date
+        required: true
+      - name: category
+        label: "Category"
+        type: select
+        required: true
+        options:
+          values:
+            - { value: uk, label: "UK / യുകെ" }
+            - { value: kerala, label: "Kerala / കേരളം" }
+            - { value: immigration, label: "Immigration / കുടിയേറ്റം" }
+            - { value: community, label: "Community / സമൂഹം" }
+            - { value: cinema, label: "Cinema / സിനിമ" }
+            - { value: sports, label: "Sports / കായികം" }
+            - { value: jobs, label: "Jobs / ജോലി" }
+            - { value: mizhi, label: "Mizhi FM / മിഴി എഫ്എം" }
+      - name: image
+        label: "Photo (your own or one you have permission to use)"
+        type: image
+      - name: summary
+        label: "Short summary (English, shown on the card)"
+        type: text
+      - name: summaryMl
+        label: "Short summary (Malayalam)"
+        type: text
+      - name: body
+        label: "Full story (English). Leave an empty line between paragraphs."
+        type: text
+      - name: bodyMl
+        label: "Full story (Malayalam). Leave an empty line between paragraphs."
+        type: text
+      - name: featured
+        label: "Top story (show big at the top)"
+        type: boolean
+      - name: breaking
+        label: "Breaking news (show in the red ticker)"
+        type: boolean
+      - name: link
+        label: "Read more link (optional, https://...)"
+        type: string
+
+  - name: gallery
+    label: "Photo gallery / ചിത്രങ്ങൾ"
+    type: file
+    path: data/gallery.json
+    format: json
+    list: true
+    fields:
+      - name: id
+        label: "Web link name (optional, e.g. onam-2026-photos)"
+        type: string
+      - name: title
+        label: "Album name (English)"
+        type: string
+        required: true
+      - name: titleMl
+        label: "Album name (Malayalam)"
+        type: string
+      - name: date
+        label: "Date"
+        type: date
+        required: true
+      - name: description
+        label: "About this album (English, optional)"
+        type: text
+      - name: descriptionMl
+        label: "About this album (Malayalam, optional)"
+        type: text
+      - name: photos
+        label: "Photos (upload several at once). The first one is the cover."
+        type: image
+        options:
+          multiple: true

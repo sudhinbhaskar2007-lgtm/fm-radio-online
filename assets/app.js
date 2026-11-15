@@ -367,7 +367,10 @@
   var row = $("contactRow");
   if (C.whatsapp) addBtn(row, "https://wa.me/" + C.whatsapp.replace(/\D/g, "") + "?text=" + encodeURIComponent("Hi " + C.stationName + "! Song request: "), "WhatsApp a request", true);
   if (C.email) addBtn(row, "mailto:" + C.email, C.email, !C.whatsapp);
-  if (C.phone) addBtn(row, "tel:" + C.phone.replace(/\s/g, ""), C.phone);
+  [].concat(C.phone || []).forEach(function (ph) {
+    ph = String(ph).trim();
+    if (ph) addBtn(row, "tel:" + ph.replace(/[^\d+]/g, "").replace(/^0/, "+44"), "📞 " + ph);
+  });
 
   var social = $("social");
   var names = { facebook: "Facebook", instagram: "Instagram", youtube: "YouTube", x: "X", tiktok: "TikTok" };

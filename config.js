@@ -52,7 +52,7 @@ window.RADIO_CONFIG = {
 
   // ---- Contact & social -----------------------------------------
   email: "hello@example.com",
-  phone: "",                     // e.g. "+44 20 0000 0000"
+  phone: ["07438 407865", "07868 466691"],   // one number, or several in [ ] separated by commas
   whatsapp: "",                  // digits only, with country code, e.g. "447700900000"
   social: {
     facebook: "",
