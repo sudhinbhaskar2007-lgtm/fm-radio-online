@@ -11,11 +11,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=8">
-  <script src="config.js?v=8"></script>
-  <script src="news-data.js?v=8"></script>
+  <link rel="stylesheet" href="assets/style.css?v=9">
+  <script src="config.js?v=9"></script>
+  <script src="news-data.js?v=9"></script>
 </head>
-<body>
+<body class="news-view">
   <!-- Full-page looping background (set in config.js) -->
   <div class="bg-video" aria-hidden="true">
     <video id="bgVideo" autoplay muted loop playsinline preload="auto"></video>
@@ -25,8 +25,8 @@
     <div class="brand">
       <span class="logo" id="logo"></span>
       <nav class="site-tabs" aria-label="Mizhi">
-        <a href="#news" class="site-tab tab-news" id="tabNews"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
-        <a href="#home" class="site-tab active" id="tabFm" aria-current="page"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
+        <a href="#news" class="site-tab tab-news active" id="tabNews" aria-current="page"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
+        <a href="#home" class="site-tab" id="tabFm"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
       </nav>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
@@ -41,7 +41,7 @@
     </nav>
   </header>
 
-  <main id="radioView">
+  <main id="radioView" hidden>
     <!-- HERO / PLAYER -->
     <section id="home" class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -120,7 +120,7 @@
   </main>
 
   <!-- NEWS (Mizhi UK Malayalam News) -->
-  <main id="newsView" class="nw" hidden>
+  <main id="newsView" class="nw">
     <!-- Info bar: date, London time & weather, £ to ₹ -->
     <div class="np-info">
       <div class="np-wrap np-info-row">
@@ -287,7 +287,7 @@
   </div>
 
   <audio id="audio" preload="none"></audio>
-  <script src="assets/app.js?v=8"></script>
-  <script src="assets/news.js?v=8"></script>
+  <script src="assets/app.js?v=9"></script>
+  <script src="assets/news.js?v=9"></script>
 </body>
 </html>

@@ -489,7 +489,8 @@
   }
   function route() {
     var h = location.hash;
-    var isNews = /^#(news|cat=|story=|gallery|album=)/.test(h);
+    // News is the first page: an empty address opens the news.
+    var isNews = !h || h === "#" || /^#(news|cat=|story=|gallery|album=)/.test(h);
     var changed = setView(isNews ? "news" : "radio");
     if (!isNews) {
       closeStory(); closeLightbox();
