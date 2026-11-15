@@ -287,15 +287,24 @@ input[type=range] { flex: 1; accent-color: var(--accent); }
 .news-empty { text-align: center; color: var(--muted); }
 
 /* ---------- News / FM tabs in the top bar ---------- */
-.site-tabs { display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--border); }
+.site-tabs { display: flex; gap: 8px; }
 .site-tab {
+  --tab: var(--accent); --tab2: var(--accent2);
   display: flex; align-items: center; gap: 6px; white-space: nowrap;
-  padding: 7px 14px; border-radius: 999px; text-decoration: none;
-  font-weight: 700; font-size: .95rem; color: var(--muted); transition: background .2s, color .2s;
+  padding: 7px 14px; border-radius: 12px; text-decoration: none;
+  font-weight: 700; font-size: .95rem; color: var(--text);
+  background: color-mix(in srgb, var(--tab) 14%, rgba(7,6,15,.6));
+  border: 1.5px solid color-mix(in srgb, var(--tab) 70%, transparent);
+  transition: background .2s, box-shadow .2s;
 }
+.site-tab.tab-news { --tab: var(--iris); --tab2: #19b6c9; }
 .site-tab .ml { font-weight: 600; font-size: .85em; }
-.site-tab:hover { color: var(--text); }
-.site-tab.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.site-tab:hover { background: color-mix(in srgb, var(--tab) 26%, rgba(7,6,15,.6)); }
+.site-tab.active {
+  background: linear-gradient(135deg, var(--tab), var(--tab2)); border-color: transparent; color: #fff;
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--tab) 45%, transparent);
+}
+.site-tab.tab-news.active { color: #04130b; }
 .site-tab .freq { margin-left: 4px; }
 .t-short, .t-short-ml { display: none; }
 .brand { min-width: 0; }
