@@ -21,19 +21,18 @@
     <div class="bg-shade"></div>
   </div>
   <header class="topbar">
-    <a href="index.html" class="brand" aria-label="Mizhi FM home">
+    <div class="brand">
       <span class="logo" id="logo"></span>
-      <span class="brand-text">
-        <span class="brand-name" data-bind="stationName"></span>
-        <span class="brand-ml ml" data-bind="stationNameMl"></span>
-      </span>
-    </a>
+      <nav class="site-tabs" aria-label="Mizhi">
+        <a href="news.html" class="site-tab active" aria-current="page"><span class="t-long">Mizhi UK Malayalam News</span><span class="t-short">News</span> <span class="ml t-long">(മിഴി യുകെ മലയാളം വാർത്ത)</span><span class="ml t-short-ml">(വാർത്ത)</span></a>
+        <a href="index.html" class="site-tab"><span>Mizhi FM</span> <span class="ml">(<span data-bind="stationNameMl">മിഴി എഫ്എം</span>)</span><span class="freq" id="freq"></span></a>
+      </nav>
+    </div>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav" id="nav">
       <a href="index.html#home">Listen</a>
-      <a href="news.html" class="nav-news active" aria-current="page">News <span class="ml">(വാർത്ത)</span></a>
       <a href="index.html#schedule">Schedule</a>
       <a href="index.html#shows">Shows</a>
       <a href="index.html#about">About</a>

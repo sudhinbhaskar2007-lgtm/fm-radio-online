@@ -285,3 +285,27 @@ input[type=range] { flex: 1; accent-color: var(--accent); }
 .news-card .tag { display: table; margin-top: 12px; font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
 .news-card a.more { display: inline-block; margin-top: 12px; color: var(--accent2); font-weight: 600; }
 .news-empty { text-align: center; color: var(--muted); }
+
+/* ---------- News / FM tabs in the top bar ---------- */
+.site-tabs { display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--border); }
+.site-tab {
+  display: flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 14px; border-radius: 999px; text-decoration: none;
+  font-weight: 700; font-size: .95rem; color: var(--muted); transition: background .2s, color .2s;
+}
+.site-tab .ml { font-weight: 600; font-size: .85em; }
+.site-tab:hover { color: var(--text); }
+.site-tab.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.site-tab .freq { margin-left: 4px; }
+.t-short, .t-short-ml { display: none; }
+.brand { min-width: 0; }
+@media (max-width: 1240px) {
+  .site-tab .t-long { display: none; }
+  .site-tab .t-short, .site-tab .t-short-ml { display: inline; }
+}
+@media (max-width: 480px) {
+  .topbar { padding: 10px 12px; }
+  .brand .logo { display: none; }
+  .site-tabs { gap: 2px; }
+  .site-tab { padding: 7px 10px; font-size: .88rem; gap: 4px; }
+}
