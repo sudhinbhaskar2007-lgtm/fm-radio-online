@@ -442,6 +442,11 @@
       im.appendChild(cr);
     }
     var m = $("rdMeta"); m.replaceWith(meta(n)); reader.querySelector(".np-meta").id = "rdMeta";
+    var oldBy = reader.querySelector(".np-byline"); if (oldBy) oldBy.remove();
+    if (n.author) {
+      var by = el("p", "np-byline", "Updated by " + n.author + (n.authorMl ? " · " + n.authorMl : ""));
+      $("rdMeta").insertAdjacentElement("afterend", by);
+    }
     // Malayalam headline is the main (big) heading; English goes underneath, smaller.
     var mainMl = !!n.titleMl;
     $("rdTitle").textContent = mainMl ? n.titleMl : n.title;
