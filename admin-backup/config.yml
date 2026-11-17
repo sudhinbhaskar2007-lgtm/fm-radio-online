@@ -53,6 +53,7 @@ collections:
               - { name: bodyMl, label: "Full story (Malayalam). Empty line between paragraphs.", widget: text, required: false }
               - { name: featured, label: "Top story", widget: boolean, default: false, required: false }
               - { name: breaking, label: "Breaking news", widget: boolean, default: false, required: false }
+              - { name: source, label: "Based on information from (optional, plain text)", widget: string, required: false }
               - { name: link, label: "Read more link (optional)", widget: string, required: false }
 
       - name: gallery
