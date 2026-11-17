@@ -551,3 +551,15 @@ body.playing .np-radio-btn .i-pause { display: block; }
 .np-article #rdTitle:focus { outline: none; }
 .np-article-more { margin-top: 30px; }
 .np-article .np-thumb-big.np-thumb-empty { aspect-ratio: 21 / 7; }
+
+/* ---------- UK headlines (BBC / Sky links) ---------- */
+.np-headlines[hidden] { display: none; }
+.np-hl-list { list-style: none; margin: 8px 0 6px; padding: 0; display: grid; gap: 2px; }
+.np-hl-list li { padding: 9px 0; border-bottom: 1px solid var(--border); }
+.np-hl-list li:last-child { border-bottom: 0; }
+.np-hl-list a { color: var(--text); text-decoration: none; font-weight: 600; line-height: 1.35; display: block; }
+.np-hl-list a:hover { color: var(--accent2); }
+.np-hl-meta { display: block; margin-top: 4px; font-size: .78rem; color: var(--muted); }
+.np-hl-meta b { font-weight: 700; padding: 1px 6px; border-radius: 4px; color: #fff; }
+.np-hl-meta .src-bbc { background: #b80000; }
+.np-hl-meta .src-sky { background: #1b4fa8; }

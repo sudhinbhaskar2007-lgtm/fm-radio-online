@@ -529,6 +529,33 @@
     route();
   });
 
+  // UK headlines from BBC / Sky (headline + link only, refreshed by a scheduled job)
+  function ago(t) {
+    var m = Math.round((Date.now() - new Date(t)) / 60000);
+    if (!(m >= 0)) return "";
+    if (m < 60) return m + " min ago";
+    if (m < 1440) return Math.round(m / 60) + " h ago";
+    return Math.round(m / 1440) + " d ago";
+  }
+  getJSON("data/headlines.json", { cache: "no-store" }).then(function (d) {
+    var items = (d && d.items || []).filter(function (h) { return h.title && /^https:\/\//.test(h.link); }).slice(0, 10);
+    if (!items.length) return;
+    var ol = $("npHlList");
+    items.forEach(function (h) {
+      var li = el("li");
+      var a = el("a", "", h.title); a.href = h.link; a.target = "_blank"; a.rel = "noopener";
+      li.appendChild(a);
+      var m = el("span", "np-hl-meta");
+      var src = el("b", h.source === "BBC News" ? "src-bbc" : "src-sky", h.source);
+      m.appendChild(src);
+      if (h.time) m.appendChild(document.createTextNode(" · " + ago(h.time)));
+      li.appendChild(m);
+      ol.appendChild(li);
+    });
+    if (d.updated) $("npHlUpdated").textContent = "Updated " + ago(d.updated);
+    $("npHeadlines").hidden = false;
+  }).catch(function () {});
+
   // ---------------------------------------------------------------
   // Sidebar radio button: controls the same player as the radio page,
   // so music keeps playing when you switch between News and FM.

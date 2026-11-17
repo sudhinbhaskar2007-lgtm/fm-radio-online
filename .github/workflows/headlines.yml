@@ -1,0 +1,33 @@
+name: Update UK headlines
+
+# Every 3 hours, fetch BBC and Sky News UK headline feeds (headline + link only)
+# into data/headlines.json. Cloudflare Pages redeploys the site when it changes.
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: headlines
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/fetch_headlines.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data/headlines.json; then echo "No change"; exit 0; fi
+          git config user.name "mizhi-headlines-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/headlines.json
+          git commit -m "Update UK headlines"
+          for i in 1 2 3; do git pull --rebase -q && git push && break || sleep 5; done
