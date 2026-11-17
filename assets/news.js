@@ -241,6 +241,7 @@
     b.appendChild(meta(n));
     if (n.titleMl) b.appendChild(el("h3", "np-h-ml ml", n.titleMl));
     b.appendChild(el(n.titleMl ? "p" : "h3", n.titleMl ? "np-h-en" : "np-h-ml", n.title));
+    if (n.author) b.appendChild(el("p", "np-byline np-byline-card", "Updated by " + n.author + (n.authorMl ? " · " + n.authorMl : "")));
     if (kind !== "small" && (n.summaryMl || n.summary)) {
       var sm = el("p", "np-sum" + (n.summaryMl ? " ml" : ""), n.summaryMl || n.summary);
       b.appendChild(sm);

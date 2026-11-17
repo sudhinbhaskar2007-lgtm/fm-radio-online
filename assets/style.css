@@ -612,3 +612,4 @@ a.np-credit:hover { text-decoration: underline; }
 .np-article .np-more { color: #b5005b; }
 
 .np-lead.np-single { grid-template-columns: 1fr; gap: 20px; }
+.np-byline-card { margin: 4px 0; font-size: .92rem; }
