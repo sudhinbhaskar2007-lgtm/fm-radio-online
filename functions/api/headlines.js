@@ -73,9 +73,39 @@ async function hash(t) {
 }
 
 // Malayalam versions for the headlines the ticker shows.
-async function addMalayalam(items, env, base) {
-  if (!env || !env.AI) return "no-ai-binding";
-  let status = "ok";
+// Cached translations are added straight away. Missing ones are translated
+// in the background (one headline per AI call, all at once), so the reply
+// is never slow; they show up on the next refresh.
+async function translateOne(env, title) {
+  const errs = [];
+  for (const model of AI_MODELS) {
+    try {
+      const r = await env.AI.run(model, {
+        messages: [{ role: "system", content: SYS }, { role: "user", content: "1. " + title }],
+        max_tokens: 256,
+        temperature: 0.2,
+      });
+      const text = ((r && (r.response || r.result || "")) + "").trim();
+      const line = text.split(/\n+/).find((l) => /[\u0D00-\u0D7F]/.test(l)) || "";
+      const ml = line.replace(/^\s*\d+[.)]\s*/, "").replace(/\*\*/g, "").trim();
+      if (ml) return { ml: ml.slice(0, 240), model };
+      errs.push(model.split("/").pop() + ":empty");
+    } catch (e) {
+      errs.push(model.split("/").pop() + ":" + String(e && e.message || e).slice(0, 60));
+    }
+  }
+  try {
+    const r = await env.AI.run(M2M, { text: title, source_lang: "en", target_lang: "ml" });
+    const ml = ((r && r.translated_text) || "").trim();
+    if (/[\u0D00-\u0D7F]/.test(ml)) return { ml: ml.slice(0, 240), model: M2M };
+  } catch (e) {
+    errs.push("m2m:" + String(e && e.message || e).slice(0, 60));
+  }
+  return { err: errs.join(" | ") };
+}
+
+async function addMalayalam(items, env, base, waitUntil) {
+  if (!env || !env.AI) return { status: "no-ai-binding", pending: 0 };
   const want = [];
   const count = {};
   for (const it of items) {
@@ -85,57 +115,25 @@ async function addMalayalam(items, env, base) {
   const cache = caches.default;
   const miss = [];
   await Promise.all(want.map(async (it) => {
-    it._key = new Request(base + "/api/ml/" + (await hash(it.title)));
-    const hit = await cache.match(it._key);
+    const key = new Request(base + "/api/ml/" + (await hash(it.title)));
+    const hit = await cache.match(key);
     if (hit) it.titleMl = await hit.text();
-    else miss.push(it);
+    else miss.push({ title: it.title, key });
   }));
   if (miss.length) {
-    const list = miss.map((it, i) => (i + 1) + ". " + it.title).join("\n");
-    const errs = [];
-    let done = false;
-    for (const model of AI_MODELS) {
-      try {
-        const r = await env.AI.run(model, {
-          messages: [{ role: "system", content: SYS }, { role: "user", content: list }],
-          max_tokens: 2048,
-          temperature: 0.2,
-        });
-        const text = (r && (r.response || r.result || "")) + "";
-        let n = 0;
-        for (const line of text.split(/\n+/)) {
-          const m = line.match(/^\s*(\d+)[.)]\s*(.+?)\s*$/);
-          if (!m) continue;
-          const it = miss[+m[1] - 1];
-          const ml = m[2].replace(/\*\*/g, "").trim();
-          if (!it || it.titleMl || !/[\u0D00-\u0D7F]/.test(ml)) continue;
-          it.titleMl = ml.slice(0, 240); n++;
-        }
-        if (n) { status = "ok:" + model + ":" + n + "/" + miss.length; done = true; break; }
-        errs.push(model.split("/").pop() + ":empty");
-      } catch (e) {
-        errs.push(model.split("/").pop() + ":" + String(e && e.message || e).slice(0, 60));
-      }
-    }
-    if (!done) {
-      // Last resort: the translation model, one headline at a time.
-      await Promise.all(miss.map(async (it) => {
-        try {
-          const r = await env.AI.run(M2M, { text: it.title, source_lang: "en", target_lang: "ml" });
-          const ml = ((r && r.translated_text) || "").trim();
-          if (/[\u0D00-\u0D7F]/.test(ml)) it.titleMl = ml.slice(0, 240);
-        } catch (e) { errs.push("m2m:" + String(e && e.message || e).slice(0, 60)); }
-      }));
-      status = "m2m:" + miss.filter((it) => it.titleMl).length + "/" + miss.length + " " + errs.join(" | ");
-    }
-    await Promise.all(miss.filter((it) => it.titleMl).map((it) =>
-      cache.put(it._key, new Response(it.titleMl, { headers: { "cache-control": "public, max-age=" + ML_TTL } }))));
+    const statusKey = new Request(base + "/api/ml-status");
+    waitUntil(Promise.all(miss.map(async (m) => {
+      const r = await translateOne(env, m.title);
+      if (r.ml) await cache.put(m.key, new Response(r.ml, { headers: { "cache-control": "public, max-age=" + ML_TTL } }));
+      return r.ml ? "ok:" + r.model : r.err;
+    })).then((res) => cache.put(statusKey, new Response(res.join("\n"), { headers: { "cache-control": "public, max-age=3600" } }))));
   }
-  for (const it of want) delete it._key;
-  return status;
+  const last = await cache.match(new Request(base + "/api/ml-status"));
+  const lastText = last ? (await last.text()).split("\n")[0] : "";
+  return { status: "have " + (want.length - miss.length) + "/" + want.length + (lastText ? "; last: " + lastText : ""), pending: miss.length };
 }
 
-async function build(env, base) {
+async function build(env, base, waitUntil) {
   const results = await Promise.all(FEEDS.map(async (f) => {
     try {
       const r = await fetch(f.url, {
@@ -156,21 +154,21 @@ async function build(env, base) {
     items.push(it);
   }
   items.sort((a, b) => (b.time || "").localeCompare(a.time || ""));
-  const ai = await addMalayalam(items, env, base);
-  return { updated: new Date().toISOString().replace(/\.\d+Z$/, "Z"), ai, items };
+  const ai = await addMalayalam(items, env, base, waitUntil);
+  return { updated: new Date().toISOString().replace(/\.\d+Z$/, "Z"), ai: ai.status, pending: ai.pending, items };
 }
 
 export async function onRequestGet(context) {
   const cache = caches.default;
   const base = new URL(context.request.url).origin;
-  const key = new Request(base + "/api/headlines?v=4");
+  const key = new Request(base + "/api/headlines?v=5");
   let res = await cache.match(key);
   if (res) return res;
-  const data = await build(context.env, base);
+  const data = await build(context.env, base, (p) => context.waitUntil(p));
   res = new Response(JSON.stringify(data), {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=" + TTL,
+      "cache-control": "public, max-age=" + (data.pending ? 60 : TTL),
       "access-control-allow-origin": "*",
     },
   });
