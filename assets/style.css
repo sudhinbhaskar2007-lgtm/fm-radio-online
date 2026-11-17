@@ -581,3 +581,32 @@ a.np-credit:hover { text-decoration: underline; }
 .np-subcat .ml { font-weight:700; font-size:.95rem; }
 .np-subcat small { font-size:.65rem; opacity:.75; text-transform:uppercase; letter-spacing:.05em; }
 .np-subcat.active { background:linear-gradient(90deg,#e0359f,#ff9a1f); border-color:transparent; }
+
+.np-home-secs { display:grid; gap:28px; margin-top:28px; }
+.np-home-sec-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; border-bottom:3px solid var(--c); padding-bottom:8px; margin-bottom:14px; }
+.np-home-sec-title { margin:0; display:flex; align-items:baseline; gap:10px; }
+.np-home-sec-title .ml { font-size:1.35rem; font-weight:800; color:#fff; border-left:6px solid var(--c); padding-left:10px; }
+.np-home-sec-title small { font-size:.75rem; text-transform:uppercase; letter-spacing:.08em; opacity:.75; }
+.np-home-more { color:var(--c); font-weight:700; font-size:.9rem; text-decoration:none; white-space:nowrap; }
+.np-home-more:hover { text-decoration:underline; }
+.np-home-sec-body .np-lead-side { gap:12px; }
+@media (max-width: 720px) { .np-home-sec-body { grid-template-columns: 1fr; } }
+.np-main, .np-home-secs, .np-home-sec { min-width: 0; }
+.np-home-sec-title { flex-wrap: wrap; min-width: 0; }
+
+/* Full story page: white paper with black text, like a standard newspaper */
+.np-article .np-reader-card { background: #fff; color: #111; border-color: #e3e3e3; }
+.np-article .np-reader-body h2, .np-article #rdTitle { color: #111; text-shadow: none; }
+.np-article .np-reader-ml { color: #444; opacity: 1; }
+.np-article .np-reader-text p { color: #1a1a1a; }
+.np-article .np-meta, .np-article .np-meta time { color: #666; }
+.np-article .np-credit { color: #666; }
+.np-article .np-byline { color: #b5005b; }
+.np-article .np-reader-close { background: #f2f2f2; color: #111; border-color: #ddd; }
+.np-article .np-reader-close:hover { background: #e6e6e6; }
+.np-article .np-lang { background: #f0f0f0; }
+.np-article .np-lang button { color: #555; }
+.np-article .np-lang button[aria-pressed=true] { color: #fff; }
+.np-article .np-share { border-top-color: #e3e3e3; }
+.np-article .np-share .btn, .np-article .np-share a, .np-article .np-share button { color: #111; background: #f2f2f2; border-color: #ddd; }
+.np-article .np-more { color: #b5005b; }

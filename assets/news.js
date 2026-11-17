@@ -279,6 +279,9 @@
       lead.appendChild(el("p", "np-empty", dataReady ? "No news in this section yet. Check back soon." : "Loading news…"));
       return;
     }
+    var homeSecs = $("npHomeSecs"); homeSecs.textContent = "";
+    $("npLatestHead").style.display = cat ? "" : "none"; grid.style.display = cat ? "" : "none";
+    if (!cat) { renderHome(list, lead, homeSecs); return; }
     var top = list.filter(function (n) { return n.featured; })[0] || list[0];
     var rest = list.filter(function (n) { return n !== top; });
     lead.appendChild(card(top, "lead"));
@@ -287,6 +290,47 @@
     if (side.children.length) lead.appendChild(side);
     rest.slice(2).forEach(function (n) { grid.appendChild(card(n, "grid")); });
     if (!rest.slice(2).length) grid.appendChild(el("p", "np-empty", rest.length ? "More news coming soon." : "More news coming soon. Send us yours!"));
+  }
+
+  // Front page: top stories, then one block per section (UK, Kerala, ...)
+  // so updates don't all pile up in one mixed list.
+  function renderHome(list, lead, box) {
+    var main = list.filter(function (n) { return n.category === "uk" || n.category === "kerala"; });
+    var top = list.filter(function (n) { return n.featured; })[0] || main[0] || list[0];
+    var used = {}; used[top.id] = 1;
+    var side = el("div", "np-lead-side");
+    // Next newest UK and Kerala story beside the lead.
+    ["uk", "kerala"].forEach(function (cid) {
+      var n = list.filter(function (x) { return x.category === cid && !used[x.id]; })[0];
+      if (n) { used[n.id] = 1; side.appendChild(card(n, "small")); }
+    });
+    lead.appendChild(card(top, "lead"));
+    if (side.children.length) lead.appendChild(side);
+    var ORDER = ["uk", "kerala", "association", "immigration", "jobs", "community", "sports", "cinema", "ads", "mizhi"];
+    CATS.slice().sort(function (a, b) {
+      var i = ORDER.indexOf(a.id), j = ORDER.indexOf(b.id);
+      return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
+    }).forEach(function (c) {
+      if (c.parent) return;
+      var items = list.filter(function (n) { return inCat(n, c.id) && !used[n.id]; });
+      if (!items.length) return;
+      var sec = el("section", "np-home-sec");
+      sec.style.setProperty("--c", c.color || "var(--accent)");
+      var head = el("div", "np-home-sec-head");
+      var t = el("h2", "np-home-sec-title");
+      t.appendChild(el("span", "ml", c.ml)); t.appendChild(el("small", "", c.en));
+      head.appendChild(t);
+      var more = el("a", "np-home-more", "കൂടുതൽ · More →"); more.href = "#cat=" + c.id;
+      head.appendChild(more);
+      sec.appendChild(head);
+      var body = el("div", "np-lead np-home-sec-body");
+      body.appendChild(card(items[0], "grid"));
+      var s2 = el("div", "np-lead-side");
+      items.slice(1, 4).forEach(function (n) { s2.appendChild(card(n, "small")); });
+      if (s2.children.length) body.appendChild(s2);
+      sec.appendChild(body);
+      box.appendChild(sec);
+    });
   }
 
   // ---------------------------------------------------------------
