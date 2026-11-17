@@ -2,7 +2,7 @@
 so WhatsApp/Facebook show the story's own photo when a link is shared
 (WhatsApp ignores images bigger than about 300 KB).
 Run: python scripts/make_share_thumbs.py   (needs Pillow)"""
-import io, json, os, re, sys, urllib.request
+import io, json, os, re, sys, time, urllib.error, urllib.request
 from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,8 +14,16 @@ def slug(s):
 
 def load(src):
     if re.match(r"^https://", src):
-        req = urllib.request.Request(src, headers={"User-Agent": "MizhiNewsShareThumbs/1.0"})
-        return Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=30).read()))
+        ua = "MizhiNewsShareThumbs/1.0 (https://mizhinews.co.uk; mizhinews@gmail.com)"
+        for wait in (3, 10, 30, 60):
+            time.sleep(wait)  # be gentle with Wikimedia (429 = too fast)
+            try:
+                req = urllib.request.Request(src, headers={"User-Agent": ua})
+                return Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=30).read()))
+            except urllib.error.HTTPError as e:
+                if e.code != 429:
+                    raise
+        raise RuntimeError("still rate-limited")
     path = os.path.join(ROOT, src.lstrip("/"))
     if ".." in src or not os.path.isfile(path):
         return None
