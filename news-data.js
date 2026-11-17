@@ -23,7 +23,7 @@ window.MIZHI_NEWS_PAGE = {
   categories: [
     { id: "uk",          en: "UK",          ml: "യുകെ",        color: "#3d7bff" },
     { id: "association", en: "Malayali Associations", ml: "മലയാളി അസോസിയേഷൻ", color: "#ff6b6b" },
-    { id: "elma",        en: "ELMA News Updates", ml: "എൽമ വാർത്തകൾ", color: "#e84393" },
+    { id: "elma",        en: "ELMA News Updates", ml: "എൽമ വാർത്തകൾ", color: "#e84393", parent: "association" },
     { id: "ads",         en: "Advertisements", ml: "പരസ്യങ്ങൾ",   color: "#c9a227" },
     { id: "kerala",      en: "Kerala",      ml: "കേരളം",       color: "#3ddc84" },
     { id: "immigration", en: "Immigration", ml: "കുടിയേറ്റം",   color: "#ff9a1f" },

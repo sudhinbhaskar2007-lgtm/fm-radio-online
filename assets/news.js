@@ -127,7 +127,10 @@
     return a;
   }
   cats.appendChild(catLink(null, "np-cat"));
-  CATS.forEach(function (c) { cats.appendChild(catLink(c, "np-cat")); });
+  CATS.forEach(function (c) { if (!c.parent) cats.appendChild(catLink(c, "np-cat")); });
+  // Sub-sections (e.g. ELMA under Malayali Associations) show as a sub-tab row.
+  function kids(id) { return CATS.filter(function (c) { return c.parent === id; }); }
+  function inCat(n, cat) { return n.category === cat || kids(cat).some(function (k) { return k.id === n.category; }); }
   var galLink = el("a", "np-cat np-cat-gallery");
   galLink.href = "#gallery"; galLink.dataset.cat = "@gallery";
   galLink.appendChild(el("span", "ml", "ചിത്രങ്ങൾ"));
@@ -137,7 +140,8 @@
   function sideCounts() {
     sideCats.textContent = "";
     CATS.forEach(function (c) {
-      var count = NEWS.filter(function (n) { return n.category === c.id; }).length;
+      if (c.parent) return;
+      var count = NEWS.filter(function (n) { return inCat(n, c.id); }).length;
       var s = catLink(c, "np-side-cat");
       s.appendChild(el("b", "", String(count)));
       sideCats.appendChild(s);
@@ -246,7 +250,17 @@
 
   function render(cat) {
     showGalleryView(false);
-    var list = cat ? NEWS.filter(function (n) { return n.category === cat; }) : NEWS;
+    var list = cat ? NEWS.filter(function (n) { return inCat(n, cat); }) : NEWS;
+    var cObj = catById[cat], parentId = cObj && cObj.parent ? cObj.parent : (cat && kids(cat).length ? cat : null);
+    var sub = $("npSubCats");
+    if (!sub) { sub = el("nav", "np-subcats"); sub.id = "npSubCats"; $("npHeading").insertAdjacentElement("beforebegin", sub); }
+    sub.textContent = ""; sub.hidden = !parentId;
+    if (parentId) {
+      var pc = catById[parentId];
+      var all = catLink(pc, "np-subcat"); all.querySelector(".ml").textContent = "എല്ലാം"; all.querySelector("small").textContent = "All " + pc.en;
+      sub.appendChild(all);
+      kids(parentId).forEach(function (k) { sub.appendChild(catLink(k, "np-subcat")); });
+    }
     var lead = $("npLead"), grid = $("npGrid");
     lead.textContent = ""; grid.textContent = "";
     var c = catById[cat];
@@ -255,6 +269,9 @@
     h.appendChild(el("span", "ml", c ? c.ml : "പ്രധാന വാർത്തകൾ"));
 
     document.querySelectorAll(".np-cat, .np-side-cat").forEach(function (a) {
+      a.classList.toggle("active", (a.dataset.cat || "") === ((cObj && cObj.parent) || cat || ""));
+    });
+    document.querySelectorAll(".np-subcat").forEach(function (a) {
       a.classList.toggle("active", (a.dataset.cat || "") === (cat || ""));
     });
 

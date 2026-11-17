@@ -574,3 +574,10 @@ a.np-credit:hover { text-decoration: underline; }
 .np-source { color: var(--muted) !important; font-size: .85rem !important; font-style: italic; margin-top: 18px !important; }
 
 .np-byline { margin:.35rem 0 0; font-size:.9rem; font-weight:600; color:#ffb347; }
+
+.np-subcats { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
+.np-subcats[hidden] { display:none; }
+.np-subcat { display:flex; flex-direction:column; padding:8px 14px; border-radius:10px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15); color:#fff; text-decoration:none; }
+.np-subcat .ml { font-weight:700; font-size:.95rem; }
+.np-subcat small { font-size:.65rem; opacity:.75; text-transform:uppercase; letter-spacing:.05em; }
+.np-subcat.active { background:linear-gradient(90deg,#e0359f,#ff9a1f); border-color:transparent; }
