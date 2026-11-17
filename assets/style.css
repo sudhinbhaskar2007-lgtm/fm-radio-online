@@ -565,3 +565,4 @@ body.playing .np-radio-btn .i-pause { display: block; }
 .np-hl-meta .src-sky { background: #1b4fa8; }
 .np-credit { display: block; margin: 6px 16px 0; font-size: .78rem; color: var(--muted); text-decoration: none; }
 a.np-credit:hover { text-decoration: underline; }
+.np-source { color: var(--muted) !important; font-size: .85rem !important; font-style: italic; margin-top: 18px !important; }

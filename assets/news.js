@@ -400,6 +400,9 @@
     var ml = lang === "ml";
     var text = ml ? (n.bodyMl || n.summaryMl) : (n.body || n.summary);
     paragraphs(text, ml);
+    if (n.source) {
+      $("rdText").appendChild(el("p", "np-source", (ml ? "വിവരങ്ങൾക്ക് കടപ്പാട്: " : "Based on information from ") + n.source));
+    }
     if (n.link && /^https?:\/\//.test(n.link)) {
       var a = el("a", "np-more", "Read more →"); a.href = n.link; a.target = "_blank"; a.rel = "noopener";
       $("rdText").appendChild(a);

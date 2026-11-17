@@ -33,11 +33,29 @@ def search(q, limit=10):
     return out
 
 
+def openverse(q, limit=10):
+    """Openverse (WordPress) indexes Flickr and other Creative Commons photos."""
+    params = {"q": q, "license": "cc0,pdm,by,by-sa", "aspect_ratio": "wide", "size": "large",
+              "page_size": str(limit), "mature": "false"}
+    url = "https://api.openverse.org/v1/images/?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"User-Agent": "MizhiNewsImageFinder/1.0"})
+    data = json.load(urllib.request.urlopen(req, timeout=30))
+    out = []
+    for r in data.get("results", []):
+        lic = (r.get("license") or "").upper()
+        lic = {"CC0": "CC0", "PDM": "Public domain"}.get(lic, "CC " + lic + " " + (r.get("license_version") or ""))
+        out.append({"title": r.get("title"), "thumb": r.get("url"), "page": r.get("foreign_landing_url"),
+                    "license": lic.strip(), "artist": (r.get("creator") or "")[:80], "source": r.get("source"),
+                    "w": r.get("width"), "h": r.get("height")})
+    return out
+
+
 if __name__ == "__main__":
     for q in sys.argv[1:]:
-        print("=== " + q)
-        try:
-            for r in search(q):
-                print(json.dumps(r, ensure_ascii=False))
-        except Exception as e:
-            print("error:", e)
+        for name, fn in (("commons", search), ("openverse", openverse)):
+            print("=== " + name + ": " + q)
+            try:
+                for r in fn(q):
+                    print(json.dumps(r, ensure_ascii=False))
+            except Exception as e:
+                print("error:", e)

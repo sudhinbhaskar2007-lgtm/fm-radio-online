@@ -12,9 +12,9 @@
     "image": "assets/news/snow-warning-17-nov.jpg",
     "featured": false,
     "breaking": true,
-    "link": "https://www.itv.com/news/2026-11-17/snow-warning-comes-into-force-bringing-potential-rush-hour-disruption",
     "imageCredit": "Illustration: Mizhi News",
-    "imageCreditLink": ""
+    "imageCreditLink": "",
+    "source": "the Met Office and ITV News"
   },
   {
     "id": "uk-youth-jobs-plan-17-nov",
@@ -29,9 +29,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Inside_Cardiff_Jobcentre_Plus_2026.jpg/1280px-Inside_Cardiff_Jobcentre_Plus_2026.jpg",
     "featured": true,
     "breaking": false,
-    "link": "https://www.gov.uk/government/news/government-commits-to-new-settlement-for-young-people-and-to-invest-in-success-rather-than-pay-for-failure",
     "imageCredit": "File photo: inside Cardiff Jobcentre Plus. Sleepytimecat, CC BY 4.0, via Wikimedia Commons",
-    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Inside_Cardiff_Jobcentre_Plus_2026.jpg"
+    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Inside_Cardiff_Jobcentre_Plus_2026.jpg",
+    "source": "the Department for Work and Pensions (GOV.UK)"
   },
   {
     "id": "earthshot-prize-mumbai-2026",
@@ -46,9 +46,9 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Jio_World_Centre_in_Mumbai.jpg/1280px-Jio_World_Centre_in_Mumbai.jpg",
     "featured": false,
     "breaking": false,
-    "link": "https://www.clickorlando.com/tech/2026/11/17/prince-williams-presents-earthshot-prize-winners-with-13m-each-in-mumbai/",
     "imageCredit": "File photo: Jio World Centre, Mumbai. DesiBoy101, CC BY 4.0, via Wikimedia Commons",
-    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Jio_World_Centre_in_Mumbai.jpg"
+    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Jio_World_Centre_in_Mumbai.jpg",
+    "source": "Associated Press"
   },
   {
     "id": "photo-gallery-launch",
