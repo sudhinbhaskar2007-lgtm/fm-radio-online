@@ -486,7 +486,16 @@
   function paragraphs(text, ml) {
     var box = $("rdText"); box.textContent = "";
     String(text || "").split(/\n\s*\n/).forEach(function (p) {
-      if (p.trim()) box.appendChild(el("p", ml ? "ml" : "", p.trim()));
+      p = p.trim();
+      // A paragraph like [img: assets/uploads/x.jpg | caption] shows a picture inside the story.
+      var m = p.match(/^\[img:\s*([^|\]]+?)\s*(?:\|\s*([^\]]*))?\]$/);
+      if (m && safeImg(m[1])) {
+        var fig = el("figure", "np-inline-fig");
+        var im = new Image(); im.src = safeImg(m[1]); im.alt = m[2] || ""; im.loading = "lazy";
+        fig.appendChild(im);
+        if (m[2]) fig.appendChild(el("figcaption", ml ? "ml" : "", m[2]));
+        box.appendChild(fig);
+      } else if (p) box.appendChild(el("p", ml ? "ml" : "", p));
     });
   }
   function showLang(lang) {

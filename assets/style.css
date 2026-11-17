@@ -613,3 +613,7 @@ a.np-credit:hover { text-decoration: underline; }
 
 .np-lead.np-single { grid-template-columns: 1fr; gap: 20px; }
 .np-byline-card { margin: 4px 0; font-size: .92rem; }
+
+.np-inline-fig { margin: 8px 0 22px; }
+.np-inline-fig img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.np-inline-fig figcaption { margin-top: 6px; font-size: .85rem; color: #666; }
