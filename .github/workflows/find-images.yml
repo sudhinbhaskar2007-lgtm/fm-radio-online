@@ -1,0 +1,24 @@
+name: Find free images
+
+# Manual helper: search Wikimedia Commons for freely licensed photos.
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: "Searches separated by |"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search
+        env:
+          QUERIES: ${{ inputs.queries }}
+        run: |
+          IFS='|' read -ra Q <<< "$QUERIES"
+          python3 scripts/find_images.py "${Q[@]}"
