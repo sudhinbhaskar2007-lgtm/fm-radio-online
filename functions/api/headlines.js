@@ -55,7 +55,15 @@ function parse(xml, feed) {
   return out;
 }
 
-const AI_MODEL = "@cf/google/gemma-3-12b-it";
+// Tried in order until one works for this account.
+const AI_MODELS = [
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "@cf/mistralai/mistral-small-3.1-24b-instruct",
+  "@cf/meta/llama-3.1-8b-instruct",
+];
+const M2M = "@cf/meta/m2m100-1.2b";
+const SYS = "You translate English news headlines into natural, short Malayalam headlines for a Malayalam newspaper. Write people's names and place names in Malayalam script. Keep numbers as digits. Reply with only the numbered Malayalam lines, one per headline, in the same order.";
 const TAKE = { kerala: 6, india: 4, uk: 4 };
 const ML_TTL = 7 * 24 * 3600;
 
@@ -83,31 +91,45 @@ async function addMalayalam(items, env, base) {
     else miss.push(it);
   }));
   if (miss.length) {
-    try {
-      const list = miss.map((it, i) => (i + 1) + ". " + it.title).join("\n");
-      const r = await env.AI.run(AI_MODEL, {
-        messages: [
-          { role: "system", content: "You translate English news headlines into natural, short Malayalam headlines for a Malayalam newspaper. Write people's names and place names in Malayalam script. Keep numbers as digits. Reply with only the numbered Malayalam lines, one per headline, in the same order." },
-          { role: "user", content: list },
-        ],
-        max_tokens: 2048,
-        temperature: 0.2,
-      });
-      const text = (r && (r.response || r.result || "")) + "";
-      status = "ok:" + miss.length + ":" + text.slice(0, 80);
-      for (const line of text.split(/\n+/)) {
-        const m = line.match(/^\s*(\d+)[.)]\s*(.+?)\s*$/);
-        if (!m) continue;
-        const it = miss[+m[1] - 1];
-        const ml = m[2].replace(/\*\*/g, "").trim();
-        if (!it || !/[\u0D00-\u0D7F]/.test(ml)) continue;
-        it.titleMl = ml.slice(0, 240);
-        await cache.put(it._key, new Response(it.titleMl, { headers: { "cache-control": "public, max-age=" + ML_TTL } }));
+    const list = miss.map((it, i) => (i + 1) + ". " + it.title).join("\n");
+    const errs = [];
+    let done = false;
+    for (const model of AI_MODELS) {
+      try {
+        const r = await env.AI.run(model, {
+          messages: [{ role: "system", content: SYS }, { role: "user", content: list }],
+          max_tokens: 2048,
+          temperature: 0.2,
+        });
+        const text = (r && (r.response || r.result || "")) + "";
+        let n = 0;
+        for (const line of text.split(/\n+/)) {
+          const m = line.match(/^\s*(\d+)[.)]\s*(.+?)\s*$/);
+          if (!m) continue;
+          const it = miss[+m[1] - 1];
+          const ml = m[2].replace(/\*\*/g, "").trim();
+          if (!it || it.titleMl || !/[\u0D00-\u0D7F]/.test(ml)) continue;
+          it.titleMl = ml.slice(0, 240); n++;
+        }
+        if (n) { status = "ok:" + model + ":" + n + "/" + miss.length; done = true; break; }
+        errs.push(model.split("/").pop() + ":empty");
+      } catch (e) {
+        errs.push(model.split("/").pop() + ":" + String(e && e.message || e).slice(0, 60));
       }
-    } catch (e) {
-      // No translation this time: the ticker shows the English headline.
-      status = "error:" + String(e && e.message || e).slice(0, 200);
     }
+    if (!done) {
+      // Last resort: the translation model, one headline at a time.
+      await Promise.all(miss.map(async (it) => {
+        try {
+          const r = await env.AI.run(M2M, { text: it.title, source_lang: "en", target_lang: "ml" });
+          const ml = ((r && r.translated_text) || "").trim();
+          if (/[\u0D00-\u0D7F]/.test(ml)) it.titleMl = ml.slice(0, 240);
+        } catch (e) { errs.push("m2m:" + String(e && e.message || e).slice(0, 60)); }
+      }));
+      status = "m2m:" + miss.filter((it) => it.titleMl).length + "/" + miss.length + " " + errs.join(" | ");
+    }
+    await Promise.all(miss.filter((it) => it.titleMl).map((it) =>
+      cache.put(it._key, new Response(it.titleMl, { headers: { "cache-control": "public, max-age=" + ML_TTL } }))));
   }
   for (const it of want) delete it._key;
   return status;
@@ -141,7 +163,7 @@ async function build(env, base) {
 export async function onRequestGet(context) {
   const cache = caches.default;
   const base = new URL(context.request.url).origin;
-  const key = new Request(base + "/api/headlines?v=3");
+  const key = new Request(base + "/api/headlines?v=4");
   let res = await cache.match(key);
   if (res) return res;
   const data = await build(context.env, base);
