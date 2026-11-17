@@ -12,15 +12,21 @@ import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone
 
+# Fallback copy of the live list in functions/api/headlines.js.
 FEEDS = [
-    ("BBC News", "https://feeds.bbci.co.uk/news/uk/rss.xml"),
-    ("Sky News", "https://feeds.skynews.com/feeds/rss/uk.xml"),
+    ("BBC News", "https://feeds.bbci.co.uk/news/uk/rss.xml", "uk"),
+    ("Sky News", "https://feeds.skynews.com/feeds/rss/uk.xml", "uk"),
+    ("Mathrubhumi", "https://www.mathrubhumi.com/rss", "kerala"),
+    ("Onmanorama", "https://www.onmanorama.com/news/kerala.feeds.onmrss.xml", "kerala"),
+    ("The Hindu", "https://www.thehindu.com/news/national/kerala/feeder/default.rss", "kerala"),
+    ("NDTV", "https://feeds.feedburner.com/ndtvnews-india-news", "india"),
+    ("The Hindu", "https://www.thehindu.com/news/national/feeder/default.rss", "india"),
 ]
 PER_SOURCE = 8
 OUT = "data/headlines.json"
 
 
-def parse(source, xml_bytes):
+def parse(source, xml_bytes, region="uk"):
     items = []
     root = ET.fromstring(xml_bytes)
     for it in root.iter("item"):
@@ -35,7 +41,8 @@ def parse(source, xml_bytes):
                 when = parsedate_to_datetime(pub).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             except (TypeError, ValueError):
                 pass
-        items.append({"title": title, "link": link, "source": source, "time": when})
+        items.append({"title": title, "link": link, "source": source, "region": region,
+                      "ml": source == "Mathrubhumi", "time": when})
         if len(items) >= PER_SOURCE:
             break
     return items
@@ -43,14 +50,14 @@ def parse(source, xml_bytes):
 
 def main(paths=None):
     all_items, ok = [], 0
-    for i, (source, url) in enumerate(FEEDS):
+    for i, (source, url, region) in enumerate(FEEDS):
         try:
             if paths:
                 data = open(paths[i], "rb").read()
             else:
                 req = urllib.request.Request(url, headers={"User-Agent": "MizhiNewsHeadlines/1.0"})
                 data = urllib.request.urlopen(req, timeout=30).read()
-            all_items += parse(source, data)
+            all_items += parse(source, data, region)
             ok += 1
         except Exception as e:  # keep the other feed if one fails
             print(f"warning: {source}: {e}", file=sys.stderr)

@@ -147,21 +147,45 @@
   // ---------------------------------------------------------------
   // Breaking ticker
   // ---------------------------------------------------------------
+  // Our own breaking stories first, then the latest Kerala, India and UK
+  // headlines from other news sites (headline + link only, opens their site).
+  var liveHeadlines = [];
+  function pickHeadlines() {
+    var by = { kerala: [], india: [], uk: [] };
+    liveHeadlines.forEach(function (h) { if (by[h.region || "uk"]) by[h.region || "uk"].push(h); });
+    var out = [], take = { kerala: 6, india: 4, uk: 4 };
+    for (var i = 0; i < 6; i++) {
+      ["kerala", "india", "uk"].forEach(function (r) { if (i < take[r] && by[r][i]) out.push(by[r][i]); });
+    }
+    return out;
+  }
+  var REGION_ML = { kerala: "കേരളം", india: "ഇന്ത്യ", uk: "യുകെ" };
   function buildTicker() {
     var breaking = NEWS.filter(function (n) { return n.breaking; });
+    var heads = pickHeadlines();
     var track = $("npTicker");
     track.textContent = "";
-    $("npBreaking").hidden = !breaking.length;
-    if (!breaking.length) return;
+    $("npBreaking").hidden = !breaking.length && !heads.length;
+    if (!breaking.length && !heads.length) return;
     for (var r = 0; r < 2; r++) {
       breaking.forEach(function (n) {
-        var a = el("a", "", n.titleMl || n.title);
+        var a = el("a", "np-tk-own", n.titleMl || n.title);
         if (n.titleMl) a.classList.add("ml");
         a.href = "#story=" + n.id;
         track.appendChild(a);
       });
+      heads.forEach(function (h) {
+        var a = el("a", h.ml ? "ml" : "");
+        var tag = el("span", "np-tk-tag np-tk-" + (h.region || "uk"), REGION_ML[h.region || "uk"]);
+        tag.classList.add("ml");
+        a.appendChild(tag);
+        a.appendChild(document.createTextNode(" " + h.title + " "));
+        a.appendChild(el("span", "np-tk-src", "· " + h.source));
+        a.href = h.link; a.target = "_blank"; a.rel = "noopener";
+        track.appendChild(a);
+      });
     }
-    track.style.animationDuration = Math.max(18, breaking.length * 14) + "s";
+    track.style.animationDuration = Math.max(30, (breaking.length + heads.length) * 9) + "s";
   }
 
   // ---------------------------------------------------------------
@@ -546,24 +570,39 @@
     if (m < 1440) return Math.round(m / 60) + " h ago";
     return Math.round(m / 1440) + " d ago";
   }
-  getJSON("data/headlines.json", { cache: "no-store" }).then(function (d) {
-    var items = (d && d.items || []).filter(function (h) { return h.title && /^https:\/\//.test(h.link); }).slice(0, 10);
-    if (!items.length) return;
+  var SRC_CLASS = { "BBC News": "src-bbc", "Sky News": "src-sky" };
+  function showHeadlines(d) {
+    var all = (d && d.items || []).filter(function (h) { return h.title && /^https:\/\//.test(h.link); });
+    if (!all.length) return false;
+    liveHeadlines = all;
+    buildTicker();
+    var items = all.filter(function (h) { return (h.region || "uk") === "uk"; }).slice(0, 10);
     var ol = $("npHlList");
+    ol.textContent = "";
     items.forEach(function (h) {
       var li = el("li");
       var a = el("a", "", h.title); a.href = h.link; a.target = "_blank"; a.rel = "noopener";
       li.appendChild(a);
       var m = el("span", "np-hl-meta");
-      var src = el("b", h.source === "BBC News" ? "src-bbc" : "src-sky", h.source);
-      m.appendChild(src);
+      m.appendChild(el("b", SRC_CLASS[h.source] || "src-other", h.source));
       if (h.time) m.appendChild(document.createTextNode(" · " + ago(h.time)));
       li.appendChild(m);
       ol.appendChild(li);
     });
     if (d.updated) $("npHlUpdated").textContent = "Updated " + ago(d.updated);
-    $("npHeadlines").hidden = false;
-  }).catch(function () {});
+    $("npHeadlines").hidden = !items.length;
+    return true;
+  }
+  function loadHeadlines() {
+    // Live list (Cloudflare, refreshed every 15 min); the saved copy if that fails.
+    getJSON("/api/headlines").then(function (d) {
+      if (!showHeadlines(d)) throw new Error("empty");
+    }).catch(function () {
+      getJSON("data/headlines.json", { cache: "no-store" }).then(showHeadlines).catch(function () {});
+    });
+  }
+  loadHeadlines();
+  setInterval(loadHeadlines, 15 * 60 * 1000);
 
   // ---------------------------------------------------------------
   // Sidebar radio button: controls the same player as the radio page,

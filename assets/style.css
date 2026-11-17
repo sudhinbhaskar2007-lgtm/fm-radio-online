@@ -377,6 +377,11 @@ body.reader-open, body.consent-open { overflow: hidden; }
 .np-ticker:hover .np-ticker-track { animation-play-state: paused; }
 .np-ticker a { color: #fff; text-decoration: none; font-weight: 600; }
 .np-ticker a:hover { color: var(--accent2); }
+.np-tk-tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 7px; border-radius: 5px; margin-right: 2px; vertical-align: 1px; color: #111; }
+.np-tk-kerala { background: #3ddc84; } .np-tk-india { background: #ff9a1f; } .np-tk-uk { background: #9cc7f0; }
+.np-tk-src { opacity: .6; font-weight: 500; font-size: .85em; }
+.np-tk-own { color: #ffd23f !important; }
+.np-hl-meta .src-other { background: #555; color: #fff; }
 .np-ticker a::before { content: "◆"; color: var(--accent2); margin-right: 10px; font-size: .7em; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
