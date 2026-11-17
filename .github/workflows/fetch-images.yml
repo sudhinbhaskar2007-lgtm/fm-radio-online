@@ -26,7 +26,7 @@ jobs:
           for pair in "${F[@]}"; do
             name="${pair%%=*}"; url="${pair#*=}"
             case "$name" in *[!a-z0-9-]*|"") echo "bad name $name"; exit 1;; esac
-            case "$url" in https://upload.wikimedia.org/*) ;; *) echo "only upload.wikimedia.org allowed"; exit 1;; esac
+            case "$url" in https://upload.wikimedia.org/*|https://www.uukma.org/wp-content/uploads/*) ;; *) echo "only upload.wikimedia.org or UUKMA logo allowed (UUKMA logo use OK per Sudhin, 17 Nov)"; exit 1;; esac
             curl -fsSL -A "MizhiNewsImageSaver/1.0" -o "assets/people/$name.jpg" "$url"
             file "assets/people/$name.jpg"
           done
