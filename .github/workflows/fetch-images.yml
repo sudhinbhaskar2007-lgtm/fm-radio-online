@@ -1,0 +1,40 @@
+name: Save free images
+
+# Manual helper: download chosen Wikimedia Commons images into assets/people/
+# so news cards can be made from them. Input: name=url pairs separated by |
+on:
+  workflow_dispatch:
+    inputs:
+      files:
+        description: "name=https://upload.wikimedia.org/... pairs separated by |"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        env:
+          FILES: ${{ inputs.files }}
+        run: |
+          mkdir -p assets/people
+          IFS='|' read -ra F <<< "$FILES"
+          for pair in "${F[@]}"; do
+            name="${pair%%=*}"; url="${pair#*=}"
+            case "$name" in *[!a-z0-9-]*|"") echo "bad name $name"; exit 1;; esac
+            case "$url" in https://upload.wikimedia.org/*) ;; *) echo "only upload.wikimedia.org allowed"; exit 1;; esac
+            curl -fsSL -A "MizhiNewsImageSaver/1.0" -o "assets/people/$name.jpg" "$url"
+            file "assets/people/$name.jpg"
+          done
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add assets/people
+          git diff --cached --quiet && exit 0
+          git commit -m "Save free-licence images to assets/people"
+          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done

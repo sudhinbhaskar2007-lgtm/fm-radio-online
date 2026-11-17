@@ -9,7 +9,7 @@ import json, re, sys, urllib.parse, urllib.request
 OK = re.compile(r"^(CC0|Public domain|PD|CC BY(-SA)? ?\d(\.\d)?)", re.I)
 
 
-def search(q, limit=10):
+def search(q, limit=10, person=False):
     params = {
         "action": "query", "format": "json", "generator": "search", "gsrnamespace": "6",
         "gsrlimit": str(limit), "gsrsearch": q + " filetype:bitmap", "prop": "imageinfo",
@@ -25,7 +25,9 @@ def search(q, limit=10):
         lic = md.get("LicenseShortName", {}).get("value", "")
         if not OK.match(lic) or ii.get("mime") not in ("image/jpeg", "image/png"):
             continue
-        if ii.get("width", 0) < 1000 or ii.get("width", 0) < ii.get("height", 1):
+        if not person and (ii.get("width", 0) < 1000 or ii.get("width", 0) < ii.get("height", 1)):
+            continue
+        if person and ii.get("width", 0) < 500:
             continue
         artist = re.sub(r"<[^>]+>", "", md.get("Artist", {}).get("value", "")).strip()
         out.append({"title": p.get("title"), "thumb": ii.get("thumburl"), "page": ii.get("descriptionurl"),
@@ -52,6 +54,16 @@ def openverse(q, limit=10):
 
 if __name__ == "__main__":
     for q in sys.argv[1:]:
+        if q.startswith("person:"):
+            # Photos of a named public figure (portrait shape allowed), Commons only.
+            q = q[len("person:"):].strip()
+            print("=== commons-person: " + q)
+            try:
+                for r in search(q, limit=25, person=True):
+                    print(json.dumps(r, ensure_ascii=False))
+            except Exception as e:
+                print("error:", e)
+            continue
         for name, fn in (("commons", search), ("openverse", openverse)):
             print("=== " + name + ": " + q)
             try:
