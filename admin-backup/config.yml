@@ -38,7 +38,7 @@ collections:
                 options:
                   - { value: uk, label: "UK / യുകെ" }
                   - { value: association, label: "Malayali Associations / മലയാളി അസോസിയേഷൻ" }
-                  - { value: elma, label: "ELMA News Updates / ഇഎൽഎംഎ വാർത്തകൾ" }
+                  - { value: elma, label: "ELMA News Updates / എൽമ വാർത്തകൾ" }
                   - { value: ads, label: "Advertisements / പരസ്യങ്ങൾ" }
                   - { value: kerala, label: "Kerala / കേരളം" }
                   - { value: immigration, label: "Immigration / കുടിയേറ്റം" }
