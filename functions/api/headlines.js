@@ -160,7 +160,18 @@ async function build(env, base, waitUntil) {
 
 export async function onRequestGet(context) {
   const cache = caches.default;
-  const base = new URL(context.request.url).origin;
+  const url = new URL(context.request.url);
+  const base = url.origin;
+  if (url.searchParams.get("test") === "ml") {
+    // Quick check of the translation set-up with one fixed headline.
+    const t0 = Date.now();
+    const r = context.env && context.env.AI
+      ? await translateOne(context.env, "Snow warning for northern England as temperatures drop")
+      : { err: "no-ai-binding" };
+    return new Response(JSON.stringify({ ...r, ms: Date.now() - t0 }), {
+      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
   const key = new Request(base + "/api/headlines?v=5");
   let res = await cache.match(key);
   if (res) return res;
