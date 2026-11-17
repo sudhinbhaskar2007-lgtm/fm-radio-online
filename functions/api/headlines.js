@@ -66,7 +66,8 @@ async function hash(t) {
 
 // Malayalam versions for the headlines the ticker shows.
 async function addMalayalam(items, env, base) {
-  if (!env || !env.AI) return;
+  if (!env || !env.AI) return "no-ai-binding";
+  let status = "ok";
   const want = [];
   const count = {};
   for (const it of items) {
@@ -93,6 +94,7 @@ async function addMalayalam(items, env, base) {
         temperature: 0.2,
       });
       const text = (r && (r.response || r.result || "")) + "";
+      status = "ok:" + miss.length + ":" + text.slice(0, 80);
       for (const line of text.split(/\n+/)) {
         const m = line.match(/^\s*(\d+)[.)]\s*(.+?)\s*$/);
         if (!m) continue;
@@ -104,9 +106,11 @@ async function addMalayalam(items, env, base) {
       }
     } catch (e) {
       // No translation this time: the ticker shows the English headline.
+      status = "error:" + String(e && e.message || e).slice(0, 200);
     }
   }
   for (const it of want) delete it._key;
+  return status;
 }
 
 async function build(env, base) {
@@ -130,14 +134,14 @@ async function build(env, base) {
     items.push(it);
   }
   items.sort((a, b) => (b.time || "").localeCompare(a.time || ""));
-  await addMalayalam(items, env, base);
-  return { updated: new Date().toISOString().replace(/\.\d+Z$/, "Z"), items };
+  const ai = await addMalayalam(items, env, base);
+  return { updated: new Date().toISOString().replace(/\.\d+Z$/, "Z"), ai, items };
 }
 
 export async function onRequestGet(context) {
   const cache = caches.default;
   const base = new URL(context.request.url).origin;
-  const key = new Request(base + "/api/headlines?v=2");
+  const key = new Request(base + "/api/headlines?v=3");
   let res = await cache.match(key);
   if (res) return res;
   const data = await build(context.env, base);
