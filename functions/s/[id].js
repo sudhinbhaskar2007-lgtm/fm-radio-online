@@ -19,11 +19,17 @@ export async function onRequestGet(context) {
 
   const target = origin + "/#story=" + id;
   let title = "Mizhi UK Malayalam News", desc = "Malayalam news for the UK.", img = origin + "/assets/eye-poster.jpg";
+  let small = "";
+  try {
+    const t = await env.ASSETS.fetch(new Request(origin + "/assets/share/" + id + ".jpg", { method: "HEAD" }));
+    if (t.ok && /image/.test(t.headers.get("content-type") || "")) small = origin + "/assets/share/" + id + ".jpg";
+  } catch (e) {}
   if (story) {
     title = story.titleMl ? story.titleMl + " | " + story.title : story.title;
     desc = story.summaryMl || story.summary || desc;
     let src = String(story.image || "").trim().replace(/^\//, "");
-    if (/^https:\/\//.test(src)) img = src;
+    if (small) img = small;
+    else if (/^https:\/\//.test(src)) img = src;
     else if (src && /^[\w\-./%]+$/.test(src) && !/\.\./.test(src)) img = origin + "/" + src;
   }
   const html = `<!doctype html><html lang="ml"><head><meta charset="utf-8">

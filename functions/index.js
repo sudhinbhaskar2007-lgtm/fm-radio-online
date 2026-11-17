@@ -21,8 +21,14 @@ export async function onRequestGet(context) {
   const title = story.titleMl ? story.titleMl + " | " + story.title : story.title;
   const desc = story.summaryMl || story.summary || "";
   let img = "";
+  // Prefer the small preview copy (assets/share/<id>.jpg); WhatsApp skips big images.
+  try {
+    const t = await env.ASSETS.fetch(new Request(url.origin + "/assets/share/" + id + ".jpg", { method: "HEAD" }));
+    if (t.ok && /image/.test(t.headers.get("content-type") || "")) img = url.origin + "/assets/share/" + id + ".jpg";
+  } catch (e) {}
   const src = String(story.image || "").trim().replace(/^\//, "");
-  if (/^https:\/\//.test(src)) img = src;
+  if (img) {}
+  else if (/^https:\/\//.test(src)) img = src;
   else if (src && /^[\w\-./%]+$/.test(src) && !/\.\./.test(src)) img = url.origin + "/" + src;
   const set = function (value) { return { element: function (el) { if (value) el.setAttribute("content", value); } }; };
   const out = new HTMLRewriter()
