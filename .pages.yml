@@ -72,9 +72,6 @@ content:
       - name: breaking
         label: "Breaking news (show in the red ticker)"
         type: boolean
-      - name: source
-        label: "Based on information from (optional, e.g. the Met Office). Shown as plain text, no link."
-        type: string
       - name: link
         label: "Read more link (optional, https://...)"
         type: string
