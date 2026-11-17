@@ -529,7 +529,8 @@
     showLang(hasMl && readerLang === "ml" ? "ml" : (hasEn ? "en" : "ml"));
 
     var share = $("rdShare"); share.textContent = "";
-    var url = location.href.split("#")[0] + "#story=" + n.id;
+    // Share link with its own preview photo (functions/s/[id].js).
+    var url = location.origin + "/s/" + n.id;
     var msg = (n.titleMl ? n.titleMl + "\n" : "") + n.title + "\n" + url;
     var w = el("a", "btn primary", "Share on WhatsApp"); w.href = "https://wa.me/?text=" + encodeURIComponent(msg); w.target = "_blank"; w.rel = "noopener";
     share.appendChild(w);
