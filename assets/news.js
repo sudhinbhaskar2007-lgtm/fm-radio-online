@@ -570,7 +570,7 @@
     $("npNewsMain").hidden = false;
     if (/^#story=/.test(location.hash)) {
       document.title = (P.title || "Mizhi News") + (P.titleMl ? " | " + P.titleMl : "");
-      history.replaceState(null, "", location.pathname + location.search + (lastCat ? "#cat=" + lastCat : "#news"));
+      history.replaceState(null, "", location.pathname + (lastCat ? "#cat=" + lastCat : "#news"));
     }
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
@@ -612,7 +612,16 @@
     }
     if (changed && !/^#story=/.test(h)) window.scrollTo(0, 0);
     var mCat = h.match(/^#cat=([\w-]+)/), mStory = h.match(/^#story=([\w-]+)/), mAlbum = h.match(/^#album=([\w-]+)/);
-    if (mStory) { if (!lastRendered) render(""); lastRendered = true; openStory(mStory[1]); return; }
+    if (mStory) {
+      if (!lastRendered) render(""); lastRendered = true; openStory(mStory[1]);
+      // Put ?s=<id> in the address so a link copied from the address bar
+      // also gets this story's photo in WhatsApp/Facebook previews (functions/index.js).
+      if (new URLSearchParams(location.search).get("s") !== mStory[1]) {
+        history.replaceState(null, "", location.pathname + "?s=" + mStory[1] + "#story=" + mStory[1]);
+      }
+      return;
+    }
+    if (/[?&]s=/.test(location.search)) history.replaceState(null, "", location.pathname + location.hash);
     closeStory(); closeLightbox();
     if (mAlbum) { renderAlbum(mAlbum[1]); lastRendered = true; window.scrollTo(0, 0); return; }
     if (/^#gallery/.test(h)) { renderGallery(); lastRendered = true; if (!changed) window.scrollTo({ top: document.querySelector(".np-cats").offsetTop - 64, behavior: "smooth" }); return; }
@@ -622,6 +631,7 @@
   }
   var lastRendered = false;
   window.addEventListener("hashchange", route);
+  window.addEventListener("popstate", function () { setTimeout(route, 0); });
   route();
 
   // Load the team's latest news and photos, then draw the page again.
