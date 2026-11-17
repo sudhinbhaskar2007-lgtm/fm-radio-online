@@ -118,19 +118,29 @@ async function addMalayalam(items, env, base, waitUntil) {
     const key = new Request(base + "/api/ml/" + (await hash(it.title)));
     const hit = await cache.match(key);
     if (hit) it.titleMl = await hit.text();
-    else miss.push({ title: it.title, key });
+    else miss.push({ title: it.title, key, it });
   }));
   if (miss.length) {
+    // Translate all missing headlines at once. Wait up to 7 seconds for them;
+    // any still running finish in the background and are cached for later.
     const statusKey = new Request(base + "/api/ml-status");
-    waitUntil(Promise.all(miss.map(async (m) => {
+    const jobs = miss.map(async (m) => {
       const r = await translateOne(env, m.title);
-      if (r.ml) await cache.put(m.key, new Response(r.ml, { headers: { "cache-control": "public, max-age=" + ML_TTL } }));
+      if (r.ml) {
+        m.it.titleMl = r.ml;
+        await cache.put(m.key, new Response(r.ml, { headers: { "cache-control": "public, max-age=" + ML_TTL } }));
+      }
       return r.ml ? "ok:" + r.model : r.err;
-    })).then((res) => cache.put(statusKey, new Response(res.join("\n"), { headers: { "cache-control": "public, max-age=3600" } }))));
+    });
+    const all = Promise.all(jobs).then((res) =>
+      cache.put(statusKey, new Response(res.join("\n"), { headers: { "cache-control": "public, max-age=3600" } })));
+    waitUntil(all);
+    await Promise.race([all, new Promise((r) => setTimeout(r, 7000))]);
   }
   const last = await cache.match(new Request(base + "/api/ml-status"));
   const lastText = last ? (await last.text()).split("\n")[0] : "";
-  return { status: "have " + (want.length - miss.length) + "/" + want.length + (lastText ? "; last: " + lastText : ""), pending: miss.length };
+  const have = want.filter((it) => it.titleMl).length;
+  return { status: "have " + have + "/" + want.length + (lastText ? "; last: " + lastText : ""), pending: want.length - have };
 }
 
 async function build(env, base, waitUntil) {
@@ -162,17 +172,7 @@ export async function onRequestGet(context) {
   const cache = caches.default;
   const url = new URL(context.request.url);
   const base = url.origin;
-  if (url.searchParams.get("test") === "ml") {
-    // Quick check of the translation set-up with one fixed headline.
-    const t0 = Date.now();
-    const r = context.env && context.env.AI
-      ? await translateOne(context.env, "Snow warning for northern England as temperatures drop")
-      : { err: "no-ai-binding" };
-    return new Response(JSON.stringify({ ...r, ms: Date.now() - t0 }), {
-      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
-    });
-  }
-  const key = new Request(base + "/api/headlines?v=5");
+  const key = new Request(base + "/api/headlines?v=6");
   let res = await cache.match(key);
   if (res) return res;
   const data = await build(context.env, base, (p) => context.waitUntil(p));
