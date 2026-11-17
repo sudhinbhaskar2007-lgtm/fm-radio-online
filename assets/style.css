@@ -610,3 +610,5 @@ a.np-credit:hover { text-decoration: underline; }
 .np-article .np-share { border-top-color: #e3e3e3; }
 .np-article .np-share .btn, .np-article .np-share a, .np-article .np-share button { color: #111; background: #f2f2f2; border-color: #ddd; }
 .np-article .np-more { color: #b5005b; }
+
+.np-lead.np-single { grid-template-columns: 1fr; gap: 20px; }

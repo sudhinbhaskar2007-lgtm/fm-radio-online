@@ -283,6 +283,14 @@
     var homeSecs = $("npHomeSecs"); homeSecs.textContent = "";
     $("npLatestHead").style.display = cat ? "" : "none"; grid.style.display = cat ? "" : "none";
     if (!cat) { renderHome(list, lead, homeSecs); return; }
+    // Associations (and ELMA): one story under another in a single column.
+    var single = cat === "association" || (cObj && cObj.parent === "association") || kids(cat).length > 0;
+    lead.classList.toggle("np-single", single); grid.classList.toggle("np-single", single);
+    if (single) {
+      list.forEach(function (n) { lead.appendChild(card(n, "lead")); });
+      $("npLatestHead").style.display = "none"; grid.style.display = "none";
+      return;
+    }
     var top = list.filter(function (n) { return n.featured; })[0] || list[0];
     var rest = list.filter(function (n) { return n !== top; });
     lead.appendChild(card(top, "lead"));
