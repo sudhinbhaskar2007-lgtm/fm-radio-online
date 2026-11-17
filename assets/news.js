@@ -377,7 +377,7 @@
   // ---------------------------------------------------------------
   // Story reader
   // ---------------------------------------------------------------
-  var reader = $("npReader"), lastFocus = null, readerLang = "en", current = null;
+  var reader = $("npReader"), lastFocus = null, readerLang = "ml", current = null;
   // Stories open as a full article page inside the news column (own link: #story=id).
   document.querySelector(".np-main").appendChild(reader);
   reader.classList.add("np-article");
@@ -426,7 +426,7 @@
     $("rdTitleMl").classList.toggle("ml", false);
     var hasEn = !!(n.body || n.summary), hasMl = !!(n.bodyMl || n.summaryMl);
     $("rdLang").hidden = !(hasEn && hasMl);
-    showLang(hasMl && !hasEn ? "ml" : (readerLang === "ml" && hasMl ? "ml" : "en"));
+    showLang(hasMl && readerLang === "ml" ? "ml" : (hasEn ? "en" : "ml"));
 
     var share = $("rdShare"); share.textContent = "";
     var url = location.href.split("#")[0] + "#story=" + n.id;
