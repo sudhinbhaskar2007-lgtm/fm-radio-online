@@ -45,6 +45,8 @@ collections:
                   - { value: jobs, label: "Jobs / ജോലി" }
                   - { value: mizhi, label: "Mizhi FM / മിഴി എഫ്എം" }
               - { name: image, label: "Photo", widget: image, required: false }
+              - { name: imageCredit, label: "Photo credit", widget: string, required: false }
+              - { name: imageCreditLink, label: "Photo credit link (optional)", widget: string, required: false }
               - { name: summary, label: "Short summary (English)", widget: text, required: false }
               - { name: summaryMl, label: "Short summary (Malayalam)", widget: text, required: false }
               - { name: body, label: "Full story (English). Empty line between paragraphs.", widget: text, required: false }

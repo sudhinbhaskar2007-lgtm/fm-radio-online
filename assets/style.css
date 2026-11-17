@@ -563,3 +563,5 @@ body.playing .np-radio-btn .i-pause { display: block; }
 .np-hl-meta b { font-weight: 700; padding: 1px 6px; border-radius: 4px; color: #fff; }
 .np-hl-meta .src-bbc { background: #b80000; }
 .np-hl-meta .src-sky { background: #1b4fa8; }
+.np-credit { display: block; margin: 6px 16px 0; font-size: .78rem; color: var(--muted); text-decoration: none; }
+a.np-credit:hover { text-decoration: underline; }

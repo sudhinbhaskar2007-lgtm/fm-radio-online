@@ -48,6 +48,12 @@ content:
       - name: image
         label: "Photo (your own or one you have permission to use)"
         type: image
+      - name: imageCredit
+        label: "Photo credit (e.g. Photo: your name, or the licence for a free photo)"
+        type: string
+      - name: imageCreditLink
+        label: "Photo credit link (optional, https://...)"
+        type: string
       - name: summary
         label: "Short summary (English, shown on the card)"
         type: text

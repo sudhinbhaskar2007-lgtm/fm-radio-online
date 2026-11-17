@@ -9,10 +9,12 @@
     "summaryMl": "സ്റ്റാഫോർഡ്ഷയർ മുതൽ തെക്കുപടിഞ്ഞാറൻ സ്കോട്ട്ലൻഡ് വരെയുള്ള പ്രദേശങ്ങളിൽ മെറ്റ് ഓഫീസ് മഞ്ഞ മുന്നറിയിപ്പ് നൽകി. റോഡ്, ട്രെയിൻ യാത്രകൾ വൈകാൻ സാധ്യത.",
     "body": "The Met Office put a yellow snow warning in place until 11am on Tuesday 17 November, covering a band from Staffordshire up to south-west Scotland, including parts of Greater Manchester, Lancashire, Cumbria, Yorkshire, Derbyshire and Northumberland.\n\nForecasters said 1 to 5 cm of snow could settle in many places, with 5 to 15 cm possible on higher ground. Some roads and railways may be affected, and there is a small chance of power cuts.\n\nA yellow cold-health alert is also in place for the North West, North East and Yorkshire until Thursday morning. If you are travelling, check before you go, and keep an eye on elderly neighbours and relatives.",
     "bodyMl": "ചൊവ്വാഴ്ച (നവംബർ 17) രാവിലെ 11 മണി വരെ സ്റ്റാഫോർഡ്ഷയർ മുതൽ തെക്കുപടിഞ്ഞാറൻ സ്കോട്ട്ലൻഡ് വരെയുള്ള പ്രദേശങ്ങളിൽ മെറ്റ് ഓഫീസ് മഞ്ഞുവീഴ്ചയ്ക്കുള്ള മഞ്ഞ മുന്നറിയിപ്പ് പ്രഖ്യാപിച്ചു. ഗ്രേറ്റർ മാഞ്ചസ്റ്റർ, ലങ്കാഷയർ, കംബ്രിയ, യോർക്ക്ഷയർ, ഡെർബിഷയർ, നോർത്തംബർലൻഡ് എന്നിവിടങ്ങളുടെ ചില ഭാഗങ്ങളും ഇതിൽ ഉൾപ്പെടുന്നു.\n\nപല സ്ഥലങ്ങളിലും 1 മുതൽ 5 സെന്റിമീറ്റർ വരെയും ഉയർന്ന പ്രദേശങ്ങളിൽ 15 സെന്റിമീറ്റർ വരെയും മഞ്ഞ് വീഴാം. ചില റോഡുകളിലും ട്രെയിൻ സർവീസുകളിലും തടസ്സമുണ്ടാകാം. ചെറിയ തോതിൽ വൈദ്യുതി മുടക്കത്തിനും സാധ്യതയുണ്ട്.\n\nനോർത്ത് വെസ്റ്റ്, നോർത്ത് ഈസ്റ്റ്, യോർക്ക്ഷയർ എന്നിവിടങ്ങളിൽ വ്യാഴാഴ്ച രാവിലെ വരെ തണുപ്പിനെതിരെയുള്ള ആരോഗ്യ മുന്നറിയിപ്പും നിലവിലുണ്ട്. യാത്ര ചെയ്യുന്നവർ പുറപ്പെടും മുമ്പ് വിവരങ്ങൾ പരിശോധിക്കുക. പ്രായമായ അയൽക്കാരെയും ബന്ധുക്കളെയും ശ്രദ്ധിക്കുക.",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Bradford_Road_in_the_snow_-_geograph.org.uk_-_7427920.jpg/1280px-Bradford_Road_in_the_snow_-_geograph.org.uk_-_7427920.jpg",
     "featured": false,
     "breaking": true,
-    "link": "https://www.itv.com/news/2026-11-17/snow-warning-comes-into-force-bringing-potential-rush-hour-disruption"
+    "link": "https://www.itv.com/news/2026-11-17/snow-warning-comes-into-force-bringing-potential-rush-hour-disruption",
+    "imageCredit": "File photo: snow on Bradford Road, Yorkshire. yorkshirelad, CC BY-SA 2.0, via Wikimedia Commons",
+    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Bradford_Road_in_the_snow_-_geograph.org.uk_-_7427920.jpg"
   },
   {
     "id": "uk-youth-jobs-plan-17-nov",
@@ -24,10 +26,12 @@
     "summaryMl": "ജോലിയോ പഠനമോ പരിശീലനമോ ഇല്ലാത്ത 16-24 വയസ്സുകാർ ഏകദേശം പത്ത് ലക്ഷത്തോളം. ഓരോ യുവാവിനും പഠനം, പരിശീലനം, അപ്രന്റിസ്ഷിപ്പ് അല്ലെങ്കിൽ ജോലി ഉറപ്പാക്കുമെന്ന് സർക്കാർ.",
     "body": "The Department for Work and Pensions says it accepts the main ideas of Alan Milburn's review into young people and work. Close to one million 16 to 24-year-olds in the UK are currently not in education, employment or training.\n\nFrom next year, new local youth services will bring together job, health, skills and youth support, shaped by mayors and local councils. Under a new 'Opportunity and Support Guarantee', every young person should be offered college, training, an apprenticeship, work experience or a job, with help to take it up. A new Youth Opportunities Unit will report directly to the Prime Minister.\n\nMore changes to welfare are expected in the coming weeks, with a White Paper in the new year. If your son or daughter is looking for work or training, it is worth asking your local Jobcentre what is available in your area.",
     "bodyMl": "യുവാക്കളും തൊഴിലും എന്ന വിഷയത്തിൽ അലൻ മിൽബേൺ നടത്തിയ പഠന റിപ്പോർട്ടിലെ പ്രധാന നിർദ്ദേശങ്ങൾ അംഗീകരിക്കുന്നതായി ഡിപ്പാർട്ട്മെന്റ് ഫോർ വർക്ക് ആൻഡ് പെൻഷൻസ് (DWP) അറിയിച്ചു. യുകെയിൽ ജോലിയോ പഠനമോ പരിശീലനമോ ഇല്ലാത്ത 16-24 വയസ്സുകാരുടെ എണ്ണം ഏകദേശം പത്ത് ലക്ഷത്തോളമാണ്.\n\nഅടുത്ത വർഷം മുതൽ ജോലി, ആരോഗ്യം, നൈപുണ്യ പരിശീലനം, യുവജന സഹായം എന്നിവ ഒരുമിച്ച് നൽകുന്ന പുതിയ പ്രാദേശിക യുവജന സേവനങ്ങൾ ആരംഭിക്കും. മേയർമാരും പ്രാദേശിക കൗൺസിലുകളുമായിരിക്കും ഇവ രൂപപ്പെടുത്തുക. 'ഓപ്പർച്യുണിറ്റി ആൻഡ് സപ്പോർട്ട് ഗ്യാരന്റി' പ്രകാരം ഓരോ യുവാവിനും കോളേജ്, പരിശീലനം, അപ്രന്റിസ്ഷിപ്പ്, തൊഴിൽ പരിചയം അല്ലെങ്കിൽ ജോലി എന്നിവയിലൊന്ന് ലഭ്യമാക്കും. പ്രധാനമന്ത്രിക്ക് നേരിട്ട് റിപ്പോർട്ട് ചെയ്യുന്ന ഒരു പുതിയ 'യൂത്ത് ഓപ്പർച്യുണിറ്റീസ് യൂണിറ്റും' രൂപീകരിക്കും.\n\nക്ഷേമ പദ്ധതികളിൽ കൂടുതൽ മാറ്റങ്ങൾ വരും ആഴ്ചകളിൽ പ്രതീക്ഷിക്കുന്നു. പുതുവർഷത്തിൽ വിശദമായ ധവളപത്രവും പുറത്തിറക്കും. നിങ്ങളുടെ മക്കൾ ജോലിയോ പരിശീലനമോ തേടുന്നുണ്ടെങ്കിൽ, പ്രദേശത്തെ ജോബ്സെന്ററിൽ ലഭ്യമായ അവസരങ്ങളെക്കുറിച്ച് അന്വേഷിക്കുക.",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Inside_Cardiff_Jobcentre_Plus_2026.jpg/1280px-Inside_Cardiff_Jobcentre_Plus_2026.jpg",
     "featured": true,
     "breaking": false,
-    "link": "https://www.gov.uk/government/news/government-commits-to-new-settlement-for-young-people-and-to-invest-in-success-rather-than-pay-for-failure"
+    "link": "https://www.gov.uk/government/news/government-commits-to-new-settlement-for-young-people-and-to-invest-in-success-rather-than-pay-for-failure",
+    "imageCredit": "File photo: inside Cardiff Jobcentre Plus. Sleepytimecat, CC BY 4.0, via Wikimedia Commons",
+    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Inside_Cardiff_Jobcentre_Plus_2026.jpg"
   },
   {
     "id": "earthshot-prize-mumbai-2026",
@@ -39,10 +43,12 @@
     "summaryMl": "ഇന്ത്യയിലെ മഹീന്ദ്ര ലാസ്റ്റ് മൈൽ മൊബിലിറ്റിയും ഭൂട്ടാനും ഉൾപ്പെടെ അഞ്ച് പരിസ്ഥിതി പദ്ധതികൾക്ക് 10 ലക്ഷം പൗണ്ട് വീതം സമ്മാനം.",
     "body": "Prince William and Catherine, Princess of Wales, held this year's Earthshot Prize ceremony at the Jio World Convention Centre in Mumbai on Tuesday, as part of a three-day visit to India.\n\nFive winners, chosen from 15 finalists, each received £1 million for work on climate and nature: Mahindra Last Mile Mobility (electric transport), the campaign PFAS-Free France (against 'forever chemicals'), Niue Ocean Wide Trust (ocean protection), Ørsted (offshore wind) and Bhutan, for protecting its Himalayan forests.\n\nThe prize was started by Prince William in 2020. The couple are due to meet Prime Minister Narendra Modi on Wednesday.",
     "bodyMl": "ഇന്ത്യയിലെ മൂന്ന് ദിവസത്തെ സന്ദർശനത്തിന്റെ ഭാഗമായി വില്യം രാജകുമാരനും വെയിൽസ് രാജകുമാരി കാതറിനും ചൊവ്വാഴ്ച മുംബൈയിലെ ജിയോ വേൾഡ് കൺവെൻഷൻ സെന്ററിൽ ഈ വർഷത്തെ എർത്ത്ഷോട്ട് പുരസ്കാര ചടങ്ങ് നടത്തി.\n\n15 ഫൈനലിസ്റ്റുകളിൽ നിന്ന് തിരഞ്ഞെടുത്ത അഞ്ച് വിജയികൾക്ക് 10 ലക്ഷം പൗണ്ട് വീതം ലഭിച്ചു: ഇലക്ട്രിക് വാഹനങ്ങൾക്കായി മഹീന്ദ്ര ലാസ്റ്റ് മൈൽ മൊബിലിറ്റി, 'ഫോറെവർ കെമിക്കലുകൾ'ക്കെതിരെ പ്രവർത്തിക്കുന്ന PFAS-Free France, സമുദ്ര സംരക്ഷണത്തിനായി നിയുവെ ഓഷ്യൻ വൈഡ് ട്രസ്റ്റ്, കടലിലെ കാറ്റാടി ഊർജ്ജത്തിനായി ഓർസ്റ്റെഡ്, ഹിമാലയൻ വനങ്ങൾ സംരക്ഷിക്കുന്നതിന് ഭൂട്ടാൻ.\n\n2020-ൽ വില്യം രാജകുമാരനാണ് ഈ പുരസ്കാരം ആരംഭിച്ചത്. ബുധനാഴ്ച ഇരുവരും പ്രധാനമന്ത്രി നരേന്ദ്ര മോദിയെ സന്ദർശിക്കും.",
-    "image": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Jio_World_Centre_in_Mumbai.jpg/1280px-Jio_World_Centre_in_Mumbai.jpg",
     "featured": false,
     "breaking": false,
-    "link": "https://www.clickorlando.com/tech/2026/11/17/prince-williams-presents-earthshot-prize-winners-with-13m-each-in-mumbai/"
+    "link": "https://www.clickorlando.com/tech/2026/11/17/prince-williams-presents-earthshot-prize-winners-with-13m-each-in-mumbai/",
+    "imageCredit": "File photo: Jio World Centre, Mumbai. DesiBoy101, CC BY 4.0, via Wikimedia Commons",
+    "imageCreditLink": "https://commons.wikimedia.org/wiki/File:Jio_World_Centre_in_Mumbai.jpg"
   },
   {
     "id": "photo-gallery-launch",
