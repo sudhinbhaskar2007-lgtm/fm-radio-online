@@ -37,6 +37,10 @@ export async function onRequestGet(context) {
     .on('meta[property="og:image"]', set(img))
     .on('meta[property="og:url"]', set(url.origin + "/?s=" + id))
     .on('meta[property="og:type"]', set("article"))
+    .on('meta[property="og:image"]', { element: function (el) {
+      if (!img) return;
+      el.after('<meta property="og:image:secure_url" content="' + img + '"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">', { html: true });
+    } })
     .transform(page);
   const headers = new Headers(out.headers);
   headers.set("cache-control", "public, max-age=300");

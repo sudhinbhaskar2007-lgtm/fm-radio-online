@@ -58,8 +58,8 @@ def main():
                 continue
             t = thumb(im)
             for q in (82, 72, 62):
-                t.save(dest, "JPEG", quality=q, optimize=True, progressive=True)
-                if os.path.getsize(dest) < 250000:
+                t.save(dest, "JPEG", quality=q, optimize=True, progressive=False)
+                if os.path.getsize(dest) < 200000:
                     break
             made += 1
             print("made", sid, os.path.getsize(dest))

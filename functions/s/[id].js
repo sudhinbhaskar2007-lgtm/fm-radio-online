@@ -41,11 +41,13 @@ export async function onRequestGet(context) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:image" content="${esc(img)}">
+<meta property="og:image:secure_url" content="${esc(img)}">
+<meta property="og:image:type" content="image/jpeg">${small ? '\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">' : ""}
+<meta property="og:image:alt" content="${esc(title)}">
 <meta property="og:url" content="${esc(origin + "/s/" + id)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="${esc(img)}">
 <link rel="canonical" href="${esc(target)}">
-<meta http-equiv="refresh" content="0; url=${esc(target)}">
 </head><body><p><a href="${esc(target)}">${esc(title)}</a></p>
 <script>location.replace(${JSON.stringify(target)});</script></body></html>`;
   return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=300" } });
