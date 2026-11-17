@@ -467,7 +467,8 @@ body.playing .np-radio-btn .i-pause { display: block; }
 .np-thumb-big { aspect-ratio: 21 / 9; }
 .np-reader-body { padding: 20px 24px 26px; }
 .np-reader-body h2 { margin: 10px 0 4px; font-size: clamp(1.4rem, 3.5vw, 1.9rem); }
-.np-reader-ml { margin: 0 0 12px; font-size: 1.2rem; font-weight: 700; color: #ffd1ec; }
+.np-reader-ml { margin: 0 0 14px; font-size: 1.05rem; font-weight: 600; color: #ffd1ec; opacity: .9; line-height: 1.4; }
+.np-article #rdTitle.ml { line-height: 1.45; }
 .np-reader-text p { color: #e8defc; font-size: 1.05rem; line-height: 1.75; margin: 0 0 14px; }
 .np-reader-text p.ml { line-height: 1.95; }
 .np-lang { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,.06); margin: 4px 0 14px; }

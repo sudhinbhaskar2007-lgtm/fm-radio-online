@@ -418,8 +418,12 @@
       im.appendChild(cr);
     }
     var m = $("rdMeta"); m.replaceWith(meta(n)); reader.querySelector(".np-meta").id = "rdMeta";
-    $("rdTitle").textContent = n.title;
-    $("rdTitleMl").textContent = n.titleMl || "";
+    // Malayalam headline is the main (big) heading; English goes underneath, smaller.
+    var mainMl = !!n.titleMl;
+    $("rdTitle").textContent = mainMl ? n.titleMl : n.title;
+    $("rdTitle").classList.toggle("ml", mainMl);
+    $("rdTitleMl").textContent = mainMl ? n.title : "";
+    $("rdTitleMl").classList.toggle("ml", false);
     var hasEn = !!(n.body || n.summary), hasMl = !!(n.bodyMl || n.summaryMl);
     $("rdLang").hidden = !(hasEn && hasMl);
     showLang(hasMl && !hasEn ? "ml" : (readerLang === "ml" && hasMl ? "ml" : "en"));
