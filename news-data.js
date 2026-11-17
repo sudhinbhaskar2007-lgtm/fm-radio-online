@@ -22,6 +22,8 @@ window.MIZHI_NEWS_PAGE = {
   // Category menu (id, English, Malayalam, colour)
   categories: [
     { id: "uk",          en: "UK",          ml: "യുകെ",        color: "#3d7bff" },
+    { id: "association", en: "Malayali Associations", ml: "മലയാളി അസോസിയേഷൻ", color: "#ff6b6b" },
+    { id: "ads",         en: "Advertisements", ml: "പരസ്യങ്ങൾ",   color: "#c9a227" },
     { id: "kerala",      en: "Kerala",      ml: "കേരളം",       color: "#3ddc84" },
     { id: "immigration", en: "Immigration", ml: "കുടിയേറ്റം",   color: "#ff9a1f" },
     { id: "community",   en: "Community",   ml: "സമൂഹം",       color: "#e0359f" },

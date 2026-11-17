@@ -148,7 +148,7 @@
   // Breaking ticker
   // ---------------------------------------------------------------
   // Our own breaking stories first, then the latest Kerala, India and UK
-  // headlines from other news sites (headline + link only, opens their site).
+  // headlines from other news sites, shown in Malayalam as plain text.
   var liveHeadlines = [];
   function pickHeadlines() {
     var by = { kerala: [], india: [], uk: [] };
@@ -175,13 +175,13 @@
         track.appendChild(a);
       });
       heads.forEach(function (h) {
-        var a = el("a", h.ml ? "ml" : "");
+        // Malayalam headline only, as plain text (no link to other sites).
+        var mlText = h.titleMl || (h.ml ? h.title : "");
+        var a = el("span", "np-tk-item" + (mlText ? " ml" : ""));
         var tag = el("span", "np-tk-tag np-tk-" + (h.region || "uk"), REGION_ML[h.region || "uk"]);
         tag.classList.add("ml");
         a.appendChild(tag);
-        a.appendChild(document.createTextNode(" " + h.title + " "));
-        a.appendChild(el("span", "np-tk-src", "· " + h.source));
-        a.href = h.link; a.target = "_blank"; a.rel = "noopener";
+        a.appendChild(document.createTextNode(" " + (mlText || h.title) + " "));
         track.appendChild(a);
       });
     }

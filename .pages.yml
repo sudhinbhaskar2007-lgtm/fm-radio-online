@@ -38,6 +38,8 @@ content:
         options:
           values:
             - { value: uk, label: "UK / യുകെ" }
+            - { value: association, label: "Malayali Associations / മലയാളി അസോസിയേഷൻ" }
+            - { value: ads, label: "Advertisements / പരസ്യങ്ങൾ" }
             - { value: kerala, label: "Kerala / കേരളം" }
             - { value: immigration, label: "Immigration / കുടിയേറ്റം" }
             - { value: community, label: "Community / സമൂഹം" }

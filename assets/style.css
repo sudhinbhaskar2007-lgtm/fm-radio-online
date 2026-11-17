@@ -375,7 +375,7 @@ body.reader-open, body.consent-open { overflow: hidden; }
 .np-ticker { flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
 .np-ticker-track { display: inline-flex; gap: 60px; white-space: nowrap; animation: ticker 30s linear infinite; padding-left: 100%; }
 .np-ticker:hover .np-ticker-track { animation-play-state: paused; }
-.np-ticker a { color: #fff; text-decoration: none; font-weight: 600; }
+.np-ticker a, .np-ticker .np-tk-item { color: #fff; text-decoration: none; font-weight: 600; }
 .np-ticker a:hover { color: var(--accent2); }
 .np-tk-tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 7px; border-radius: 5px; margin-right: 2px; vertical-align: 1px; color: #111; }
 .np-tk-kerala { background: #3ddc84; } .np-tk-india { background: #ff9a1f; } .np-tk-uk { background: #9cc7f0; }

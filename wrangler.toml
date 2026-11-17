@@ -1,0 +1,9 @@
+# Cloudflare Pages settings for the "mizhifm" project (no build step).
+# The AI binding lets functions/api/headlines.js make Malayalam versions
+# of the breaking-ticker headlines with Workers AI (free daily allowance).
+name = "mizhifm"
+pages_build_output_dir = "."
+compatibility_date = "2026-11-01"
+
+[ai]
+binding = "AI"
