@@ -52,7 +52,7 @@ window.RADIO_CONFIG = {
 
   // ---- Contact & social -----------------------------------------
   email: "mizhinews@gmail.com",
-  phone: ["07438 407865", "07868 466691"],   // one number, or several in [ ] separated by commas
+  phone: [],   // one number, or several in [ ] separated by commas
   whatsapp: "",                  // digits only, with country code, e.g. "447700900000"
   social: {
     facebook: "",
