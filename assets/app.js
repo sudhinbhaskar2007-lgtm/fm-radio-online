@@ -400,4 +400,40 @@
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   }
+
+  // Install-app button: native prompt where supported, instructions elsewhere
+  (function () {
+    var btn = document.getElementById("appBtn");
+    if (!btn) return;
+    var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone;
+    if (standalone) { btn.hidden = true; return; }
+    var deferred = null;
+    window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; });
+    window.addEventListener("appinstalled", function () { btn.hidden = true; closeSheet(); });
+    var ua = navigator.userAgent || "";
+    var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var android = /Android/.test(ua);
+    var sheet = null;
+    function closeSheet() { if (sheet) sheet.hidden = true; }
+    function showSheet() {
+      var steps;
+      if (ios) steps = "<li>Tap the <strong>Share</strong> button (square with an arrow) in Safari.</li><li>Choose <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong>. Mizhi appears on your home screen.</li>";
+      else if (android) steps = "<li>Tap the <strong>⋮ menu</strong> at the top right of Chrome.</li><li>Choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li><li>Tap <strong>Install</strong>.</li>";
+      else steps = "<li>In Chrome or Edge, click the <strong>install icon</strong> at the right end of the address bar, or open the browser menu and choose <strong>Install Mizhi</strong>.</li><li>In Safari on Mac, choose <strong>File → Add to Dock</strong>.</li>";
+      if (!sheet) {
+        sheet = document.createElement("div");
+        sheet.className = "app-sheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true");
+        sheet.addEventListener("click", function (e) { if (e.target === sheet || e.target.tagName === "BUTTON") closeSheet(); });
+        document.body.appendChild(sheet);
+      }
+      sheet.innerHTML = '<div class="app-sheet-card"><h2>Get the Mizhi app</h2><div class="ml">മിഴി ആപ്പ് ഫോണിൽ ചേർക്കാം</div><ol>' + steps + '</ol><p style="margin:0;color:#555;font-size:.9rem">Free. No app store needed. News and Mizhi FM open from your home screen.</p><button type="button">OK</button></div>';
+      sheet.hidden = false;
+    }
+    btn.addEventListener("click", function () {
+      if (deferred) {
+        deferred.prompt();
+        deferred.userChoice.then(function (c) { if (c && c.outcome === "accepted") btn.hidden = true; deferred = null; });
+      } else showSheet();
+    });
+  })();
 })();

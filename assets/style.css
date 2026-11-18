@@ -617,3 +617,27 @@ a.np-credit:hover { text-decoration: underline; }
 .np-inline-fig { margin: 8px 0 22px; }
 .np-inline-fig img { width: 100%; height: auto; display: block; border-radius: 10px; }
 .np-inline-fig figcaption { margin-top: 6px; font-size: .85rem; color: #666; }
+
+/* Install-app button */
+.topbar { gap: 14px; justify-content: flex-start; }
+.topbar .nav { margin-left: auto; }
+.app-btn {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  border: 0; border-radius: 999px; padding: 8px 14px; color: #fff; font: 700 .9rem "Outfit", system-ui, sans-serif;
+  background: linear-gradient(90deg, var(--accent), var(--accent2)); box-shadow: 0 4px 16px rgba(224,53,159,.35);
+}
+.app-btn .ml { font-size: .8rem; }
+.app-btn[hidden] { display: none; }
+@media (max-width: 760px) {
+  .app-btn { order: 2; margin-left: auto; }
+  .menu-btn { order: 3; }
+}
+@media (max-width: 480px) { .app-btn { padding: 7px 11px; font-size: .9rem; gap: 4px; } .app-btn .ml { display: none; } .topbar { gap: 8px; } #tabFm > .ml { display: none; } }
+@media (max-width: 360px) { .app-btn span { display: none; } }
+.app-sheet { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(0,0,0,.6); padding: 16px; }
+.app-sheet[hidden] { display: none; }
+.app-sheet-card { background: #fff; color: #111; max-width: 420px; width: 100%; border-radius: 18px; padding: 22px 20px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.app-sheet-card h2 { margin: 0 0 4px; font-size: 1.3rem; }
+.app-sheet-card .ml { color: #8a1a5c; font-weight: 700; }
+.app-sheet-card ol { padding-left: 1.2em; margin: 14px 0; line-height: 1.55; }
+.app-sheet-card button { margin-top: 6px; width: 100%; border: 0; border-radius: 12px; padding: 12px; font-weight: 700; color: #fff; background: linear-gradient(90deg, #e0359f, #ff9a1f); cursor: pointer; }

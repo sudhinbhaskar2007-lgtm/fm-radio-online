@@ -1,9 +1,27 @@
 {
-  "name": "Mizhi FM",
-  "short_name": "Mizhi FM",
-  "start_url": "./",
+  "name": "Mizhi UK Malayalam News & Mizhi FM",
+  "short_name": "Mizhi",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#07060f",
   "theme_color": "#07060f",
-  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "scope": "/",
+  "description": "Malayalam news for the UK and Mizhi FM radio"
 }
