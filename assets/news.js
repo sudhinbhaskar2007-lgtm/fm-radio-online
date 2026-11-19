@@ -170,8 +170,18 @@
         track.appendChild(a);
       });
     }
-    track.style.animationDuration = Math.max(30, items.length * 9) + "s";
+    setTickerSpeed();
   }
+
+  // Steady reading speed in pixels per second, slower on phones.
+  function setTickerSpeed() {
+    var track = $("npTicker");
+    if (!track || !track.scrollWidth) return;
+    var pxPerSec = window.innerWidth < 700 ? 30 : 45;
+    track.style.animationDuration = Math.max(40, track.scrollWidth / pxPerSec) + "s";
+  }
+  window.addEventListener("resize", function () { clearTimeout(setTickerSpeed.t); setTickerSpeed.t = setTimeout(setTickerSpeed, 300); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setTickerSpeed);
 
   // Side box: latest Mizhi headlines (our own stories only).
   function showOwnHeadlines() {
