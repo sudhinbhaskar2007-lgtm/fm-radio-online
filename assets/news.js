@@ -173,12 +173,31 @@
     setTickerSpeed();
   }
 
-  // Steady reading speed in pixels per second, slower on phones.
+  // Desktop: slow steady scroll. Phones (Sudhin, 19 Nov: too fast to read):
+  // no scrolling, one headline at a time that changes every 6 seconds.
+  var tkTimer = null;
   function setTickerSpeed() {
     var track = $("npTicker");
-    if (!track || !track.scrollWidth) return;
-    var pxPerSec = window.innerWidth < 700 ? 30 : 45;
-    track.style.animationDuration = Math.max(40, track.scrollWidth / pxPerSec) + "s";
+    if (!track || !track.children.length) return;
+    var phone = window.innerWidth < 700;
+    var box = track.parentNode;
+    box.classList.toggle("np-ticker-rotate", phone);
+    clearInterval(tkTimer);
+    var kids = Array.prototype.slice.call(track.children);
+    var half = Math.ceil(kids.length / 2);
+    if (phone) {
+      var i = 0;
+      var show = function () { kids.forEach(function (k, n) { k.classList.toggle("on", n === i); }); };
+      show();
+      tkTimer = setInterval(function () {
+        if (box.matches(":active")) return;
+        i = (i + 1) % half; show();
+      }, 6000);
+      return;
+    }
+    kids.forEach(function (k) { k.classList.remove("on"); });
+    if (!track.scrollWidth) return;
+    track.style.animationDuration = Math.max(60, track.scrollWidth / 40) + "s";
   }
   window.addEventListener("resize", function () { clearTimeout(setTickerSpeed.t); setTickerSpeed.t = setTimeout(setTickerSpeed, 300); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setTickerSpeed);

@@ -384,6 +384,14 @@ body.reader-open, body.consent-open { overflow: hidden; }
 .np-tk-own { color: #ffd23f !important; }
 .np-hl-meta .src-other { background: #555; color: #fff; }
 .np-ticker a::before { content: "◆"; color: var(--accent2); margin-right: 10px; font-size: .7em; }
+/* Phones: one headline at a time, fading, no scrolling */
+.np-ticker-rotate { mask-image: none; -webkit-mask-image: none; min-width: 0; }
+.np-ticker-rotate .np-ticker-track { animation: none !important; padding-left: 0; display: block; white-space: normal; transform: none; }
+.np-ticker-rotate .np-ticker-track > a { display: none; line-height: 1.35; font-size: .95rem; }
+.np-ticker-rotate .np-ticker-track > a.on { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; animation: tkfade .6s ease; }
+.np-ticker-rotate .np-ticker-track > a::before { display: none; }
+@media (max-width: 699px) { .np-breaking-label { font-size: .68rem; padding: 4px 7px; } .np-breaking-label .ml { display: none; } }
+@keyframes tkfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
 /* Layout */
