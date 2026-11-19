@@ -1,0 +1,19 @@
+name: Check radio stream
+
+# Manual helper: checks the Mizhi FM stream and AzuraCast status from outside.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stream
+        run: |
+          curl -sS -m 15 -o /tmp/s.mp3 -r 0-50000 -w "stream http=%{http_code} type=%{content_type} bytes=%{size_download}\n" https://mizhifm.duckdns.org/listen/mizhi_fm/radio.mp3 || echo "stream FAILED"
+          curl -sS -m 15 -o /dev/null -w "home http=%{http_code}\n" https://mizhifm.duckdns.org/ || echo "home FAILED"
+          curl -sS -m 15 https://mizhifm.duckdns.org/api/nowplaying/mizhi_fm | python3 -c "import json,sys;d=json.load(sys.stdin);print('online',d.get('is_online'),'listeners',d.get('listeners',{}).get('current'),'song',d.get('now_playing',{}).get('song',{}).get('text'));print([m.get('url') for m in d.get('station',{}).get('mounts',[])])" || echo "api FAILED"
+          nslookup mizhifm.duckdns.org || true
