@@ -156,7 +156,7 @@
   function buildTicker() {
     // Only our own Mizhi stories (Sudhin chose no outside headlines, 17 Nov).
     var breaking = NEWS.filter(function (n) { return n.breaking; });
-    var latest = NEWS.filter(function (n) { return !n.breaking && (n.category === "uk" || n.category === "kerala"); }).slice(0, 12);
+    var latest = NEWS.filter(function (n) { return !n.breaking && (n.category === "uk" || n.category === "kerala" || n.category === "sports"); }).slice(0, 14);
     var items = breaking.concat(latest);
     var track = $("npTicker");
     track.textContent = "";
