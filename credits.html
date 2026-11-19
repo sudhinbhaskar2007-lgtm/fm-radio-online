@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photo credits · Mizhi UK Malayalam News</title>
+  <meta name="description" content="Credits and licences for the photos used on Mizhi UK Malayalam News.">
+  <link rel="canonical" href="https://mizhinews.co.uk/credits.html">
+  <style>
+    body{margin:0;background:#fff;color:#111;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{max-width:820px;margin:0 auto;padding:24px 16px 64px}
+    h1{font-size:28px;line-height:1.25;margin:8px 0 4px}
+    a{color:#b5156f}
+    .top{display:inline-block;margin-bottom:12px;font-weight:600;text-decoration:none}
+    .muted{color:#555;font-size:15px}
+    li{margin:10px 0}
+    .t{font-weight:600;display:block}
+  </style>
+</head>
+<body>
+<main>
+  <a class="top" href="/">← Mizhi UK Malayalam News</a>
+  <h1>Photo credits</h1>
+  <p class="muted">ഫോട്ടോ കടപ്പാട് · Photos of public figures are free-licence images from Wikimedia Commons and similar sources, used under their licences (Creative Commons or public domain). Our picture cards made with them are shared under CC BY-SA 4.0. Illustrations are by Mizhi News.</p>
+  <ul id="list"><li class="muted">Loading…</li></ul>
+</main>
+<script>
+fetch("data/news.json", {cache: "no-cache"}).then(function (r) { return r.json(); }).then(function (d) {
+  var ul = document.getElementById("list"); ul.textContent = "";
+  d.filter(function (n) { return n.imageCredit && !/^Illustration: Mizhi News\.?$/.test(n.imageCredit); }).forEach(function (n) {
+    var li = document.createElement("li");
+    var t = document.createElement("a"); t.className = "t"; t.href = "/#story=" + encodeURIComponent(n.id || ""); t.textContent = n.titleMl || n.title || "";
+    li.appendChild(t);
+    var c = document.createElement(/^https:\/\//.test(n.imageCreditLink || "") ? "a" : "span");
+    c.textContent = n.imageCredit;
+    if (c.tagName === "A") { c.href = n.imageCreditLink; c.target = "_blank"; c.rel = "noopener"; }
+    li.appendChild(c); ul.appendChild(li);
+  });
+});
+</script>
+</body>
+</html>

@@ -545,11 +545,7 @@
     current = n;
     lastFocus = document.activeElement;
     var im = $("rdImg"); im.textContent = ""; im.appendChild(thumb(n, "np-thumb-big"));
-    if (n.imageCredit && safeImg(n.image)) {
-      var cr = el(/^https:\/\//.test(n.imageCreditLink || "") ? "a" : "p", "np-credit", n.imageCredit);
-      if (cr.tagName === "A") { cr.href = n.imageCreditLink; cr.target = "_blank"; cr.rel = "noopener"; }
-      im.appendChild(cr);
-    }
+    // No credit line under photos (Sudhin, 19 Nov): all photo credits are listed on credits.html, linked in the footer.
     var m = $("rdMeta"); m.replaceWith(meta(n)); reader.querySelector(".np-meta").id = "rdMeta";
     var oldBy = reader.querySelector(".np-byline"); if (oldBy) oldBy.remove();
     if (n.author) {
