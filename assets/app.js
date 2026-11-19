@@ -103,11 +103,22 @@
     audio.src = C.streamUrl + sep + "t=" + Date.now();
     var p = audio.play();
     if (p && p.catch) p.catch(onError);
+    armWatchdog();
+  }
+
+  // If the stream neither starts nor fails (a stuck spinner on some phones),
+  // try again after 12 seconds instead of spinning forever.
+  var watchdog = null;
+  function armWatchdog() {
+    clearTimeout(watchdog);
+    watchdog = setTimeout(function () {
+      if (wantPlaying && (audio.paused || audio.readyState < 3)) onError();
+    }, 12000);
   }
 
   function stop() {
     wantPlaying = false;
-    clearTimeout(retryTimer);
+    clearTimeout(retryTimer); clearTimeout(watchdog);
     audio.pause();
     // Drop the connection completely; a live stream can't be "paused".
     audio.removeAttribute("src");
@@ -127,13 +138,13 @@
       clearTimeout(retryTimer);
       retryTimer = setTimeout(play, 1500 * retries);
     } else {
-      wantPlaying = false;
+      wantPlaying = false; retries = 0; clearTimeout(watchdog);
       setState("stopped");
       status.textContent = "We can't reach the stream right now. Please try again in a moment.";
     }
   }
 
-  audio.addEventListener("playing", function () { retries = 0; setState("playing"); status.textContent = ""; });
+  audio.addEventListener("playing", function () { clearTimeout(watchdog); retries = 0; setState("playing"); status.textContent = ""; });
   audio.addEventListener("waiting", function () { if (wantPlaying) setState("loading"); });
   audio.addEventListener("error", onError);
   audio.addEventListener("stalled", function () { if (wantPlaying && audio.paused) onError(); });

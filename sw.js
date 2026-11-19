@@ -1,6 +1,6 @@
 // Caches the page shell so the site opens instantly and works offline.
 // The live audio stream and now-playing data are never cached.
-var CACHE = "radio-shell-v32";
+var CACHE = "radio-shell-v34";
 var SHELL = ["./", "index.html", "config.js", "assets/style.css", "assets/app.js", "news.html", "news-data.js", "assets/news.js", "data/news.json", "data/gallery.json", "assets/icon.svg", "assets/eye-poster.jpg"];
 
 self.addEventListener("install", function (e) {
