@@ -650,3 +650,56 @@ a.np-credit:hover { text-decoration: underline; }
 .app-sheet-card .ml { color: #8a1a5c; font-weight: 700; }
 .app-sheet-card ol { padding-left: 1.2em; margin: 14px 0; line-height: 1.55; }
 .app-sheet-card button { margin-top: 6px; width: 100%; border: 0; border-radius: 12px; padding: 12px; font-weight: 700; color: #fff; background: linear-gradient(90deg, #e0359f, #ff9a1f); cursor: pointer; }
+
+/* =====================================================================
+   Light news theme (22 Nov 2026): white pages, light-grey bars, red
+   accents and a dark footer. Only applies on the News tab; the FM tab
+   keeps the eye animation.
+   ===================================================================== */
+body.news-view {
+  --text: #1c1c1c; --muted: #5f5f5f; --border: #e3e3e3; --red: #d70b02;
+  background: #ffffff; color: var(--text);
+}
+body.news-view .bg-video { display: none; }
+body.news-view .topbar { background: rgba(246,246,246,.96); border-bottom-color: #e0e0e0; }
+body.news-view .brand, body.news-view .brand-text { color: #111; }
+body.news-view .site-tab { color: #222; }
+body.news-view .site-tab:hover { background: #ececec; }
+body.news-view .nav a { color: #444; }
+body.news-view .nav a:hover, body.news-view .nav a.active { color: var(--red); }
+body.news-view .menu-btn, body.news-view .menu-btn span { color: #111; }
+body.news-view .np-info { background: #ebebeb; color: #444; border-bottom-color: #ddd; }
+body.news-view .nw-title { background: none; color: #111; -webkit-text-fill-color: #111; }
+body.news-view .np-title-ml { color: var(--red); }
+body.news-view .np-mast-ad { background: #f6f6f6; border-color: #ddd; color: #222; }
+body.news-view .np-cats { background: var(--red); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+body.news-view .np-breaking { background: #f6f6f6; border-bottom-color: #e0e0e0; }
+body.news-view .np-breaking-label { background: var(--red); }
+body.news-view .np-ticker a, body.news-view .np-ticker .np-tk-item { color: #111; }
+body.news-view .np-ticker a:hover { color: var(--red); }
+body.news-view .np-ticker a::before { color: var(--red); }
+body.news-view .np-tk-own { color: var(--red) !important; }
+body.news-view .np-section-title { border-left-color: var(--red); }
+body.news-view .np-home-sec-title .ml { color: #111; }
+body.news-view .np-card { background: #fff; color: #111; border-color: #e6e6e6; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+body.news-view .np-card:hover { border-color: var(--red); box-shadow: 0 8px 22px rgba(0,0,0,.12); }
+body.news-view .np-thumb, body.news-view .np-gl-tile { background: #eee; }
+body.news-view .np-h-en { color: #333; }
+body.news-view .np-box { background: #f6f6f6; border-color: #e3e3e3; color: #111; }
+body.news-view .np-radio { background: linear-gradient(145deg, #232426, #11182b); color: #fff; border-color: transparent; }
+body.news-view .np-radio .np-radio-row, body.news-view .np-radio strong { color: #fff; }
+body.news-view .np-side-cat { color: #111; background: #fff; }
+body.news-view .np-subcat { background: #f2f2f2; border-color: #ddd; color: #111; }
+body.news-view .np-subcat.active { background: var(--red); color: #fff; }
+body.news-view .np-gl-desc { color: #333; }
+body.news-view .np-hl-list a { color: #111; }
+body.news-view .np-hl-list a:hover, body.news-view .np-more, body.news-view .np-gl-back { color: var(--red); }
+body.news-view .np-byline { color: var(--red); }
+body.news-view .np-reader-card { background: #fff; color: #111; }
+body.news-view .np-reader-text p { color: #1a1a1a; }
+body.news-view .np-reader-ml { color: #444; }
+body.news-view .btn:not(.primary) { background: #f2f2f2; color: #111; border-color: #ddd; }
+body.news-view .footer { background: #232426; color: #b5b5b5; margin-top: 30px; }
+body.news-view .footer a { color: #ddd; }
+body.news-view .nav { background: #f6f6f6; }
+body.news-view .mini { color: #fff; } body.news-view .mini-text span { color: #c9c9c9; }
