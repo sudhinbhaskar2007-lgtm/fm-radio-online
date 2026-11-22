@@ -31,6 +31,9 @@ content:
         label: "Date"
         type: date
         required: true
+      - name: time
+        label: "Time (UK, 24-hour, e.g. 14:30) - optional"
+        type: string
       - name: category
         label: "Category"
         type: select

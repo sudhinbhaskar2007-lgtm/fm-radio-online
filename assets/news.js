@@ -29,7 +29,7 @@
       seen[id] = true;
       n.id = id;
       return n;
-    }).sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
+    }).sort(function (a, b) { return ((b.date || "") + (b.time || "")).localeCompare((a.date || "") + (a.time || "")); });
   }
   var NEWS = [], ALBUMS = [], dataReady = false;
 
@@ -66,6 +66,19 @@
     $("npTime").textContent = now.toLocaleTimeString("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
   }
   tick(); setInterval(tick, 20000);
+
+  // "Last updated" time, written by each news run into data/updated.json
+  function loadUpdated() {
+    fetch("data/updated.json", { cache: "no-store" }).then(function (r) { if (!r.ok) throw r; return r.json(); }).then(function (u) {
+      var d = new Date(u.updated); if (isNaN(d)) return;
+      var el = $("npUpdated"); if (!el) return;
+      var day = d.toLocaleDateString("en-GB", { timeZone: TZ, day: "numeric", month: "short" });
+      var t = d.toLocaleTimeString("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+      el.innerHTML = '<b>Last updated</b> ' + day + ', ' + t + ' UK <span class="ml">· അവസാനം പുതുക്കിയത്</span>';
+      el.hidden = false;
+    }).catch(function () {});
+  }
+  loadUpdated(); setInterval(loadUpdated, 600000);
 
   function getJSON(url, opts) { return fetch(url, opts).then(function (r) { if (!r.ok) throw r; return r.json(); }); }
 
@@ -215,7 +228,7 @@
       var b = el("b", "src-own ml", c.ml || c.en || "");
       b.style.background = c.color || "#555";
       m.appendChild(b);
-      if (n.date) m.appendChild(document.createTextNode(" · " + fmtDate(n.date)));
+      if (n.date) m.appendChild(document.createTextNode(" · " + fmtDate(n.date) + fmtTime(n.time)));
       li.appendChild(m);
       ol.appendChild(li);
     });
@@ -229,6 +242,13 @@
     var d = new Date((s || "") + "T12:00:00");
     if (isNaN(d)) return s || "";
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  }
+  // Optional story time ("HH:MM", UK time) shown after the date
+  function fmtTime(s) {
+    s = String(s || "").trim();
+    if (!/^\d{1,2}:\d{2}$/.test(s)) return "";
+    var p = s.split(":"), h = +p[0], ap = h >= 12 ? "pm" : "am";
+    return ", " + ((h % 12) || 12) + ":" + p[1] + " " + ap + " UK";
   }
   function safeImg(src) {
     src = String(src || "").trim();
@@ -258,7 +278,7 @@
       b.appendChild(el("span", "ml", c.ml));
       m.appendChild(b);
     }
-    var t = el("time", "", fmtDate(n.date)); t.dateTime = n.date || "";
+    var t = el("time", "", fmtDate(n.date) + fmtTime(n.time)); t.dateTime = n.date || "";
     m.appendChild(t);
     return m;
   }

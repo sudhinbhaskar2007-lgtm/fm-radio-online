@@ -703,3 +703,4 @@ body.news-view .footer { background: #232426; color: #b5b5b5; margin-top: 30px; 
 body.news-view .footer a { color: #ddd; }
 body.news-view .nav { background: #f6f6f6; }
 body.news-view .mini { color: #fff; } body.news-view .mini-text span { color: #c9c9c9; }
+.np-updated b { color: var(--red, #ff9a1f); } .np-updated .ml { font-family: "Noto Sans Malayalam", sans-serif; }
