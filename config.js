@@ -19,9 +19,7 @@ window.RADIO_CONFIG = {
   // ---- Music credits ---------------------------------------------
   // Shown in the footer of every page. Creative Commons (CC BY) music
   // must credit the artist: add one line per artist you use.
-  musicCredits: [
-    "Music by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0 (creativecommons.org/licenses/by/4.0/)"
-  ],
+  musicCredits: [],
 
   // ---- Background video ------------------------------------------
   // The looping blinking-eye animation behind the page. Set both to ""
