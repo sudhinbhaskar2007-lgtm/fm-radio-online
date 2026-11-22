@@ -663,8 +663,8 @@ body.news-view {
 body.news-view .bg-video { display: none; }
 body.news-view .topbar { background: rgba(246,246,246,.96); border-bottom-color: #e0e0e0; }
 body.news-view .brand, body.news-view .brand-text { color: #111; }
-body.news-view .site-tab { color: #222; }
-body.news-view .site-tab:hover { background: #ececec; }
+body.news-view .site-tab:not(.active) { background: linear-gradient(135deg, var(--tab), var(--tab2)); border-color: transparent; color: #fff; box-shadow: 0 3px 12px color-mix(in srgb, var(--tab) 35%, transparent); }
+body.news-view .site-tab:not(.active):hover { filter: brightness(1.08); }
 body.news-view .nav a { color: #444; }
 body.news-view .nav a:hover, body.news-view .nav a.active { color: var(--red); }
 body.news-view .menu-btn, body.news-view .menu-btn span { color: #111; }
