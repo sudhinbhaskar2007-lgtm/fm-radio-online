@@ -1,6 +1,22 @@
 [
   {
     "date": "2026-11-23",
+    "time": "10:05",
+    "featured": false,
+    "breaking": false,
+    "id": "ni-consultant-sas-doctors-strike-pay",
+    "category": "uk",
+    "titleMl": "നോർത്തേൺ അയർലൻഡിൽ ഇന്ന് കൺസൾട്ടന്റുമാരുടെയും എസ്എഎസ് ഡോക്ടർമാരുടെയും 24 മണിക്കൂർ പണിമുടക്ക്",
+    "title": "Consultants and SAS doctors in Northern Ireland stage 24-hour strike over pay",
+    "summaryMl": "റസിഡന്റ് ഡോക്ടർമാരുടെ വെള്ളിയാഴ്ചത്തെ സമരത്തിന് പിന്നാലെയാണ് മുതിർന്ന ഡോക്ടർമാരും ജോലി നിർത്തുന്നത്; ശമ്പള പുനഃസ്ഥാപനമാണ് ബിഎംഎയുടെ ആവശ്യം.",
+    "summary": "The walkout follows Friday's strike by resident doctors; the BMA wants full pay restoration.",
+    "bodyMl": "നോർത്തേൺ അയർലൻഡിലെ കൺസൾട്ടന്റുമാരും സ്പെഷ്യാലിറ്റി ആൻഡ് സ്പെഷ്യലിസ്റ്റ് (എസ്എഎസ്) ഡോക്ടർമാരും തിങ്കളാഴ്ച 24 മണിക്കൂർ പണിമുടക്ക് നടത്തുന്നു. ശമ്പളത്തെച്ചൊല്ലിയുള്ള തർക്കത്തിലാണ് ബ്രിട്ടീഷ് മെഡിക്കൽ അസോസിയേഷൻ (ബിഎംഎ) നേതൃത്വത്തിൽ സമരം.\n\nകഴിഞ്ഞ വെള്ളിയാഴ്ച റസിഡന്റ് ഡോക്ടർമാർ നടത്തിയ പണിമുടക്കിന് തൊട്ടുപിന്നാലെയാണ് മുതിർന്ന ഡോക്ടർമാരും ജോലിയിൽ നിന്ന് വിട്ടുനിൽക്കുന്നത്. അടിയന്തര ചികിത്സ ഉറപ്പാക്കുമെങ്കിലും പതിവ് അപ്പോയിന്റ്മെന്റുകളെയും ഓപ്പറേഷനുകളെയും സമരം ബാധിക്കും.\n\nഈ വർഷത്തെ ഡിഡിആർബി ശുപാർശ പ്രകാരമുള്ള ശമ്പള വർധന നോർത്തേൺ അയർലൻഡിലെ ഡോക്ടർമാർക്ക് ഇതുവരെ ലഭിച്ചിട്ടില്ല. വർഷങ്ങളായി കുറഞ്ഞുപോയ ശമ്പളം പൂർണമായി പുനഃസ്ഥാപിക്കണമെന്നാണ് ബിഎംഎ എൻഐയുടെ ആവശ്യം.\n\n3.5 ശതമാനം വർധന നൽകാനാണ് ശ്രമമെന്ന് ആരോഗ്യമന്ത്രി റോബി ബട്ട്‌ലർ പറഞ്ഞു. എന്നാൽ വകുപ്പിന്റെ ബജറ്റ് പരിമിതമാണെന്നും അദ്ദേഹം വ്യക്തമാക്കി.\n\nജൂണിൽ നടന്ന സമരങ്ങളിൽ 2,200-ലേറെ അപ്പോയിന്റ്മെന്റുകൾ റദ്ദാക്കേണ്ടി വന്നിരുന്നു. ഇന്ന് ആശുപത്രി അപ്പോയിന്റ്മെന്റുള്ളവർ ബന്ധപ്പെട്ട ട്രസ്റ്റിൽ നിന്നുള്ള അറിയിപ്പ് പരിശോധിക്കണം; അത്യാവശ്യ സാഹചര്യത്തിൽ സാധാരണ പോലെ എമർജൻസി സേവനം തേടാം.",
+    "body": "Consultants and specialty and specialist (SAS) doctors in Northern Ireland are holding a 24-hour strike on Monday in a dispute over pay led by the British Medical Association.\n\nThe walkout comes straight after Friday's strike by resident doctors. Emergency care will be covered, but routine appointments and operations are expected to be affected.\n\nDoctors in Northern Ireland have not yet received this year's pay rise recommended by the DDRB, the independent pay review body. BMA Northern Ireland is calling for full pay restoration after years of real-terms cuts.\n\nHealth Minister Robbie Butler has said he wants to deliver a 3.5% uplift, but that his department's budget is limited.\n\nStrikes in June led to more than 2,200 appointments being cancelled. Patients with hospital appointments today should check for messages from their health trust, and use emergency services as normal if they need urgent care.",
+    "image": "assets/news/ni-consultant-sas-doctors-strike-pay-ph.jpg",
+    "imageCredit": "File photo: Royal Victoria Hospital, Belfast. Eric Jones, CC BY-SA 2.0, via Wikimedia Commons"
+  },
+  {
+    "date": "2026-11-23",
     "time": "07:07",
     "featured": false,
     "breaking": false,
