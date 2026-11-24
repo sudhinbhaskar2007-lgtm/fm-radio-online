@@ -21,6 +21,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.TextureView
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -30,6 +34,7 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.media3.common.MediaItem
@@ -46,6 +51,11 @@ import java.net.URL
 import kotlin.concurrent.thread
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        /** Hides the website's own FM tab and mini player inside the app; the app's play button does that job. */
+        private const val HIDE_WEB_RADIO = """(function(){var s=document.getElementById('mizhiApp');if(!s){s=document.createElement('style');s.id='mizhiApp';s.textContent='#tabFm,#mini{display:none!important}';document.head.appendChild(s);}var a=document.getElementById('audio');if(a){a.pause();}})();"""
+    }
 
     private lateinit var prefs: Prefs
     private lateinit var playButton: View
@@ -118,7 +128,11 @@ class MainActivity : ComponentActivity() {
 
         playButton.setOnClickListener { togglePlay() }
         findViewById<View>(R.id.tabRadio).setOnClickListener {
-            findViewById<ScrollView>(R.id.scroll).smoothScrollTo(0, 0)
+            if (newsShowing) showNews(false)
+            else findViewById<ScrollView>(R.id.scroll).smoothScrollTo(0, 0)
+        }
+        findViewById<View>(R.id.tabNews).setOnClickListener {
+            if (newsShowing) newsWeb.loadUrl(getString(R.string.news_url)) else showNews(true)
         }
         findViewById<View>(R.id.tabCar).setOnClickListener { showCarSettings() }
         findViewById<View>(R.id.tabShare).setOnClickListener {
@@ -126,7 +140,7 @@ class MainActivity : ComponentActivity() {
                 .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
             startActivity(Intent.createChooser(send, getString(R.string.tab_share)))
         }
-        findViewById<View>(R.id.tabMail).setOnClickListener {
+        findViewById<View>(R.id.contactLink).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:mizhinews@gmail.com"))
                     .putExtra(Intent.EXTRA_SUBJECT, "Mizhi FM"))
@@ -135,7 +149,75 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        setupNews()
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when {
+                    newsShowing && newsWeb.canGoBack() -> newsWeb.goBack()
+                    newsShowing -> showNews(false)
+                    else -> { isEnabled = false; onBackPressedDispatcher.onBackPressed(); isEnabled = true }
+                }
+            }
+        })
+        showNews(false)
+
         askFirstRunPermissions(force = false)
+    }
+
+    // ---- Mizhi News inside the app ----
+
+    private lateinit var newsBox: View
+    private lateinit var newsWeb: WebView
+    private lateinit var newsLoading: View
+    private var newsShowing = false
+    private var newsLoaded = false
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupNews() {
+        newsBox = findViewById(R.id.newsBox)
+        newsWeb = findViewById(R.id.newsWeb)
+        newsLoading = findViewById(R.id.newsLoading)
+        newsWeb.settings.javaScriptEnabled = true
+        newsWeb.settings.domStorageEnabled = true
+        // The app plays the radio itself, so the web page must never start its own copy.
+        newsWeb.settings.mediaPlaybackRequiresUserGesture = true
+        newsWeb.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+                val uri = request.url
+                val host = uri.host.orEmpty()
+                if ((uri.scheme == "https" || uri.scheme == "http") &&
+                    (host == "mizhinews.co.uk" || host.endsWith(".mizhinews.co.uk"))) return false
+                // Anything else (email, WhatsApp, other sites) opens in its own app.
+                try { startActivity(Intent(Intent.ACTION_VIEW, uri)) } catch (e: Exception) { }
+                return true
+            }
+            override fun onPageStarted(view: WebView, url: String?, favicon: android.graphics.Bitmap?) {
+                newsLoading.visibility = View.VISIBLE
+            }
+            override fun onPageFinished(view: WebView, url: String?) {
+                newsLoading.visibility = View.GONE
+                view.evaluateJavascript(HIDE_WEB_RADIO, null)
+            }
+            override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+                if (request.isForMainFrame) {
+                    newsLoading.visibility = View.GONE
+                    newsLoaded = false
+                    toast(getString(R.string.news_offline))
+                }
+            }
+        }
+    }
+
+    private fun showNews(on: Boolean) {
+        newsShowing = on
+        newsBox.visibility = if (on) View.VISIBLE else View.GONE
+        findViewById<View>(R.id.scroll).visibility = if (on) View.INVISIBLE else View.VISIBLE
+        findViewById<View>(R.id.tabRadio).alpha = if (on) 0.6f else 1f
+        findViewById<View>(R.id.tabNews).alpha = if (on) 1f else 0.6f
+        if (on && !newsLoaded) {
+            newsLoaded = true
+            newsWeb.loadUrl(getString(R.string.news_url))
+        }
     }
 
     override fun onStart() {
