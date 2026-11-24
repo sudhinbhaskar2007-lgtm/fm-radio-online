@@ -30,8 +30,10 @@ android {
             create("release") {
                 storeFile = file(ksPath)
                 storePassword = System.getenv("MIZHI_KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("MIZHI_KEY_ALIAS") ?: "mizhi"
-                keyPassword = System.getenv("MIZHI_KEY_PASSWORD") ?: System.getenv("MIZHI_KEYSTORE_PASSWORD")
+                // Unset secrets arrive as empty strings, so treat blank as "not set".
+                keyAlias = System.getenv("MIZHI_KEY_ALIAS")?.takeIf { it.isNotBlank() } ?: "mizhi"
+                keyPassword = System.getenv("MIZHI_KEY_PASSWORD")?.takeIf { it.isNotBlank() }
+                    ?: System.getenv("MIZHI_KEYSTORE_PASSWORD")
             }
         }
     }
