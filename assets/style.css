@@ -829,17 +829,16 @@ html.has-eye-cursor [role=button], html.has-eye-cursor label, html.has-eye-curso
 .eye-cursor.on { opacity: 1; }
 .eye-cursor.off { opacity: 0; }
 .eye-cursor .ec-eye {
-  position: absolute; width: 38px; height: 23px; left: -19px; top: -11.5px;
-  filter: drop-shadow(0 0 6px rgba(224,53,159,.7)) drop-shadow(0 1px 2px rgba(0,0,0,.6));
+  position: absolute; width: 40px; height: 40px; left: -20px; top: -20px; border-radius: 50%;
+  object-fit: cover; border: 2px solid #e0359f;
+  box-shadow: 0 0 10px rgba(224,53,159,.7), 0 2px 6px rgba(0,0,0,.6);
   transition: transform .18s;
 }
-.eye-cursor .ec-open { transform-origin: 20px 12px; animation: ec-blink 3.8s infinite; }
-@keyframes ec-blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.08); } }
 .eye-cursor .ec-ring {
-  position: absolute; width: 44px; height: 44px; left: -22px; top: -22px; border-radius: 50%;
+  position: absolute; width: 54px; height: 54px; left: -27px; top: -27px; border-radius: 50%;
   border: 1.5px solid rgba(255,154,31,.6); transition: transform .2s, border-color .2s;
 }
-.eye-cursor .ec-ring2 { width: 62px; height: 62px; left: -31px; top: -31px; border-color: rgba(224,53,159,.4); }
-.eye-cursor.big .ec-eye { transform: scale(1.35); }
+.eye-cursor .ec-ring2 { width: 72px; height: 72px; left: -36px; top: -36px; border-color: rgba(224,53,159,.4); }
+.eye-cursor.big .ec-eye { transform: scale(1.25); }
 .eye-cursor.big .ec-ring { transform: scale(1.2); border-color: rgba(255,154,31,.8); }
 .eye-cursor.press .ec-eye { transform: scale(.85); }
