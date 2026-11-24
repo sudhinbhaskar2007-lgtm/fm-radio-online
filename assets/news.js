@@ -289,7 +289,8 @@
     var b = el("div", "np-card-body");
     b.appendChild(meta(n));
     if (n.titleMl) b.appendChild(el("h3", "np-h-ml ml", n.titleMl));
-    b.appendChild(el(n.titleMl ? "p" : "h3", n.titleMl ? "np-h-en" : "np-h-ml", n.title));
+    // Malayalam only for now (Sudhin, 24 Nov): English line shown only when there is no Malayalam headline.
+    if (!n.titleMl) b.appendChild(el("h3", "np-h-ml", n.title));
     if (n.author) b.appendChild(el("p", "np-byline np-byline-card", "Updated by " + n.author + (n.authorMl ? " · " + n.authorMl : "")));
     if (kind !== "small" && (n.summaryMl || n.summary)) {
       var sm = el("p", "np-sum" + (n.summaryMl ? " ml" : ""), n.summaryMl || n.summary);
@@ -582,10 +583,10 @@
     var mainMl = !!n.titleMl;
     $("rdTitle").textContent = mainMl ? n.titleMl : n.title;
     $("rdTitle").classList.toggle("ml", mainMl);
-    $("rdTitleMl").textContent = mainMl ? n.title : "";
+    $("rdTitleMl").textContent = "";  // English subtitle hidden for now (Sudhin, 24 Nov)
     $("rdTitleMl").classList.toggle("ml", false);
     var hasEn = !!(n.body || n.summary), hasMl = !!(n.bodyMl || n.summaryMl);
-    $("rdLang").hidden = !(hasEn && hasMl);
+    $("rdLang").hidden = true;  // Malayalam only for now (Sudhin, 24 Nov); English kept in the data
     showLang(hasMl && readerLang === "ml" ? "ml" : (hasEn ? "en" : "ml"));
 
     topShare.textContent = "";
@@ -636,7 +637,7 @@
     $("npNewsMain").hidden = true;
     $("npGalleryView").hidden = true;
     reader.hidden = false;
-    document.title = n.title + " | " + (P.title || "Mizhi News");
+    document.title = (n.titleMl || n.title) + " | " + (P.title || "Mizhi News");
     var bars = (document.querySelector(".topbar") || {}).offsetHeight || 64;
     bars += (document.querySelector(".np-cats") || {}).offsetHeight || 0;
     window.scrollTo(0, Math.max(0, reader.getBoundingClientRect().top + window.scrollY - bars - 12));

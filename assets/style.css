@@ -725,3 +725,4 @@ body.news-view .mini { color: #fff; } body.news-view .mini-text span { color: #c
   .np-latest-text h3 { font-size: .95rem; }
   .np-latest-text p { display: none; }
 }
+#rdTitleMl:empty{display:none}
