@@ -820,8 +820,10 @@ body.playing .tap-hint .t-on { display: inline; }
 }
 
 /* ---------- Blinking-eye mouse cursor (desktop) ---------- */
-html.has-eye-cursor, html.has-eye-cursor body, html.has-eye-cursor a, html.has-eye-cursor button,
-html.has-eye-cursor [role=button], html.has-eye-cursor label, html.has-eye-cursor .site-tab { cursor: none; }
+/* FM tab only: the news pages keep the normal mouse pointer */
+html.has-eye-cursor body:not(.news-view), html.has-eye-cursor body:not(.news-view) a, html.has-eye-cursor body:not(.news-view) button,
+html.has-eye-cursor body:not(.news-view) [role=button], html.has-eye-cursor body:not(.news-view) label, html.has-eye-cursor body:not(.news-view) .site-tab { cursor: none; }
+body.news-view .eye-cursor { display: none; }
 .eye-cursor {
   position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 2147483000;
   pointer-events: none; opacity: 0; transition: opacity .2s;
