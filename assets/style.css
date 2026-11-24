@@ -854,3 +854,4 @@ body.news-view .eye-cursor { display: none; }
 @media (max-width: 720px) { .np-ad-mobile { display: grid; gap: 4px; justify-items: center; padding-top: 10px; padding-bottom: 10px; } }
 .fm-ad { width: min(900px, calc(100% - 32px)); margin: 24px auto 0; display: grid; gap: 4px; justify-items: center; padding: 8px; border-radius: 14px; background: #fff; }
 .fm-ad .np-ad-label { color: #666; }
+.ad-link { display: block; width: 100%; }
