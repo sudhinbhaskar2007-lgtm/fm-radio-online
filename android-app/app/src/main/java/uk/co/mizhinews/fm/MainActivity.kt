@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         /** Hides the website's own FM tab and mini player inside the app; the app's play button does that job. */
-        private const val HIDE_WEB_RADIO = """(function(){var s=document.getElementById('mizhiApp');if(!s){s=document.createElement('style');s.id='mizhiApp';s.textContent='#tabFm,#mini{display:none!important}';document.head.appendChild(s);}var a=document.getElementById('audio');if(a){a.pause();}})();"""
+        private const val HIDE_WEB_RADIO = """(function(){var s=document.getElementById('mizhiApp');if(!s){s=document.createElement('style');s.id='mizhiApp';s.textContent='#tabFm,#mini{display:none!important}';document.head.appendChild(s);}var a=document.getElementById('audio');if(a){a.pause();}HTMLMediaElement.prototype.play=function(){return Promise.resolve();};if(location.hash==''||location.hash=='#home'||location.hash=='#fm'){location.hash='#news';}window.addEventListener('hashchange',function(){if(location.hash=='#home'||location.hash=='#fm'){location.hash='#news';}});})();"""
     }
 
     private lateinit var prefs: Prefs
