@@ -726,3 +726,7 @@ body.news-view .mini { color: #fff; } body.news-view .mini-text span { color: #c
   .np-latest-text p { display: none; }
 }
 #rdTitleMl:empty{display:none}
+/* Bigger article text (Sudhin, 24 Nov, like uukmanews) */
+.np-article .np-reader-text p { font-size: 1.22rem; }
+.np-article .np-reader-body h2, .np-article #rdTitle { font-size: clamp(1.8rem, 4.6vw, 2.6rem); }
+@media (max-width: 600px) { .np-article .np-reader-text p { font-size: 1.15rem; } }
