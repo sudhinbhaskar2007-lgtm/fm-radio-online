@@ -1,0 +1,74 @@
+name: Build Mizhi FM Android app
+
+# Builds the Mizhi FM radio app (android-app/) and puts the APK on the
+# "Mizhi FM app (test)" release page so it can be downloaded on a phone.
+on:
+  push:
+    paths:
+      - "android-app/**"
+      - ".github/workflows/android-app.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android-app
+    env:
+      VERSION_CODE: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Optional Play Store signing key (only needed later, see android-app/README.md)
+      - name: Restore release key
+        env:
+          KS_B64: ${{ secrets.MIZHI_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+            echo "MIZHI_KEYSTORE=$RUNNER_TEMP/release.keystore" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build
+        env:
+          MIZHI_KEYSTORE_PASSWORD: ${{ secrets.MIZHI_KEYSTORE_PASSWORD }}
+          MIZHI_KEY_ALIAS: ${{ secrets.MIZHI_KEY_ALIAS }}
+          MIZHI_KEY_PASSWORD: ${{ secrets.MIZHI_KEY_PASSWORD }}
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug bundleRelease
+          mkdir -p out
+          cp app/build/outputs/apk/debug/app-debug.apk out/mizhi-fm.apk
+          cp app/build/outputs/bundle/release/app-release.aab out/mizhi-fm-play-store.aab
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mizhi-fm-app
+          path: android-app/out/
+
+      - name: Put the APK on the download page
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: mizhi-fm-app-test
+          name: Mizhi FM app (test)
+          prerelease: true
+          target_commitish: ${{ github.sha }}
+          body: |
+            Test version of the Mizhi FM Android app (build ${{ github.run_number }}).
+            On your Android phone, tap **mizhi-fm.apk** below to download and install it.
+          files: android-app/out/mizhi-fm.apk

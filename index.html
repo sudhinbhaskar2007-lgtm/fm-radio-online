@@ -28,8 +28,8 @@
   <link rel="icon" href="assets/favicon-32.png?v=2" type="image/png" sizes="32x32">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=40">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;600;800&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css?v=41">
   <script src="config.js?v=34"></script>
   <script src="news-data.js?v=34"></script>
   <!-- Google AdSense (fixed, labelled slots only; no auto ads) -->
@@ -66,18 +66,38 @@
     <!-- HERO / PLAYER -->
     <section id="home" class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="live-pill"><span class="dot"></span> LIVE</div>
-        <h1 data-bind="stationName"></h1>
-        <p class="title-ml ml" data-bind="stationNameMl"></p>
-        <p class="tagline" data-bind="tagline"></p>
+      <div class="hero-inner hero-big">
+        <div class="hero-word" aria-hidden="true">MIZHI FM</div>
+        <div class="live-pill"><span class="dot"></span> LIVE NOW</div>
+        <h1 class="hero-head">UK Malayalis, your <em>Malayalam</em> radio is on air.</h1>
+        <p class="hero-head-ml ml">യുകെ മലയാളികളുടെ സ്വന്തം <span>മിഴി എഫ്എം</span>, ഇപ്പോൾ തത്സമയം.</p>
+        <p class="hero-sub">Songs, jingles and good company from <span data-bind="stationName">Mizhi FM</span>, playing day and night. One tap and you are listening.</p>
 
-        <div class="player-card">
-          <button class="play-btn" id="playBtn" aria-label="Play">
+        <div class="eye-player">
+          <span class="eye-ring r1" aria-hidden="true"></span>
+          <span class="eye-ring r2" aria-hidden="true"></span>
+          <span class="eye-ring r3" aria-hidden="true"></span>
+          <img class="eye-disc" src="assets/eye-disc.jpg" alt="" width="240" height="240">
+          <button class="play-btn eye-play" id="playBtn" aria-label="Play">
             <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
             <span class="spinner"></span>
           </button>
+        </div>
+        <p class="tap-hint"><span class="t-off">Tap to play · <span class="ml">കേൾക്കാൻ തൊടൂ</span></span><span class="t-on">On air · <span class="ml">കേട്ടുകൊണ്ടിരിക്കുന്നു</span></span></p>
+
+        <div class="store-btns">
+          <a class="store-btn" href="https://github.com/sudhinbhaskar2007-lgtm/fm-radio-online/releases/download/mizhi-fm-app-test/mizhi-fm.apk" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.5l1.8-3.1a.4.4 0 0 0-.7-.4l-1.8 3.1A11 11 0 0 0 12 8a11 11 0 0 0-4.9 1.1L5.3 6a.4.4 0 1 0-.7.4l1.8 3.1A10.3 10.3 0 0 0 1 18h22a10.3 10.3 0 0 0-5.4-8.5zM7 15.3a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm10 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+            <span><small>Get the app</small>Android</span>
+          </a>
+          <button class="store-btn" type="button" id="iosBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7a4.5 4.5 0 0 0-3.5-1.9c-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8A4.7 4.7 0 0 0 4.2 9.5c-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.7-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+            <span><small>Add to Home Screen</small>iPhone</span>
+          </button>
+        </div>
+
+        <div class="player-card np-card-slim">
           <div class="np">
             <div class="np-label" id="npLabel">Now playing</div>
             <div class="np-title" id="npTitle">Press play to listen live</div>
@@ -315,7 +335,7 @@
   </div>
 
   <audio id="audio" preload="none"></audio>
-  <script src="assets/app.js?v=34"></script>
+  <script src="assets/app.js?v=35"></script>
   <script src="assets/news.js?v=38"></script>
 </body>
 </html>
