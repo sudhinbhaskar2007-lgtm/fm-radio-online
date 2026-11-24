@@ -450,3 +450,40 @@
     if (iosBtn) iosBtn.addEventListener("click", function () { showSheet(true); });
   })();
 })();
+
+// Blinking-eye mouse cursor (computers with a mouse only)
+(function () {
+  if (!window.matchMedia || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var el = document.createElement("div");
+  el.className = "eye-cursor";
+  el.setAttribute("aria-hidden", "true");
+  el.innerHTML =
+    '<span class="ec-ring"></span><span class="ec-ring ec-ring2"></span>' +
+    '<svg viewBox="0 0 40 24" class="ec-eye"><defs>' +
+    '<radialGradient id="ecIris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3ddc84"/><stop offset=".55" stop-color="#e0359f"/><stop offset="1" stop-color="#ff9a1f"/></radialGradient>' +
+    '<clipPath id="ecClip"><path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z"/></clipPath></defs>' +
+    '<g class="ec-open"><path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z" fill="#f4f1fb"/>' +
+    '<g clip-path="url(#ecClip)"><circle cx="20" cy="12" r="7.2" fill="url(#ecIris)"/><circle cx="20" cy="12" r="3" fill="#07060f"/><circle cx="22" cy="9.6" r="1.3" fill="#fff"/></g>' +
+    '<path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z" fill="none" stroke="#e0359f" stroke-width="1.6"/></g></svg>';
+  document.body.appendChild(el);
+  document.documentElement.classList.add("has-eye-cursor");
+
+  var x = -100, y = -100, cx = x, cy = y, shown = false;
+  document.addEventListener("mousemove", function (e) {
+    x = e.clientX; y = e.clientY;
+    if (!shown) { shown = true; cx = x; cy = y; el.classList.add("on"); }
+    var t = e.target;
+    var typing = t && t.closest && t.closest("input, textarea, select, [contenteditable]");
+    el.classList.toggle("off", !!typing);
+    el.classList.toggle("big", !typing && !!(t && t.closest && t.closest("a, button, [role=button], label, .site-tab")));
+  }, { passive: true });
+  document.addEventListener("mouseleave", function () { el.classList.remove("on"); shown = false; });
+  document.addEventListener("mousedown", function () { el.classList.add("press"); });
+  document.addEventListener("mouseup", function () { el.classList.remove("press"); });
+  (function loop() {
+    cx += (x - cx) * 0.35; cy += (y - cy) * 0.35;
+    el.style.transform = "translate(" + cx + "px," + cy + "px)";
+    requestAnimationFrame(loop);
+  })();
+})();
