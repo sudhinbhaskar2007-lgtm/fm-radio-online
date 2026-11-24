@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#07060F</color>
+    <color name="magenta">#E0359F</color>
+    <color name="orange">#FF9A1F</color>
+    <color name="green">#3DDC84</color>
+    <color name="text">#FFFFFF</color>
+    <color name="muted">#B9B4C9</color>
+    <color name="card">#16142A</color>
+
+    <style name="Theme.Mizhi" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:colorAccent">@color/magenta</item>
+    </style>
+</resources>

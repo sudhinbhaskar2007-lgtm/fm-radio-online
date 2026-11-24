@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mizhi FM</string>
+    <string name="station_ml">മിഴി എഫ്എം</string>
+    <string name="tagline">Malayalam radio from the UK</string>
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="connecting">Connecting…</string>
+    <string name="live">LIVE</string>
+    <string name="offline">Can\'t reach the radio. Check your internet and press Play again.</string>
+    <string name="auto_car">Auto-play when I start my car</string>
+    <string name="auto_car_hint">Mizhi FM starts by itself when your phone connects to the car (Bluetooth or Android Auto).</string>
+    <string name="pick_car">Choose my car</string>
+    <string name="any_car">Any car Bluetooth</string>
+    <string name="car_set">Car: %1$s</string>
+    <string name="auto_open">Play as soon as I open the app</string>
+    <string name="bt_needed">Allow "Nearby devices" so Mizhi FM can see when your car connects.</string>
+    <string name="no_paired">No paired Bluetooth devices found. Pair your phone with the car first.</string>
+    <string name="contact">mizhinews.co.uk · mizhinews@gmail.com</string>
+</resources>
