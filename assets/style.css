@@ -844,3 +844,13 @@ body.news-view .eye-cursor { display: none; }
 .eye-cursor.big .ec-eye { transform: scale(1.25); }
 .eye-cursor.big .ec-ring { transform: scale(1.2); border-color: rgba(255,154,31,.8); }
 .eye-cursor.press .ec-eye { transform: scale(.85); }
+
+/* Paid adverts (fixed, clearly labelled) */
+.np-ad-live img, .np-ad-mobile img, .fm-ad img { display: block; width: 100%; height: auto; border-radius: 8px; background: #fff; }
+.np-mast-ad.np-ad-live { padding: 6px 8px 8px; gap: 4px; border-style: solid; background: #fff; border-color: #ddd; width: min(440px, 45%); }
+.np-ad.np-ad-live { border-style: solid; padding: 10px; }
+.np-ad-more { font-size: .8rem; color: var(--muted); text-decoration: underline; margin-top: 4px; }
+.np-ad-mobile { display: none; }
+@media (max-width: 720px) { .np-ad-mobile { display: grid; gap: 4px; justify-items: center; padding-top: 10px; padding-bottom: 10px; } }
+.fm-ad { width: min(900px, calc(100% - 32px)); margin: 24px auto 0; display: grid; gap: 4px; justify-items: center; padding: 8px; border-radius: 14px; background: #fff; }
+.fm-ad .np-ad-label { color: #666; }
