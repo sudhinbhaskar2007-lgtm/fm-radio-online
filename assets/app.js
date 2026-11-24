@@ -460,12 +460,7 @@
   el.setAttribute("aria-hidden", "true");
   el.innerHTML =
     '<span class="ec-ring"></span><span class="ec-ring ec-ring2"></span>' +
-    '<svg viewBox="0 0 40 24" class="ec-eye"><defs>' +
-    '<radialGradient id="ecIris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3ddc84"/><stop offset=".55" stop-color="#e0359f"/><stop offset="1" stop-color="#ff9a1f"/></radialGradient>' +
-    '<clipPath id="ecClip"><path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z"/></clipPath></defs>' +
-    '<g class="ec-open"><path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z" fill="#f4f1fb"/>' +
-    '<g clip-path="url(#ecClip)"><circle cx="20" cy="12" r="7.2" fill="url(#ecIris)"/><circle cx="20" cy="12" r="3" fill="#07060f"/><circle cx="22" cy="9.6" r="1.3" fill="#fff"/></g>' +
-    '<path d="M2 12C8 3 32 3 38 12C32 21 8 21 2 12Z" fill="none" stroke="#e0359f" stroke-width="1.6"/></g></svg>';
+    '<img class="ec-eye" src="assets/eye-cursor.webp" alt="" width="40" height="40">';
   document.body.appendChild(el);
   document.documentElement.classList.add("has-eye-cursor");
 
