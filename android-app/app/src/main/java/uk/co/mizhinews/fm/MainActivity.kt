@@ -140,6 +140,11 @@ class MainActivity : ComponentActivity() {
                 .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
             startActivity(Intent.createChooser(send, getString(R.string.tab_share)))
         }
+        findViewById<View>(R.id.adBox).setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.ad_url))))
+            } catch (e: Exception) { }
+        }
         findViewById<View>(R.id.contactLink).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:mizhinews@gmail.com"))
