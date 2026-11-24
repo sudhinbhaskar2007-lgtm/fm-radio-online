@@ -532,6 +532,12 @@
   backBtn.setAttribute("aria-label", "Back to news");
   var moreBox = el("section", "np-article-more");
   reader.appendChild(moreBox);
+  // Newspaper-style article (like uukmanews.com, Sudhin 24 Nov): headline first, then date and
+  // share buttons, then the big picture, then the story; a "Latest news" list underneath.
+  var rdBody = reader.querySelector(".np-reader-body");
+  var topShare = el("div", "np-share-top");
+  rdBody.insertBefore(topShare, $("rdLang"));
+  rdBody.insertBefore($("rdImg"), $("rdLang"));
   function paragraphs(text, ml) {
     var box = $("rdText"); box.textContent = "";
     String(text || "").split(/\n\s*\n/).forEach(function (p) {
@@ -582,6 +588,16 @@
     $("rdLang").hidden = !(hasEn && hasMl);
     showLang(hasMl && readerLang === "ml" ? "ml" : (hasEn ? "en" : "ml"));
 
+    topShare.textContent = "";
+    var shareUrl = location.origin + "/s/" + n.id;
+    var shareMsg = (n.titleMl ? n.titleMl + "\n" : "") + n.title + "\n" + shareUrl;
+    [["wa", "WhatsApp", "https://wa.me/?text=" + encodeURIComponent(shareMsg)],
+     ["fb", "Facebook", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl)],
+     ["x", "X", "https://twitter.com/intent/tweet?text=" + encodeURIComponent(n.titleMl || n.title) + "&url=" + encodeURIComponent(shareUrl)]
+    ].forEach(function (s) {
+      var a = el("a", "np-sh np-sh-" + s[0], s[1]); a.href = s[2]; a.target = "_blank"; a.rel = "noopener";
+      a.setAttribute("aria-label", "Share on " + s[1]); topShare.appendChild(a);
+    });
     var share = $("rdShare"); share.textContent = "";
     // Share link with its own preview photo (functions/s/[id].js).
     var url = location.origin + "/s/" + n.id;
@@ -599,14 +615,23 @@
     moreBox.textContent = "";
     var others = NEWS.filter(function (x) { return x !== n; });
     var same = others.filter(function (x) { return x.category === n.category; });
-    var pick = same.concat(others.filter(function (x) { return same.indexOf(x) < 0; })).slice(0, 4);
+    var pick = same.slice(0, 4);
+    others.forEach(function (x) { if (pick.length < 8 && pick.indexOf(x) < 0) pick.push(x); });
     if (pick.length) {
-      var hh = el("h2", "np-section-title", "More news ");
-      hh.appendChild(el("span", "ml", "കൂടുതൽ വാർത്തകൾ"));
+      var hh = el("h2", "np-section-title", "Latest news ");
+      hh.appendChild(el("span", "ml", "പുതിയ വാർത്തകൾ"));
       moreBox.appendChild(hh);
-      var g = el("div", "np-grid");
-      pick.forEach(function (x) { g.appendChild(card(x, "grid")); });
-      moreBox.appendChild(g);
+      var list = el("div", "np-latest-list");
+      pick.forEach(function (x) {
+        var row = el("a", "np-latest-row"); row.href = "#story=" + x.id;
+        var th = el("div", "np-latest-thumb"); th.appendChild(thumb(x, "np-thumb-sm")); row.appendChild(th);
+        var tx = el("div", "np-latest-text");
+        tx.appendChild(el("h3", x.titleMl ? "ml" : "", x.titleMl || x.title));
+        var sm = x.summaryMl || x.summary; if (sm) tx.appendChild(el("p", x.summaryMl ? "ml" : "", sm));
+        tx.appendChild(meta(x));
+        row.appendChild(tx); list.appendChild(row);
+      });
+      moreBox.appendChild(list);
     }
     $("npNewsMain").hidden = true;
     $("npGalleryView").hidden = true;
