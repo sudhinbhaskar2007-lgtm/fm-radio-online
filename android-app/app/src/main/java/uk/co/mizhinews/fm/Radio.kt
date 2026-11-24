@@ -8,6 +8,7 @@ import androidx.media3.common.MediaMetadata
 /** Station details shared by the app screen, the car screen and the auto-play receiver. */
 object Radio {
     const val STREAM_URL = "https://mizhifm.duckdns.org/listen/mizhi_fm/radio.mp3"
+    const val NOW_PLAYING_URL = "https://mizhifm.duckdns.org/api/nowplaying/mizhi_fm"
     const val ROOT_ID = "mizhi_root"
     const val STATION_ID = "mizhi_fm"
 
