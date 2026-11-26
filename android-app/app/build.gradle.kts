@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "uk.co.mizhinews.fm"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 35
         versionCode = (System.getenv("VERSION_CODE") ?: "1").toInt()
         versionName = "1.0." + (System.getenv("VERSION_CODE") ?: "1")
