@@ -23,6 +23,7 @@ import android.os.Looper
 import android.view.TextureView
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.view.View
@@ -53,6 +54,12 @@ import kotlin.concurrent.thread
 class MainActivity : ComponentActivity() {
 
     companion object {
+        /** Google ad and analytics hosts blocked in the News tab, so the app shows no web ads and collects no data. */
+        private val BLOCKED_HOSTS = listOf(
+            "googlesyndication.com", "doubleclick.net", "googleadservices.com",
+            "adservice.google.com", "google-analytics.com", "googletagmanager.com",
+            "googletagservices.com", "fundingchoicesmessages.google.com", "cloudflareinsights.com"
+        )
         /** Hides the website's own FM tab and mini player inside the app; the app's play button does that job. */
         private const val HIDE_WEB_RADIO = """(function(){var s=document.getElementById('mizhiApp');if(!s){s=document.createElement('style');s.id='mizhiApp';s.textContent='#tabFm,#mini{display:none!important}';document.head.appendChild(s);}var a=document.getElementById('audio');if(a){a.pause();}HTMLMediaElement.prototype.play=function(){return Promise.resolve();};if(location.hash==''||location.hash=='#home'||location.hash=='#fm'){location.hash='#news';}window.addEventListener('hashchange',function(){if(location.hash=='#home'||location.hash=='#fm'){location.hash='#news';}});})();"""
     }
@@ -195,6 +202,15 @@ class MainActivity : ComponentActivity() {
                 // Anything else (email, WhatsApp, other sites) opens in its own app.
                 try { startActivity(Intent(Intent.ACTION_VIEW, uri)) } catch (e: Exception) { }
                 return true
+            }
+            // No ads or trackers inside the app: the website's Google ad and analytics
+            // scripts are blocked here, so the app collects no user data.
+            override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+                val host = request.url.host.orEmpty()
+                if (BLOCKED_HOSTS.any { host == it || host.endsWith(".$it") }) {
+                    return WebResourceResponse("text/plain", "utf-8", java.io.ByteArrayInputStream(ByteArray(0)))
+                }
+                return null
             }
             override fun onPageStarted(view: WebView, url: String?, favicon: android.graphics.Bitmap?) {
                 newsLoading.visibility = View.VISIBLE
