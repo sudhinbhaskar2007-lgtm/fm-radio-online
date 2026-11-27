@@ -167,6 +167,13 @@ class MainActivity : ComponentActivity() {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.ad_url))))
             } catch (e: Exception) { }
         }
+        findViewById<View>(R.id.whatsappLink).setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.whatsapp_url))))
+            } catch (e: Exception) {
+                toast(getString(R.string.whatsapp))
+            }
+        }
         findViewById<View>(R.id.contactLink).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:mizhinews@gmail.com"))

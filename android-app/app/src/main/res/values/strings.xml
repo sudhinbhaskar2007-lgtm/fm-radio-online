@@ -16,6 +16,8 @@
     <string name="auto_open">Play as soon as I open the app</string>
     <string name="bt_needed">Allow "Nearby devices" so Mizhi FM can see when your car connects.</string>
     <string name="no_paired">No paired Bluetooth devices found. Pair your phone with the car first.</string>
+    <string name="whatsapp">WhatsApp us: 07467 081180</string>
+    <string name="whatsapp_url">https://wa.me/447467081180</string>
     <string name="contact">Contact: mizhinews@gmail.com</string>
     <string name="tap_play">Tap play to listen live</string>
     <string name="on_air">ON AIR</string>
