@@ -196,38 +196,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Sponsor advert (phone screen only; never shown in the car / Android Auto) -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:letterSpacing="0.2"
-                android:text="@string/ad_label"
-                android:textColor="#99FFFFFF"
-                android:textSize="10sp" />
-
-            <FrameLayout
-                android:id="@+id/adBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/ad_card"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/ad_desc"
-                android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/adImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/ad_desc"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ad_shan" />
-            </FrameLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -245,6 +213,21 @@
                 android:text="@string/contact"
                 android:textColor="#B9B4C9"
                 android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/whatsappLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/pill_whatsapp"
+                android:paddingLeft="16dp"
+                android:paddingTop="7dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="7dp"
+                android:text="@string/whatsapp"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 
@@ -271,6 +254,58 @@
             android:indeterminate="true"
             android:indeterminateTint="#D70B02"
             android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Sponsor advert: slides down from the top now and then (phone screen only; never in the car / Android Auto) -->
+    <FrameLayout
+        android:id="@+id/adBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ad_card"
+        android:elevation="20dp"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/adImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/ad_desc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ad_shan" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:background="#99000000"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/ad_short"
+            android:textColor="#FFFFFF"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/adClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/oval_dark"
+            android:contentDescription="@string/ad_close"
+            android:gravity="center"
+            android:text="✕"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <!-- Bottom bar with the big play button -->

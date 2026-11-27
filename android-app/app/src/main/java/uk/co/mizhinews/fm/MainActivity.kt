@@ -54,6 +54,9 @@ import kotlin.concurrent.thread
 class MainActivity : ComponentActivity() {
 
     companion object {
+        private const val AD_FIRST_MS = 3_000L   // first advert 3 seconds after opening
+        private const val AD_SHOW_MS = 10_000L   // stays for 10 seconds
+        private const val AD_EVERY_MS = 90_000L  // comes back every 90 seconds
         /** Google ad and analytics hosts blocked in the News tab, so the app shows no web ads and collects no data. */
         private val BLOCKED_HOSTS = listOf(
             "googlesyndication.com", "doubleclick.net", "googleadservices.com",
@@ -159,10 +162,17 @@ class MainActivity : ComponentActivity() {
                 .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text))
             startActivity(Intent.createChooser(send, getString(R.string.tab_share)))
         }
-        findViewById<View>(R.id.adBox).setOnClickListener {
+        findViewById<View>(R.id.adImage).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.ad_url))))
             } catch (e: Exception) { }
+        }
+        findViewById<View>(R.id.whatsappLink).setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.whatsapp_url))))
+            } catch (e: Exception) {
+                toast(getString(R.string.whatsapp))
+            }
         }
         findViewById<View>(R.id.contactLink).setOnClickListener {
             try {
@@ -172,6 +182,9 @@ class MainActivity : ComponentActivity() {
                 toast("mizhinews@gmail.com")
             }
         }
+
+        findViewById<View>(R.id.adClose).setOnClickListener { hideAd() }
+        fitRadioScreen()
 
         setupNews()
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -186,6 +199,72 @@ class MainActivity : ComponentActivity() {
         showNews(false)
 
         askFirstRunPermissions(force = false)
+    }
+
+    // ---- Fit the radio screen on one page, and the slide-down advert ----
+
+    /** Shrinks the eye logo on shorter phones so the whole radio page fits without scrolling. */
+    private fun fitRadioScreen() {
+        val scroll = findViewById<ScrollView>(R.id.scroll)
+        scroll.post {
+            val content = scroll.getChildAt(0) ?: return@post
+            val visible = scroll.height - scroll.paddingTop - scroll.paddingBottom
+            val overflow = content.height - visible
+            if (overflow <= 0) return@post
+            val d = resources.displayMetrics.density
+            val box = findViewById<View>(R.id.eyeBox)
+            val frame = findViewById<View>(R.id.eyeFrame)
+            val newBox = maxOf((150 * d).toInt(), box.height - overflow)
+            val scale = newBox.toFloat() / box.height
+            box.layoutParams = box.layoutParams.apply { width = newBox; height = newBox }
+            frame.layoutParams = frame.layoutParams.apply {
+                width = (frame.width * scale).toInt(); height = (frame.height * scale).toInt()
+            }
+            val brand = findViewById<TextView>(R.id.brand)
+            if (scale < 0.75f) brand.textSize = 38f
+        }
+    }
+
+    private var adVisible = false
+    private val adCycle = object : Runnable {
+        override fun run() {
+            if (!newsShowing) showAd()
+            handler.postDelayed(hideAdRunnable, AD_SHOW_MS)
+            handler.postDelayed(this, AD_EVERY_MS)
+        }
+    }
+    private val hideAdRunnable = Runnable { hideAd() }
+
+    private fun showAd() {
+        val ad = findViewById<View>(R.id.adBanner)
+        if (adVisible) return
+        adVisible = true
+        ad.visibility = View.VISIBLE
+        ad.post {
+            ad.translationY = -(ad.height + ad.top).toFloat()
+            ad.animate().translationY(0f).setDuration(450).start()
+        }
+    }
+
+    private fun hideAd() {
+        val ad = findViewById<View>(R.id.adBanner)
+        if (!adVisible) return
+        adVisible = false
+        ad.animate().translationY(-(ad.height + ad.top).toFloat()).setDuration(350)
+            .withEndAction { ad.visibility = View.GONE }.start()
+    }
+
+    private fun startAdCycle() {
+        handler.removeCallbacks(adCycle)
+        handler.removeCallbacks(hideAdRunnable)
+        handler.postDelayed(adCycle, AD_FIRST_MS)
+    }
+
+    private fun stopAdCycle() {
+        handler.removeCallbacks(adCycle)
+        handler.removeCallbacks(hideAdRunnable)
+        adVisible = false
+        findViewById<View>(R.id.adBanner).apply { animate().cancel(); visibility = View.GONE }
     }
 
     // ---- Mizhi News inside the app ----
@@ -243,6 +322,7 @@ class MainActivity : ComponentActivity() {
 
     private fun showNews(on: Boolean) {
         newsShowing = on
+        if (on) hideAd()
         newsBox.visibility = if (on) View.VISIBLE else View.GONE
         findViewById<View>(R.id.scroll).visibility = if (on) View.INVISIBLE else View.VISIBLE
         findViewById<View>(R.id.tabRadio).alpha = if (on) 0.6f else 1f
@@ -255,6 +335,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        startAdCycle()
         startEyeVideo()
         val token = SessionToken(this, ComponentName(this, PlaybackService::class.java))
         val future = MediaController.Builder(this, token).buildAsync()
@@ -264,7 +345,7 @@ class MainActivity : ComponentActivity() {
             controller = c
             c.addListener(playerListener)
             updateUi()
-            if (prefs.autoOpen && !autoPlayedThisLaunch && !c.isPlaying) {
+            if (prefs.autoOpen && !autoPlayedThisLaunch && !c.isPlaying && !c.playWhenReady) {
                 autoPlayedThisLaunch = true
                 startRadio(c)
             }
@@ -273,6 +354,9 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onStop() {
+        stopAdCycle()
+        // Next time the app is brought to the front, the radio starts by itself again.
+        autoPlayedThisLaunch = false
         handler.removeCallbacks(pollNowPlaying)
         eyePlayer?.release()
         eyePlayer = null

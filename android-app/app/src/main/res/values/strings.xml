@@ -16,6 +16,8 @@
     <string name="auto_open">Play as soon as I open the app</string>
     <string name="bt_needed">Allow "Nearby devices" so Mizhi FM can see when your car connects.</string>
     <string name="no_paired">No paired Bluetooth devices found. Pair your phone with the car first.</string>
+    <string name="whatsapp">WhatsApp us: 07467 081180</string>
+    <string name="whatsapp_url">https://wa.me/447467081180</string>
     <string name="contact">Contact: mizhinews@gmail.com</string>
     <string name="tap_play">Tap play to listen live</string>
     <string name="on_air">ON AIR</string>
@@ -34,6 +36,8 @@
     <string name="car_title">In the car</string>
     <string name="done">DONE</string>
     <string name="share_text">Listen to Mizhi FM (മിഴി എഫ്എം), Malayalam radio from the UK: https://mizhinews.co.uk/fm</string>
+    <string name="ad_short">AD</string>
+    <string name="ad_close">Close advert</string>
     <string name="ad_label">ADVERTISEMENT</string>
     <string name="ad_desc">Advertisement: Shan Properties (UK) Ltd, connecting people with properties since 2008</string>
     <string name="ad_url">https://www.shanproperties.co.uk/</string>
