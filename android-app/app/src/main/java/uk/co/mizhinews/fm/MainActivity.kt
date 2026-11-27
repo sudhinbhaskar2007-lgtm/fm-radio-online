@@ -338,7 +338,7 @@ class MainActivity : ComponentActivity() {
             controller = c
             c.addListener(playerListener)
             updateUi()
-            if (prefs.autoOpen && !autoPlayedThisLaunch && !c.isPlaying) {
+            if (prefs.autoOpen && !autoPlayedThisLaunch && !c.isPlaying && !c.playWhenReady) {
                 autoPlayedThisLaunch = true
                 startRadio(c)
             }
@@ -348,6 +348,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         stopAdCycle()
+        // Next time the app is brought to the front, the radio starts by itself again.
+        autoPlayedThisLaunch = false
         handler.removeCallbacks(pollNowPlaying)
         eyePlayer?.release()
         eyePlayer = null
